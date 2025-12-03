@@ -26,7 +26,7 @@ const steps = [
   },
   {
     number: 2,
-    icon: "building2",
+    icon: "buildings",
     title: "Showroom Office",
     subtitle: "Start Product Sale & Setup Company",
     description:
@@ -166,7 +166,7 @@ const steps = [
                 <div
                   class="w-12 h-12 bg-gradient-to-br from-sky-500 to-amber-400 rounded-xl flex items-center justify-center text-white"
                 >
-                  {{ step.icon }}
+                  <Icon :name="step.icon" size="24" />
                 </div>
               </div>
               <div>
@@ -213,7 +213,7 @@ const steps = [
                       <div
                         class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4"
                       >
-                        {{ step.icon }}
+                        <Icon :name="step.icon" size="24" />
                       </div>
                       <p class="text-gray-600">{{ step.imagePlaceholder }}</p>
                     </div>

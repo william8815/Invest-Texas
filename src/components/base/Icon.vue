@@ -11,6 +11,9 @@ import earth from "@/assets/icons/earth.svg";
 import trending_up from "@/assets/icons/trending-up.svg";
 import buildings from "@/assets/icons/buildings.svg";
 import group from "@/assets/icons/group.svg";
+import store from "@/assets/icons/store.svg";
+import factory from "@/assets/icons/factory.svg";
+import home from "@/assets/icons/home.svg";
 
 const icons = {
   mail,
@@ -23,6 +26,9 @@ const icons = {
   trending_up,
   buildings,
   group,
+  store,
+  factory,
+  home,
 };
 
 const props = defineProps({
