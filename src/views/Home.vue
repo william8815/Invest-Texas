@@ -192,7 +192,7 @@ function animateCount(el, start, end, duration = 1500) {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative min-h-[90dvh] flex items-center justify-center overflow-hidden"
+      class="hero__section relative min-h-[calc(100dvh-70px)] flex items-center justify-center overflow-hidden"
     >
       <!-- Background Image -->
       <div class="absolute inset-0 z-0 w-full">
@@ -206,11 +206,11 @@ function animateCount(el, start, end, duration = 1500) {
         ></div>
       </div>
       <!-- content -->
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:py-16 py-8">
         <div class="max-w-3xl">
           <!-- flags  -->
           <div
-            class="hero__flags flex items-center gap-4 mb-8 opacity-0 translate-y-[-10px] transition-all duration-1000"
+            class="hero__flags flex items-center gap-4 mb-4 md:mb-8 opacity-0 translate-y-[-10px] transition-all duration-1000"
           >
             <div
               class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center"
@@ -233,25 +233,25 @@ function animateCount(el, start, end, duration = 1500) {
           </div>
 
           <h1
-            class="hero__title text-5xl md:text-6xl lg:text-7xl text-white mb-6 opacity-0 translate-y-[-10px] transition-all duration-1000 delay-[250ms]"
+            class="hero__title text-3xl md:text-6xl text-white mb-3 md:mb-6 opacity-0 translate-y-[-10px] transition-all duration-1000 delay-[250ms]"
           >
             Best Property for Investing in Texas
           </h1>
 
           <div
-            class="hero__description space-y-4 mb-8 opacity-0 transition-all duration-1000 delay-[500ms]"
+            class="hero__description space-y-4 mb-4 md:mb-8 opacity-0 transition-all duration-1000 delay-[500ms]"
           >
-            <p class="text-xl md:text-2xl text-blue-100">
+            <p class="text-lg md:text-2xl text-blue-100">
               Best Destination for Trump's Tariffs Solution
             </p>
             <p class="text-lg md:text-xl text-blue-100">
               Invest Texas with Finance & Go IPO support from New York
             </p>
-            <p class="text-lg text-blue-200">
+            <p class="text-base md:text-lg text-blue-200">
               We could support both Local & Global Marketing + Future Low Cost Manufacturing in
               Mexico
             </p>
-            <p class="text-lg text-blue-200">
+            <p class="text-base md:text-lg text-blue-200">
               Welcome to Invest Texas to enjoy Trump's Tariffs Policy for Free Duty Sales in USA +
               Low Duty Global Sales
             </p>
@@ -281,13 +281,13 @@ function animateCount(el, start, end, duration = 1500) {
         </div>
       </div>
       <!-- Scroll Indicator - 滾動提示動畫 -->
-      <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <!-- <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
         <div
           class="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2"
         >
           <div class="w-1.5 h-1.5 bg-white rounded-full scroll-indicator" />
         </div>
-      </div>
+      </div> -->
     </section>
     <!-- Main Features : Why Choose InvesTexas? -->
     <section class="main-features py-20 bg-transparent">
@@ -366,7 +366,7 @@ function animateCount(el, start, end, duration = 1500) {
 </template>
 
 <style scoped>
-.scroll-indicator {
+/* .scroll-indicator {
   animation: bounce 1s infinite;
 }
 @keyframes bounce {
@@ -377,5 +377,5 @@ function animateCount(el, start, end, duration = 1500) {
   50% {
     transform: translateY(100%);
   }
-}
+} */
 </style>

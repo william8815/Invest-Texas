@@ -197,11 +197,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <nav class="bg-white/40 backdrop-blur-md shadow-md sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-      <div class="grid grid-cols-2 lg:grid-cols-3 items-center">
+  <nav class="bg-white/40 backdrop-blur-md shadow-md sticky top-0 z-40 h-[70px]">
+    <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full">
+      <div class="h-full grid grid-cols-2 lg:grid-cols-[auto_1fr_auto] items-center">
         <!-- Left: Logo -->
-        <div class="justify-self-start py-5">
+        <div class="justify-self-start">
           <a :href="`${pathUrl}home`" class="flex items-center space-x-3 group">
             <div
               class="w-12 h-12 bg-gradient-to-br from-sky-600 to-cyan-600 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-shadow"
@@ -227,7 +227,7 @@ onUnmounted(() => {
               v-if="item.path"
               :href="`${pathUrl}${item.path}`"
               :class="[
-                'px-3 py-8 rounded-lg transition-colors text-[15px] whitespace-nowrap',
+                'px-3 h-[100%] rounded-lg transition-colors text-[15px] whitespace-nowrap',
                 isPathActive(item) ? 'text-sky-600' : 'text-gray-700 hover:text-sky-600',
               ]"
             >
@@ -236,7 +236,7 @@ onUnmounted(() => {
             <button
               v-else
               :class="[
-                'px-3 py-8 rounded-lg transition-colors flex items-center space-x-1 text-[15px] whitespace-nowrap',
+                'px-3 rounded-lg transition-colors flex items-center space-x-1 text-[15px] whitespace-nowrap',
                 isPathActive(item) ? 'text-sky-600' : 'text-gray-700 hover:text-sky-600',
               ]"
             >
@@ -247,7 +247,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Right: CTA Button & Mobile Menu Button -->
-        <div class="justify-self-end flex items-center gap-3 py-5">
+        <div class="justify-self-end flex items-center gap-3">
           <a
             :href="`${pathUrl}contact`"
             class="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all text-sm sm:text-base group"
@@ -418,7 +418,7 @@ onUnmounted(() => {
       >
         <!-- Drawer Header -->
         <div
-          class="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between z-10"
+          class="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between z-10 h-[70px]"
         >
           <div class="flex items-center space-x-2">
             <div
