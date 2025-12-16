@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
@@ -37,28 +37,317 @@ const benefits = [
   "Maintain 'Made in USA' or 'Made in North America' product status",
   "Reduce supply chain risks and shipping times",
 ];
+
+// gsap
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+// intersection observer
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  gsap.fromTo(
+    ".problemSolution__challenge",
+    {
+      opacity: 0,
+      x: -100,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".problemSolution__challenge",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    }
+  );
+  gsap.fromTo(
+    ".problemSolution__solution",
+    {
+      opacity: 0,
+      x: 100,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".problemSolution__solution",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    }
+  );
+
+  // Tariff Comparison Section
+  gsap.fromTo(
+    ".tariffComparison__title",
+    {
+      opacity: 0,
+      x: -100,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".tariffComparison__title",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    }
+  );
+  gsap.fromTo(
+    ".tariffComparison__description",
+    {
+      opacity: 0,
+      x: 100,
+    },
+    {
+      opacity: 1,
+      x: 0,
+      duration: 1,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: ".tariffComparison__description",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    }
+  );
+  gsap.fromTo(
+    ".tariffComparison__table",
+    {
+      opacity: 0,
+      y: 100,
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "ease",
+      scrollTrigger: {
+        trigger: ".tariffComparison__table",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    }
+  );
+  gsap.fromTo(
+    ".tariffComparison__savings",
+    {
+      opacity: 0,
+      y: 100,
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "ease",
+      scrollTrigger: {
+        trigger: ".tariffComparison__savings",
+        start: "top bottom",
+        end: "bottom top",
+      },
+    }
+  );
+
+  // animate numbers
+  const tableNumbers = document.querySelectorAll(".table__number");
+  const tableNumbersObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target, 0, entry.target.dataset.end);
+        tableNumbersObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  tableNumbers.forEach((el) => {
+    tableNumbersObserver.observe(el);
+  });
+
+  // Key Advantages Section
+  const keyAdvantagesSection = document.querySelector(".keyAdvantages__section");
+  const KeyAdvantagesObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      let title = entry.target.querySelector(".keyAdvantages__title");
+      let description = entry.target.querySelector(".keyAdvantages__description");
+      title.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
+      description.classList.add(
+        "opacity-0",
+        "translate-y-10",
+        "transition-all",
+        "duration-300",
+        "delay-200"
+      );
+      if (entry.isIntersecting) {
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        description.classList.remove("opacity-0", "translate-y-10");
+        description.classList.add("opacity-100", "translate-y-0");
+        KeyAdvantagesObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  KeyAdvantagesObserver.observe(keyAdvantagesSection);
+  const keyAdvantagesItems = document.querySelectorAll(".keyAdvantages__item");
+  const keyAdvantagesListObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        keyAdvantagesListObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  keyAdvantagesItems.forEach((el) => {
+    keyAdvantagesListObserver.observe(el);
+  });
+
+  // Benefits Section
+  const benefitsSection = document.querySelector(".benefits__section");
+  const BenefitsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      let title = entry.target.querySelector(".benefits__title");
+      let description = entry.target.querySelector(".benefits__description");
+      title.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
+      description.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
+      if (entry.isIntersecting) {
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        description.classList.remove("opacity-0", "translate-y-10");
+        description.classList.add("opacity-100", "translate-y-0");
+        BenefitsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  BenefitsObserver.observe(benefitsSection);
+  const benefitsList = document.querySelector(".benefits__list");
+  const benefitsListObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      let items = entry.target.querySelectorAll(".benefits__item");
+      items.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.1}s`;
+        item.classList.add("opacity-0", "-translate-x-10", "transition-all", "duration-300");
+      });
+      if (entry.isIntersecting) {
+        items.forEach((item) => {
+          item.classList.remove("opacity-0", "-translate-x-10");
+          item.classList.add("opacity-100", "translate-x-0");
+        });
+        benefitsListObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  benefitsListObserver.observe(benefitsList);
+
+  // USMCA & FTZ Section
+  const usmcaFtzContent = document.querySelector(".usmcaFtz__content");
+  const usmcaFtzHowItWorks = document.querySelector(".usmcaFtz__howItWorks");
+  const usmcaFtzContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "-translate-x-10", "transition-all", "duration-300");
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "-translate-x-10");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        usmcaFtzContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  const usmcaFtzHowItWorksObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-x-10", "transition-all", "duration-300");
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-10");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        usmcaFtzHowItWorksObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  usmcaFtzContentObserver.observe(usmcaFtzContent);
+  usmcaFtzHowItWorksObserver.observe(usmcaFtzHowItWorks);
+
+  // CTA Section
+  const ctaContent = document.querySelector(".cta__content");
+  const ctaContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        ctaContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  ctaContentObserver.observe(ctaContent);
+});
+
+function animateCount(el, start, end, duration = 1500) {
+  const startTime = performance.now();
+
+  function loop(now) {
+    const timeFraction = Math.min((now - startTime) / duration, 1);
+    let progress = eqal(timeFraction);
+    const value = Math.floor(start + (end - start) * progress);
+    el.textContent = value;
+
+    if (timeFraction < 1) {
+      requestAnimationFrame(loop);
+    }
+  }
+
+  requestAnimationFrame(loop);
+}
+// 例子一 : 等速
+function eqal(timeFraction) {
+  return timeFraction;
+}
 </script>
 
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="relative py-20 bg-gradient-to-br from-green-900 via-blue-900 to-blue-800 text-white overflow-hidden"
+      class="hero__section relative py-20 bg-gradient-to-br from-green-900 via-blue-900 to-blue-800 text-white overflow-hidden"
     >
       <!-- Decorative Elements -->
-      <div class="absolute inset-0 opacity-10">
+      <div class="hero__decorative-elements absolute inset-0 opacity-10">
         <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           <path d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" fill="white" />
         </svg>
       </div>
 
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="hero__content relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 translate-y-10 transition-all duration-300"
+      >
         <div class="text-center">
-          <div class="inline-block mb-6">
+          <div class="hero__icon inline-block mb-6">
             <Icon name="trending_down" size="20" class="w-20 h-20 mx-auto text-green-400" />
           </div>
-          <h1 class="text-5xl md:text-6xl mb-6">Trump's Tariff Solution</h1>
-          <p class="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto">
+          <h1 class="hero__title text-5xl md:text-6xl mb-6">Trump's Tariff Solution</h1>
+          <p class="hero__description text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto">
             Navigate the new tariff landscape with strategic manufacturing and assembly in the USMCA
             zone
           </p>
@@ -67,12 +356,12 @@ const benefits = [
     </section>
 
     <!-- Problem/Solution Section -->
-    <section class="py-20 bg-white">
+    <section class="problemSolution__section py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- The Challenge -->
           <div
-            class="bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200"
+            class="problemSolution__challenge bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200"
           >
             <h2 class="text-3xl text-gray-900 mb-6">The Challenge</h2>
             <div class="space-y-4">
@@ -128,7 +417,7 @@ const benefits = [
 
           <!-- The Solution -->
           <div
-            class="bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl border-2 border-green-200"
+            class="problemSolution__solution bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl border-2 border-green-200"
           >
             <h2 class="text-3xl text-gray-900 mb-6">The Solution</h2>
             <div class="space-y-4">
@@ -186,14 +475,18 @@ const benefits = [
     </section>
 
     <!-- Tariff Comparison Table -->
-    <section class="py-20 bg-gradient-to-br from-gray-900 via-sky-900 to-cyan-900 text-white">
+    <section
+      class="tariffComparison__section py-20 bg-gradient-to-br from-gray-900 via-sky-900 to-cyan-900 text-white"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-4xl mb-4">Cost Comparison Analysis</h2>
-          <p class="text-xl text-blue-200">See the dramatic savings with our USMCA solution</p>
+          <h2 class="tariffComparison__title text-4xl mb-4">Cost Comparison Analysis</h2>
+          <p class="tariffComparison__description text-xl text-blue-200">
+            See the dramatic savings with our USMCA solution
+          </p>
         </div>
 
-        <div class="overflow-x-auto">
+        <div class="tariffComparison__table overflow-x-auto">
           <table
             class="w-full border-collapse bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
           >
@@ -213,14 +506,15 @@ const benefits = [
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-3xl text-red-300">
-                    <!-- <AnimatedCounter target="{60}" suffix="%" duration="{2.5}" /> -->
-                    <span>60%</span>
+                    <span :data-end="60" class="table__number">0</span>
+                    <span>%</span>
                   </div>
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-3xl text-red-300">
-                    <!-- <AnimatedCounter target="{45}" prefix="+" suffix="%" duration="{2.5}" /> -->
-                    <span>+45%</span>
+                    <span>+</span>
+                    <span :data-end="45" class="table__number"></span>
+                    <span>%</span>
                   </div>
                 </td>
                 <td class="p-6 text-center text-red-200">45-60 days</td>
@@ -233,14 +527,14 @@ const benefits = [
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-3xl text-amber-300">
-                    <!-- <AnimatedCounter target="{0}" suffix="%" duration="{2.5}" /> -->
                     <span>0%</span>
                   </div>
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-3xl text-amber-300">
-                    <!-- <AnimatedCounter target="{35}" prefix="+" suffix="%" duration="{2.5}" /> -->
-                    <span>+35%</span>
+                    <span>+</span>
+                    <span :data-end="35" class="table__number"></span>
+                    <span>%</span>
                   </div>
                 </td>
                 <td class="p-6 text-center text-amber-200">30-45 days</td>
@@ -256,14 +550,12 @@ const benefits = [
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-4xl text-green-300">
-                    <!-- <AnimatedCounter target="{0}" suffix="%" duration="{2.5}" /> -->
                     <span>0%</span>
                   </div>
                   <div class="text-sm text-green-200 mt-1">Duty-free</div>
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-4xl text-green-300">
-                    <!-- <AnimatedCounter target="{0}" prefix="" suffix="%" duration="{2.5}" /> -->
                     <span>0%</span>
                   </div>
                   <div class="text-sm text-green-200 mt-1">Optimized</div>
@@ -275,14 +567,14 @@ const benefits = [
         </div>
 
         <!-- Savings Highlight -->
-        <div class="mt-12 text-center">
+        <div class="tariffComparison__savings mt-12 text-center">
           <div
             class="inline-block bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-8 shadow-2xl"
           >
             <div class="text-lg text-white mb-2">Average Savings with InvesTexas</div>
             <div class="text-6xl text-white mb-2">
-              <!-- <AnimatedCounter target="{40}" suffix="%" duration="{3}" /> -->
-              <span>40%</span>
+              <span :data-end="40" class="table__number"></span>
+              <span>%</span>
             </div>
             <div class="text-xl text-green-100">Compared to traditional import methods</div>
           </div>
@@ -291,18 +583,20 @@ const benefits = [
     </section>
 
     <!-- Key Advantages -->
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section class="keyAdvantages__section py-20 bg-gradient-to-br from-gray-50 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <h2 class="text-4xl text-gray-900 mb-4">Strategic Advantages</h2>
-          <p class="text-xl text-gray-600">How InvesTexas helps you navigate tariff policies</p>
+          <h2 class="keyAdvantages__title text-4xl text-gray-900 mb-4">Strategic Advantages</h2>
+          <p class="keyAdvantages__description text-xl text-gray-600">
+            How InvesTexas helps you navigate tariff policies
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="keyAdvantages__list grid grid-cols-1 md:grid-cols-2 gap-8">
           <div
             v-for="(advantage, index) in advantages"
             :key="index"
-            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+            class="keyAdvantages__item bg-white p-8 rounded-xl shadow-lg hover:shadow-xl border border-gray-100"
           >
             <div
               class="w-16 h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white mb-6"
@@ -317,21 +611,23 @@ const benefits = [
     </section>
 
     <!-- Benefits List -->
-    <section class="py-20 bg-white">
+    <section class="benefits__section py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-4xl text-gray-900 mb-4">Complete Tariff Policy Benefits</h2>
-          <p class="text-xl text-gray-600">
+          <h2 class="benefits__title text-4xl text-gray-900 mb-4">
+            Complete Tariff Policy Benefits
+          </h2>
+          <p class="benefits__description text-xl text-gray-600">
             Everything you need to succeed in the new trade environment
           </p>
         </div>
 
         <div class="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl">
-          <div class="space-y-4">
+          <div class="benefits__list space-y-4">
             <div
               v-for="(benefit, index) in benefits"
               :key="index"
-              class="flex items-start space-x-4 p-4 bg-white rounded-lg"
+              class="benefits__item flex items-start space-x-4 p-4 bg-white rounded-lg"
             >
               <div class="flex items-start space-x-4 p-4 bg-white rounded-lg">
                 <Icon
@@ -348,10 +644,10 @@ const benefits = [
     </section>
 
     <!-- USMCA & FTZ Section -->
-    <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section class="usmcaFtz__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div class="usmcaFtz__content">
             <h2 class="text-4xl mb-6">USMCA & Foreign Trade Zone Benefits</h2>
             <p class="text-lg text-blue-100 mb-6">
               Sinopac has been serving in International Business for 38 years as a Regular/Active
@@ -393,7 +689,9 @@ const benefits = [
             </div>
           </div>
 
-          <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+          <div
+            class="usmcaFtz__howItWorks bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20"
+          >
             <h3 class="text-2xl mb-6">How It Works</h3>
             <div class="space-y-6">
               <div>
@@ -440,9 +738,9 @@ const benefits = [
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 bg-white">
+    <section class="cta__section py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div>
+        <div class="cta__content">
           <h2 class="text-4xl text-gray-900 mb-6">Ready to Navigate Tariff Policies?</h2>
           <p class="text-xl text-gray-600 mb-8">
             Contact us to learn how we can help your business thrive in the new trade environment

@@ -176,7 +176,7 @@ function animateCount(el, start, end, duration = 1500) {
 
   function update(now) {
     const progress = Math.min((now - startTime) / duration, 1);
-    const value = Math.floor(start + (end - start) * progress * 0.8);
+    const value = Math.floor(start + (end - start) * progress);
     el.textContent = value;
 
     if (progress < 1) {
@@ -280,14 +280,6 @@ function animateCount(el, start, end, duration = 1500) {
           </div>
         </div>
       </div>
-      <!-- Scroll Indicator - 滾動提示動畫 -->
-      <!-- <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div
-          class="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2"
-        >
-          <div class="w-1.5 h-1.5 bg-white rounded-full scroll-indicator" />
-        </div>
-      </div> -->
     </section>
     <!-- Main Features : Why Choose InvesTexas? -->
     <section class="main-features py-20 bg-transparent">
@@ -365,17 +357,4 @@ function animateCount(el, start, end, duration = 1500) {
   </DefaultLayout>
 </template>
 
-<style scoped>
-/* .scroll-indicator {
-  animation: bounce 1s infinite;
-}
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(100%);
-  }
-} */
-</style>
+<style scoped></style>
