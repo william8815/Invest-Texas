@@ -78,7 +78,7 @@ onMounted(() => {
   // 觀察指定元素
   MainFeaturesTitleObserver.observe(MainFeaturesTitle);
 
-  const MainFeaturesContent = document.querySelector(".main-features-content");
+  const MainFeaturesContent = document.querySelectorAll(".main-features-content");
   const MainFeaturesContentObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       entry.target.classList.add("opacity-0", "translate-y-10");
@@ -89,20 +89,28 @@ onMounted(() => {
       }
     });
   }, options);
-  MainFeaturesContentObserver.observe(MainFeaturesContent);
+  MainFeaturesContent.forEach((el, index) => {
+    el.style.transitionDelay = `${index * 0.1}s`;
+    MainFeaturesContentObserver.observe(el);
+  });
 
   // Quick Stats
-  const statNumber = document.querySelectorAll(".stat-number");
-  const statNumberObserver = new IntersectionObserver((entries) => {
+  const statItem = document.querySelectorAll(".stat-item");
+  const statItemObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
       if (entry.isIntersecting) {
-        animateCount(entry.target, 0, entry.target.dataset.end);
-        statNumberObserver.unobserve(entry.target);
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        let statNumber = entry.target.querySelector(".stat-number");
+        animateCount(statNumber, 0, statNumber.dataset.end);
+        statItemObserver.unobserve(entry.target);
       }
     });
   }, options);
-  statNumber.forEach((el) => {
-    statNumberObserver.observe(el);
+  statItem.forEach((el, index) => {
+    el.style.transitionDelay = `${index * 0.1}s`;
+    statItemObserver.observe(el);
   });
 
   // CTA
@@ -232,7 +240,7 @@ function animateCount(el, start, end, duration = 1500) {
         <div
           class="w-6 h-10 border-2 border-white/50 rounded-full flex items-start justify-center p-2"
         >
-          <div class="w-1.5 h-1.5 bg-white rounded-full" />
+          <div class="w-1.5 h-1.5 bg-white rounded-full scroll-indicator" />
         </div>
       </div>
     </section>
@@ -248,16 +256,14 @@ function animateCount(el, start, end, duration = 1500) {
           </p>
         </div>
         <!-- content -->
-        <div
-          class="main-features-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 duration-1000 delay-500"
-        >
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div
             v-for="(feature, index) in mainFeatures"
             :key="index"
-            class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow border border-gray-100 group"
+            class="main-features-content bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl border border-gray-100 group hover:translate-y-[-10px] transition-all duration-300"
           >
             <div
-              class="w-16 h-16 bg-gradient-to-br from-sky-500 to-amber-400 rounded-xl flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform"
+              class="w-16 h-16 bg-gradient-to-br from-sky-500 to-amber-400 rounded-xl flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform duration-300"
             >
               <Icon :name="feature.icon" size="24" />
             </div>
@@ -272,12 +278,12 @@ function animateCount(el, start, end, duration = 1500) {
     <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div v-for="(stat, index) in quickStats" :key="index" class="text-center">
+          <div v-for="(stat, index) in quickStats" :key="index" class="text-center stat-item">
             <div class="flex justify-center mb-4 text-amber-400">
               <Icon :name="stat.icon" size="24" />
             </div>
             <div class="text-5xl mb-2 text-amber-300">
-              <span ref="statNumber" class="stat-number" :data-end="stat.number">0</span>
+              <span class="stat-number" :data-end="stat.number">0</span>
               <span>{{ stat.suffix }}</span>
             </div>
             <div class="text-blue-200">{{ stat.label }}</div>
@@ -314,4 +320,17 @@ function animateCount(el, start, end, duration = 1500) {
   </DefaultLayout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.scroll-indicator {
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+}
+</style>
