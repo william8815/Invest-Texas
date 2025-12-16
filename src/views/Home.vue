@@ -61,6 +61,49 @@ onMounted(() => {
     rootMargin: "0px",
     threshold: 0.1,
   };
+  // Hero Section
+  const HeroFlags = document.querySelector(".hero__flags");
+  const HeroFlagsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-[-10px]");
+        entry.target.classList.add("opacity-100", "translate-y-[0px]");
+        HeroFlagsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  HeroFlagsObserver.observe(HeroFlags);
+  const HeroTitle = document.querySelector(".hero__title");
+  const HeroTitleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-[-10px]");
+        entry.target.classList.add("opacity-100", "translate-y-[0px]");
+      }
+    });
+  }, options);
+  HeroTitleObserver.observe(HeroTitle);
+  const HeroDescription = document.querySelector(".hero__description");
+  const HeroDescriptionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0");
+        entry.target.classList.add("opacity-100");
+      }
+    });
+  }, options);
+  HeroDescriptionObserver.observe(HeroDescription);
+  const HeroCTA = document.querySelector(".hero__cta");
+  const HeroCTAObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-[10px]");
+        entry.target.classList.add("opacity-100", "translate-y-[0px]");
+      }
+    });
+  }, options);
+  HeroCTAObserver.observe(HeroCTA);
+
   const MainFeaturesTitle = document.querySelector(".main-features-title");
   // 創建 IntersectionObserver 物件
   const MainFeaturesTitleObserver = new IntersectionObserver((entries) => {
@@ -148,7 +191,9 @@ function animateCount(el, start, end, duration = 1500) {
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
-    <section class="relative min-h-[90dvh] flex items-center justify-center overflow-hidden">
+    <section
+      class="hero__section relative min-h-[90dvh] flex items-center justify-center overflow-hidden"
+    >
       <!-- Background Image -->
       <div class="absolute inset-0 z-0 w-full">
         <img
@@ -164,7 +209,9 @@ function animateCount(el, start, end, duration = 1500) {
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="max-w-3xl">
           <!-- flags  -->
-          <div class="flex items-center gap-4 mb-8 animate__animated animate__fadeInDown">
+          <div
+            class="hero__flags flex items-center gap-4 mb-8 opacity-0 translate-y-[-10px] transition-all duration-1000"
+          >
             <div
               class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center"
             >
@@ -186,14 +233,13 @@ function animateCount(el, start, end, duration = 1500) {
           </div>
 
           <h1
-            class="text-5xl md:text-6xl lg:text-7xl text-white mb-6 animate__animated animate__fadeInUp"
+            class="hero__title text-5xl md:text-6xl lg:text-7xl text-white mb-6 opacity-0 translate-y-[-10px] transition-all duration-1000 delay-[250ms]"
           >
             Best Property for Investing in Texas
           </h1>
 
           <div
-            class="space-y-4 mb-8 animate__animated animate__fadeIn"
-            style="animation-delay: 0.5s"
+            class="hero__description space-y-4 mb-8 opacity-0 transition-all duration-1000 delay-[500ms]"
           >
             <p class="text-xl md:text-2xl text-blue-100">
               Best Destination for Trump's Tariffs Solution
@@ -212,8 +258,7 @@ function animateCount(el, start, end, duration = 1500) {
           </div>
 
           <div
-            class="flex flex-col sm:flex-row gap-4 animate__animated animate__fadeInUp"
-            style="animation-delay: 1s"
+            class="hero__cta flex flex-col sm:flex-row gap-4 opacity-0 translate-y-[10px] transition-all duration-1000 delay-[750ms]"
           >
             <a
               :href="`${pathUrl}process`"
