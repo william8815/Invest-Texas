@@ -16,8 +16,8 @@ export const routes = [
     component: () => import("../views/TariffAdvantage.vue"),
   },
   {
-    path: "/site-location ",
-    name: "site-location ",
+    path: "/site-location",
+    name: "site-location",
     component: () => import("../views/SiteLocation.vue"),
   },
   // process
@@ -59,9 +59,9 @@ export const routes = [
     component: () => import("../views/services/projects/X-AI-PC.vue"),
   },
   {
-    path: "/projects_Ionoxy-AI",
-    name: "projects-Ionoxy-AI",
-    component: () => import("../views/services/projects/Ionoxy-AI.vue"),
+    path: "/projects_Ionoxy-Air",
+    name: "projects-Ionoxy-Air",
+    component: () => import("../views/services/projects/Ionoxy-Air.vue"),
   },
   {
     path: "/projects_Home-Lift",

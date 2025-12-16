@@ -1,4 +1,6 @@
 <script setup>
+import { ref, onMounted } from "vue";
+
 // components
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
@@ -46,14 +48,101 @@ const quickStats = [
   { number: 38, label: "Years Experience", icon: "trending_up", suffix: "+" },
   { number: 3, label: "NY Finance Partners", icon: "group", suffix: "" },
 ];
+
+// gsap
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
+// intersection observer
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const MainFeaturesTitle = document.querySelector(".main-features-title");
+  // 創建 IntersectionObserver 物件
+  const MainFeaturesTitleObserver = new IntersectionObserver((entries) => {
+    // entries 為陣列，裝有進入視窗範圍的元素資訊，並執行後面的 callback 函式
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-y-10");
+      // 取消觀察指定元素
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        MainFeaturesTitleObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  // 觀察指定元素
+  MainFeaturesTitleObserver.observe(MainFeaturesTitle);
+
+  const MainFeaturesContent = document.querySelector(".main-features-content");
+  const MainFeaturesContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-y-10");
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        MainFeaturesContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  MainFeaturesContentObserver.observe(MainFeaturesContent);
+
+  // Quick Stats
+  const statNumber = document.querySelectorAll(".stat-number");
+  const statNumberObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target, 0, entry.target.dataset.end);
+        statNumberObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  statNumber.forEach((el) => {
+    statNumberObserver.observe(el);
+  });
+
+  // CTA
+  const CTA = document.querySelector(".cta-section");
+  const CTAObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.add("opacity-0", "translate-y-10");
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        CTAObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  CTAObserver.observe(CTA);
+});
+
+function animateCount(el, start, end, duration = 1500) {
+  const startTime = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const value = Math.floor(start + (end - start) * progress * 0.8);
+    el.textContent = value;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+
+  requestAnimationFrame(update);
+}
 </script>
 
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
-    <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section class="relative min-h-[90dvh] flex items-center justify-center overflow-hidden">
       <!-- Background Image -->
-      <div class="absolute inset-0 z-0 aspect-[1080/607] w-full">
+      <div class="absolute inset-0 z-0 w-full">
         <img
           :src="heroImage"
           alt="Texas Investment Opportunity"
@@ -66,8 +155,8 @@ const quickStats = [
       <!-- content -->
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="max-w-3xl">
-          <!-- flags -->
-          <div class="flex items-center gap-4 mb-8">
+          <!-- flags  -->
+          <div class="flex items-center gap-4 mb-8 animate__animated animate__fadeInDown">
             <div
               class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center"
             >
@@ -88,11 +177,16 @@ const quickStats = [
             </div>
           </div>
 
-          <h1 class="text-5xl md:text-6xl lg:text-7xl text-white mb-6">
+          <h1
+            class="text-5xl md:text-6xl lg:text-7xl text-white mb-6 animate__animated animate__fadeInUp"
+          >
             Best Property for Investing in Texas
           </h1>
 
-          <div class="space-y-4 mb-8">
+          <div
+            class="space-y-4 mb-8 animate__animated animate__fadeIn"
+            style="animation-delay: 0.5s"
+          >
             <p class="text-xl md:text-2xl text-blue-100">
               Best Destination for Trump's Tariffs Solution
             </p>
@@ -109,12 +203,15 @@ const quickStats = [
             </p>
           </div>
 
-          <div class="flex flex-col sm:flex-row gap-4">
+          <div
+            class="flex flex-col sm:flex-row gap-4 animate__animated animate__fadeInUp"
+            style="animation-delay: 1s"
+          >
             <a
-              :href="`${pathUrl}contact`"
-              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/30 group"
+              :href="`${pathUrl}process`"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
             >
-              Contact Us
+              View Investment Process
               <Icon
                 name="arrow_forward"
                 size="20"
@@ -125,7 +222,7 @@ const quickStats = [
               :href="`${pathUrl}services-overview`"
               class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors"
             >
-              Explore Facilities
+              Explore Services
             </a>
           </div>
         </div>
@@ -140,10 +237,10 @@ const quickStats = [
       </div>
     </section>
     <!-- Main Features : Why Choose InvesTexas? -->
-    <section class="py-20 bg-transparent">
+    <section class="main-features py-20 bg-transparent">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- title -->
-        <div class="text-center mb-16">
+        <div class="main-features-title text-center mb-16 duration-1000">
           <h2 class="text-4xl text-gray-900 mb-4">Why Choose InvesTexas?</h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
             Strategic location, tariff advantages, and complete infrastructure for your business
@@ -151,7 +248,9 @@ const quickStats = [
           </p>
         </div>
         <!-- content -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div
+          class="main-features-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 duration-1000 delay-500"
+        >
           <div
             v-for="(feature, index) in mainFeatures"
             :key="index"
@@ -174,17 +273,12 @@ const quickStats = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div v-for="(stat, index) in quickStats" :key="index" class="text-center">
-            <div className="flex justify-center mb-4 text-amber-400">
+            <div class="flex justify-center mb-4 text-amber-400">
               <Icon :name="stat.icon" size="24" />
             </div>
-            <div className="text-5xl mb-2 text-amber-300">
-              {{ stat.number }}
-              {{ stat.suffix }}
-              <!-- <AnimatedCounter 
-                target={stat.number} 
-                suffix={stat.suffix}
-                duration={2.5}
-              /> -->
+            <div class="text-5xl mb-2 text-amber-300">
+              <span ref="statNumber" class="stat-number" :data-end="stat.number">0</span>
+              <span>{{ stat.suffix }}</span>
             </div>
             <div class="text-blue-200">{{ stat.label }}</div>
           </div>
@@ -195,7 +289,7 @@ const quickStats = [
     <!-- CTA Section - 滾動淡入 -->
     <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
+        <div class="cta-section text-center duration-1000">
           <h2 class="text-4xl text-gray-900 mb-6">Ready to Start Your Investment Journey?</h2>
           <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Join successful businesses that have already established their presence in Texas.
@@ -203,21 +297,15 @@ const quickStats = [
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              :href="`${pathUrl}process`"
+              :href="`${pathUrl}contact`"
               class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
             >
-              View Investment Process
+              Schedule a Visit
               <Icon
                 name="arrow_forward"
                 size="20"
                 class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"
               />
-            </a>
-            <a
-              :href="`${pathUrl}contact`"
-              class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-sky-600 text-sky-600 rounded-lg hover:bg-sky-50 transition-colors"
-            >
-              Schedule a Visit
             </a>
           </div>
         </div>
@@ -225,3 +313,5 @@ const quickStats = [
     </section>
   </DefaultLayout>
 </template>
+
+<style scoped></style>
