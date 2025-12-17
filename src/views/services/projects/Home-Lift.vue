@@ -1,8 +1,11 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
-
-import { ref, onMounted, onUnmounted } from "vue";
+import { appConfig } from "@/config/env";
+const pathUrl = appConfig.pathUrl;
 
 // 圖標上下浮動動畫
 const iconStyle = ref({});
@@ -145,7 +148,8 @@ function eqal(timeFraction) {
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <a
-          :href="`/services-overview`"
+          :href="`${pathUrl}/services-overview`"
+          @click.prevent="router.go(-1)"
           class="inline-flex items-center text-white mb-6 hover:text-blue-200 transition-colors"
         >
           <Icon name="arrow_forward" size="16" class="mr-2 rotate-180" />

@@ -1,5 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+import { appConfig } from "@/config/env";
+const pathUrl = appConfig.pathUrl;
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
@@ -168,8 +173,9 @@ onMounted(() => {
       <div class="absolute inset-0 flex items-center">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <a
-            :href="`/services-overview`"
+            :href="`${pathUrl}/services-overview`"
             class="inline-flex items-center text-white mb-6 hover:text-blue-200 transition-colors"
+            @click.prevent="router.go(-1)"
           >
             <Icon name="arrow_forward" size="16" class="mr-2 rotate-180" />
             Back to Overview
