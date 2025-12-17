@@ -1,12 +1,57 @@
 <script setup>
+import { onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  // Overview Section
+  const overviewContent = document.querySelector(".overview__content");
+  const overviewImage = document.querySelector(".overview__image");
+  const overviewContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        overviewContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  const overviewImageObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[-100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        overviewImageObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  overviewContentObserver.observe(overviewContent);
+  overviewImageObserver.observe(overviewImage);
+});
 </script>
 
 <template>
   <DefaultLayout>
+    <!-- Hero Section -->
     <section
-      class="relative py-20 bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <a
@@ -16,7 +61,7 @@ import Icon from "@/components/base/Icon.vue";
           <Icon name="arrow_forward" size="16" class="mr-2 rotate-180" />
           Back to Overview
         </a>
-        <div class="text-center">
+        <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <Icon name="camping" size="20" class="w-20 h-20 mx-auto mb-6 text-amber-400" />
           <h1 class="text-5xl md:text-6xl mb-6">Leisure RV Villas</h1>
           <p class="text-xl md:text-2xl text-orange-100 max-w-4xl mx-auto">
@@ -29,7 +74,7 @@ import Icon from "@/components/base/Icon.vue";
     <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
+          <div class="overview__content opacity-0 translate-x-[100px] transition-all duration-500">
             <h2 class="text-4xl text-gray-900 mb-6">Premium RV Living</h2>
             <p class="text-lg text-gray-700 mb-6">
               Experience the perfect blend of adventure and luxury at our Leisure RV Villas. Located
@@ -43,7 +88,7 @@ import Icon from "@/components/base/Icon.vue";
               Explore Community <Icon name="arrow_forward" size="16" class="ml-2 w-5 h-5" />
             </a>
           </div>
-          <div>
+          <div class="overview__image opacity-0 translate-x-[-100px] transition-all duration-500">
             <img
               src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
               alt="RV Resort"
