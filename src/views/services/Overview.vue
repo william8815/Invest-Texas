@@ -181,6 +181,9 @@ onMounted(() => {
           item.style.transitionDelay = `${index * 0.1}s`;
           item.classList.remove("opacity-0", "translate-x-10");
           item.classList.add("opacity-100", "translate-x-0");
+          setTimeout(() => {
+            item.style.transitionDelay = "0s";
+          }, 500);
         });
         projectsListObserver.unobserve(entry.target);
       }
@@ -259,6 +262,9 @@ onMounted(() => {
           item.style.transitionDelay = `${index * 0.1}s`;
           item.classList.remove("opacity-0", "translate-y-10");
           item.classList.add("opacity-100", "translate-y-0");
+          setTimeout(() => {
+            item.style.transitionDelay = "0s";
+          }, 500);
         });
         infrastructureListObserver.unobserve(entry.target);
       }
@@ -319,7 +325,7 @@ onMounted(() => {
           <a
             v-for="project in investmentProjects"
             :key="project.title"
-            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-gradient-to-br from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100 hover:shadow-lg"
+            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-gradient-to-br from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100 group hover:shadow-lg"
             :href="`${pathUrl}${project.href}`"
           >
             <div
