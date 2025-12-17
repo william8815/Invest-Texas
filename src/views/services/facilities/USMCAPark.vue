@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
@@ -43,12 +43,127 @@ const facilities = {
 };
 
 const facility = ref(facilities["usmca-park"]);
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  // Description Section
+  const descriptionAbout = document.querySelector(".description__about");
+  const descriptionAboutObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let title = entry.target.querySelector(".about__title");
+        let description = entry.target.querySelector(".about__description");
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        setTimeout(() => {
+          description.classList.remove("opacity-0", "translate-y-10");
+          description.classList.add("opacity-100", "translate-y-0");
+        }, 200);
+        descriptionAboutObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  descriptionAboutObserver.observe(descriptionAbout);
+
+  const descriptionHighlights = document.querySelector(".description__highlights");
+  const descriptionHighlightsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let title = entry.target.querySelector(".highlights__title");
+        let list = entry.target.querySelector(".highlights__list");
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        setTimeout(() => {
+          list.classList.remove("opacity-0", "translate-y-10");
+          list.classList.add("opacity-100", "translate-y-0");
+        }, 200);
+        descriptionHighlightsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  descriptionHighlightsObserver.observe(descriptionHighlights);
+
+  const descriptionFeatures = document.querySelector(".description__features");
+  const descriptionFeaturesObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let title = entry.target.querySelector(".features__title");
+        let items = entry.target.querySelectorAll(".features__item");
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        items.forEach((item, index) => {
+          item.style.transitionDelay = `${index * 0.1}s`;
+          item.classList.remove("opacity-0", "translate-y-10");
+          item.classList.add("opacity-100", "translate-y-0");
+          setTimeout(() => {
+            item.style.transitionDelay = "0s";
+          }, 500);
+        });
+        descriptionFeaturesObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  descriptionFeaturesObserver.observe(descriptionFeatures);
+
+  // Pricing Section
+  const pricingCard = document.querySelector(".pricing__card");
+  const pricingCardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[50px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        pricingCardObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  pricingCardObserver.observe(pricingCard);
+
+  // Info Card Section
+  const infoCard = document.querySelector(".info__card");
+  const infoCardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[50px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+      }
+    });
+  }, options);
+  infoCardObserver.observe(infoCard);
+
+  // CTA Section
+  const ctaContent = document.querySelector(".cta__content");
+  const ctaContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+      }
+    });
+  }, options);
+  ctaContentObserver.observe(ctaContent);
+});
 </script>
 
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
-    <section class="relative h-96 overflow-hidden">
+    <section class="hero__section relative h-96 overflow-hidden">
       <img :src="facility.heroImage" :alt="facility.title" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-800/70" />
 
@@ -61,7 +176,7 @@ const facility = ref(facilities["usmca-park"]);
             <Icon name="arrow_forward" size="16" class="mr-2 rotate-180" />
             Back to Overview
           </a>
-          <div>
+          <div class="hero__content opacity-0 translate-y-10 transition-all duration-500">
             <h1 class="text-5xl md:text-6xl text-white mb-4">
               {{ facility.title }}
             </h1>
@@ -89,44 +204,70 @@ const facility = ref(facilities["usmca-park"]);
     </section>
 
     <!-- Description -->
-    <section class="py-20 bg-white">
+    <section class="description__section py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div class="lg:col-span-2">
-            <h2 class="text-3xl text-gray-900 mb-6">About This Facility</h2>
-            <p class="text-lg text-gray-700 leading-relaxed mb-8">
-              {{ facility.description }}
-            </p>
-
-            <h3 class="text-2xl text-gray-900 mb-6">Key Highlights</h3>
-            <div class="space-y-4 mb-12">
-              <div
-                v-for="(highlight, index) in facility.highlights"
-                :key="index"
-                class="flex items-start space-x-3"
+            <div class="description__about">
+              <h2
+                class="about__title text-3xl text-gray-900 mb-6 opacity-0 translate-y-10 transition-all duration-500"
               >
-                <Icon name="check" size="16" class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
-                <p class="text-gray-700">{{ highlight }}</p>
+                About This Facility
+              </h2>
+              <p
+                class="about__description text-lg text-gray-700 leading-relaxed mb-8 opacity-0 translate-y-10 transition-all duration-500"
+              >
+                {{ facility.description }}
+              </p>
+            </div>
+
+            <div class="description__highlights">
+              <h3
+                class="highlights__title text-2xl text-gray-900 mb-6 opacity-0 translate-y-10 transition-all duration-500"
+              >
+                Key Highlights
+              </h3>
+              <div
+                class="highlights__list space-y-4 mb-12 opacity-0 translate-y-10 transition-all duration-500"
+              >
+                <div
+                  v-for="(highlight, index) in facility.highlights"
+                  :key="index"
+                  class="highlights__item flex items-start space-x-3"
+                >
+                  <Icon
+                    name="check"
+                    size="16"
+                    class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5"
+                  />
+                  <p class="text-gray-700">{{ highlight }}</p>
+                </div>
               </div>
             </div>
 
-            <h3 class="text-2xl text-gray-900 mb-6">Features & Amenities</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div
-                v-for="(feature, index) in facility.features"
-                :key="index"
-                class="flex items-center space-x-2 p-3 bg-blue-50 rounded-lg"
+            <div class="description__features">
+              <h3
+                class="features__title text-2xl text-gray-900 mb-6 opacity-0 translate-y-10 transition-all duration-500"
               >
-                <div class="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
-                <span class="text-gray-700">{{ feature }}</span>
+                Features & Amenities
+              </h3>
+              <div class="features__list grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div
+                  v-for="(feature, index) in facility.features"
+                  :key="index"
+                  class="features__item flex items-center space-x-2 p-3 bg-blue-50 rounded-lg opacity-0 translate-y-10 transition-all duration-500"
+                >
+                  <div class="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
+                  <span class="text-gray-700">{{ feature }}</span>
+                </div>
               </div>
             </div>
           </div>
 
           <div class="lg:col-span-1">
-            <div class="sticky top-24">
+            <div class="sticky top-[100px]">
               <div
-                class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200"
+                class="pricing__card bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200 opacity-0 translate-x-[50px] transition-all duration-500"
               >
                 <h3 class="text-2xl text-gray-900 mb-6 flex items-center">
                   <Icon name="dollar" size="16" class="w-6 h-6 mr-2 text-blue-600" />
@@ -152,7 +293,9 @@ const facility = ref(facilities["usmca-park"]);
                 </a>
               </div>
 
-              <div class="mt-6 bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+              <div
+                class="info__card mt-6 bg-white p-6 rounded-xl shadow-lg border border-gray-100 opacity-0 translate-x-[50px] transition-all duration-500"
+              >
                 <h4 class="text-lg text-gray-900 mb-4">Need More Information?</h4>
                 <p class="text-sm text-gray-600 mb-4">
                   Contact Dr. Frank Lin for a personalized tour and detailed pricing.
@@ -176,9 +319,9 @@ const facility = ref(facilities["usmca-park"]);
     </section>
 
     <!-- CTA -->
-    <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section class="cta__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div>
+        <div class="cta__content opacity-0 translate-y-10 transition-all duration-500">
           <h2 class="text-4xl mb-6">Ready to Get Started?</h2>
           <p class="text-xl text-blue-100 mb-8">Schedule a visit to see this facility in person</p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
