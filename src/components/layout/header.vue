@@ -197,7 +197,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <nav class="bg-white/40 backdrop-blur-md shadow-md sticky top-0 z-40 h-[70px]">
+  <nav class="bg-white/40 backdrop-blur-md shadow-md h-[70px]">
     <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 h-full">
       <div class="h-full grid grid-cols-2 lg:grid-cols-[auto_1fr_auto] items-center">
         <!-- Left: Logo -->

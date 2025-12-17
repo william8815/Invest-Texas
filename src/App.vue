@@ -9,7 +9,6 @@ import { RouterView } from "vue-router";
 <style>
 /* html, */
 body {
-  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 </style>

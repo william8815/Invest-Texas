@@ -275,7 +275,7 @@ onMounted(() => {
 
     <section
       ref="progressRef"
-      class="process__section py-20 bg-gradient-to-b from-white via-gray-50 to-white relative"
+      class="process__section py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-x-hidden"
     >
       <!-- Vertical Timeline Progress Bar -->
       <div
@@ -388,7 +388,7 @@ onMounted(() => {
 
     <!-- Timeline Visual -->
     <section
-      class="timeline__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-hidden"
+      class="timeline__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
