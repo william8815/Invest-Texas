@@ -63,6 +63,7 @@ const facilities = [
     website: "www.InternationalBizCenter.com",
     image:
       "https://images.unsplash.com/photo-1726802147453-a3c55327e1ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjBidWlsZGluZyUyMGhvdXN0b258ZW58MXx8fHwxNzY0MTY2OTA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    link_name: "facility_IBCenter",
   },
   {
     id: "usmca-park",
@@ -83,6 +84,7 @@ const facilities = [
     website: "www.USMCAPARK.US",
     image:
       "https://images.unsplash.com/photo-1649206349711-74ec8951dbd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZXhhcyUyMGFlcmlhbCUyMHZpZXclMjBpbmR1c3RyaWFsJTIwcGFya3xlbnwxfHx8fDE3NjQxNjY5MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    link_name: "facility_USMCAPark",
   },
   {
     id: "texas69-outlet",
@@ -101,6 +103,7 @@ const facilities = [
     website: "www.Texas69.us",
     image:
       "https://images.unsplash.com/photo-1758429551604-885ca2c55ddd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb2dpc3RpY3MlMjB0cmFuc3BvcnRhdGlvbiUyMGhpZ2h3YXl8ZW58MXx8fHwxNzY0MTY2OTA3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    link_name: "facility_Texas69",
   },
   {
     id: "mexican-facility",
@@ -119,6 +122,7 @@ const facilities = [
     website: "www.Lintelmex.com",
     image:
       "https://images.unsplash.com/photo-1599765824376-a87eb981b2ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW51ZmFjdHVyaW5nJTIwZmFjdG9yeSUyMGZsb29yfGVufDF8fHx8MTc2NDA3MzQyOHww&ixlib=rb-4.1.0&q=80&w=1080",
+    link_name: "facility_Lintel",
   },
 ];
 
@@ -400,7 +404,7 @@ onMounted(() => {
                 </ul>
               </div>
 
-              <div class="flex items-center justify-between">
+              <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
                 <a
                   :href="`http://${facility.website}`"
                   target="_blank"
@@ -410,7 +414,7 @@ onMounted(() => {
                   {{ facility.website }}
                 </a>
                 <a
-                  :href="`/facility/${facility.id}`"
+                  :href="`${pathUrl}${facility.link_name}`"
                   class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all group"
                 >
                   Learn More
