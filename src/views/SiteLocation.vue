@@ -267,7 +267,7 @@ onMounted(() => {
       trigger: surroundingAreaRef.value,
       start: `top 70%`,
       end: `bottom 50%`,
-      markers: true,
+      // markers: true,
       onUpdate: (self) => {
         activeAmenityIndex.value = Math.floor(self.progress / averageProgress);
       },

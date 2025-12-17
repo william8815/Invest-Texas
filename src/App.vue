@@ -6,4 +6,10 @@ import { RouterView } from "vue-router";
   <RouterView />
 </template>
 
-<style scoped></style>
+<style>
+/* html, */
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+</style>
