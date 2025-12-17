@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
@@ -127,18 +128,171 @@ const infrastructureHighlights = [
   { icon: "factory", label: "50K sqft", description: "Mexico Manufacturing" },
   { icon: "truck", label: "Pan-American", description: "Highway Access" },
 ];
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  // Hero Section
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  // Investment Projects
+  const projectsTitle = document.querySelector(".projects__title");
+  const projectsDescription = document.querySelector(".projects__description");
+  const projectsTitleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        projectsTitleObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  const projectsDescriptionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        projectsDescriptionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  projectsTitleObserver.observe(projectsTitle);
+  projectsDescriptionObserver.observe(projectsDescription);
+
+  const projectsList = document.querySelector(".projects__list");
+  const projectsListObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let items = entry.target.querySelectorAll(".projects__item");
+        items.forEach((item, index) => {
+          item.style.transitionDelay = `${index * 0.1}s`;
+          item.classList.remove("opacity-0", "translate-x-10");
+          item.classList.add("opacity-100", "translate-x-0");
+        });
+        projectsListObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  projectsListObserver.observe(projectsList);
+
+  // Facilities
+  const facilitiesTitle = document.querySelector(".facilities__title");
+  const facilitiesDescription = document.querySelector(".facilities__description");
+  const facilitiesTitleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        facilitiesTitleObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  const facilitiesDescriptionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        facilitiesDescriptionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  facilitiesTitleObserver.observe(facilitiesTitle);
+  facilitiesDescriptionObserver.observe(facilitiesDescription);
+
+  const facilitiesItems = document.querySelectorAll(".facilities__item");
+  const facilitiesItemsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        facilitiesItemsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  facilitiesItems.forEach((item) => {
+    facilitiesItemsObserver.observe(item);
+  });
+
+  // Infrastructure Highlights
+  const infrastructureTitle = document.querySelector(".infrastructure__title");
+  const infrastructureDescription = document.querySelector(".infrastructure__description");
+  const infrastructureTitleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[-100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        infrastructureTitleObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  const infrastructureDescriptionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        infrastructureDescriptionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  infrastructureTitleObserver.observe(infrastructureTitle);
+  infrastructureDescriptionObserver.observe(infrastructureDescription);
+
+  const infrastructureList = document.querySelector(".infrastructure__list");
+  const infrastructureListObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      let items = entry.target.querySelectorAll(".infrastructure__item");
+      if (entry.isIntersecting) {
+        items.forEach((item, index) => {
+          item.style.transitionDelay = `${index * 0.1}s`;
+          item.classList.remove("opacity-0", "translate-y-10");
+          item.classList.add("opacity-100", "translate-y-0");
+        });
+        infrastructureListObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  infrastructureListObserver.observe(infrastructureList);
+
+  // CTA Section
+  const ctaContent = document.querySelector(".cta__content");
+  const ctaContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        ctaContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  ctaContentObserver.observe(ctaContent);
+});
 </script>
 
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white overflow-x-hidden"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        class="hero__content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 translate-y-10 transition-all duration-500"
+      >
         <div class="text-center">
-          <h1 class="text-5xl md:text-6xl mb-6">Master Plan & Facilities</h1>
-          <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          <h1 class="hero__title text-5xl md:text-6xl mb-6">Master Plan & Facilities</h1>
+          <p class="hero__description text-xl text-blue-100 max-w-3xl mx-auto">
             Comprehensive infrastructure and investment opportunities across Texas and Mexico
           </p>
         </div>
@@ -146,18 +300,26 @@ const infrastructureHighlights = [
     </section>
 
     <!-- Investment Projects -->
-    <section class="py-20 bg-white">
+    <section class="projects__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <h2 class="text-4xl text-gray-900 mb-4">Investment Projects</h2>
-          <p class="text-xl text-gray-600">Innovative projects available for investors</p>
+          <h2
+            class="projects__title text-4xl text-gray-900 mb-4 opacity-0 translate-y-10 transition-all duration-500"
+          >
+            Investment Projects
+          </h2>
+          <p
+            class="projects__description text-xl text-gray-600 opacity-0 translate-y-10 transition-all duration-500"
+          >
+            Innovative projects available for investors
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="projects__list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <a
             v-for="project in investmentProjects"
             :key="project.title"
-            class="block bg-gradient-to-br from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100 hover:shadow-lg transition-shadow"
+            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-gradient-to-br from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100 hover:shadow-lg"
             :href="`${pathUrl}${project.href}`"
           >
             <div
@@ -173,18 +335,28 @@ const infrastructureHighlights = [
     </section>
 
     <!-- Main Facilities -->
-    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section
+      class="facilities__section py-20 bg-gradient-to-b from-gray-50 to-white overflow-x-hidden"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <h2 class="text-4xl text-gray-900 mb-4">Our Facilities</h2>
-          <p class="text-xl text-gray-600">Strategic locations across USA and Mexico</p>
+          <h2
+            class="facilities__title text-4xl text-gray-900 mb-4 opacity-0 translate-y-10 transition-all duration-500"
+          >
+            Our Facilities
+          </h2>
+          <p
+            class="facilities__description text-xl text-gray-600 opacity-0 translate-y-10 transition-all duration-500"
+          >
+            Strategic locations across USA and Mexico
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="facilities__list grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div
             v-for="facility in facilities"
             :key="facility.id"
-            class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow"
+            class="facilities__item opacity-0 translate-y-10 transition-all duration-500 bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl"
           >
             <div class="w-full h-64">
               <img :src="facility.image" :alt="facility.title" class="w-full h-full object-cover" />
@@ -250,17 +422,29 @@ const infrastructureHighlights = [
     </section>
 
     <!-- Infrastructure Highlights -->
-    <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section
+      class="infrastructure__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <h2 class="text-4xl mb-4">Complete Infrastructure Support</h2>
-          <p class="text-xl text-blue-100">
+          <h2
+            class="infrastructure__title text-4xl mb-4 opacity-0 translate-x-[-100px] transition-all duration-500"
+          >
+            Complete Infrastructure Support
+          </h2>
+          <p
+            class="infrastructure__description text-xl text-blue-100 opacity-0 translate-x-[100px] transition-all duration-500"
+          >
             Everything you need for successful business operations
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div v-for="item in infrastructureHighlights" :key="item.label" class="text-center">
+        <div class="infrastructure__list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            v-for="item in infrastructureHighlights"
+            :key="item.label"
+            class="infrastructure__item text-center opacity-0 translate-y-10 transition-all duration-500"
+          >
             <div
               class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/30"
             >
@@ -274,11 +458,11 @@ const infrastructureHighlights = [
     </section>
 
     <!-- CTA -->
-    <section class="py-20 bg-white">
+    <section class="cta__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div>
-          <h2 class="text-4xl text-gray-900 mb-6">Explore Our Facilities</h2>
-          <p class="text-xl text-gray-600 mb-8">
+        <div class="cta__content opacity-0 translate-y-10 transition-all duration-500">
+          <h2 class="cta__title text-4xl text-gray-900 mb-6">Explore Our Facilities</h2>
+          <p class="cta__description text-xl text-gray-600 mb-8">
             Schedule a visit to see how our infrastructure can support your business
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
