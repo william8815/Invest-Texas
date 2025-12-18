@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
@@ -47,16 +47,100 @@ const handleSubmit = (e) => {
   // Form submission logic here
   console.log("Form submitted:", formData.value);
 };
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  // Office Section
+  const officeTitle = document.querySelector(".office__title");
+  const officeTitleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        officeTitleObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  officeTitleObserver.observe(officeTitle);
+
+  // Contact Info
+  const contactInfo = document.querySelector(".contact__info");
+  const contactInfoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        contactInfoObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  contactInfoObserver.observe(contactInfo);
+
+  const contactInfoLeft = document.querySelector(".contact__infoLeft");
+  const contactInfoLeftObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[-100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        contactInfoLeftObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  contactInfoLeftObserver.observe(contactInfoLeft);
+
+  const contactInfoRight = document.querySelector(".contact__infoRight");
+  const contactInfoRightObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        contactInfoRightObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  contactInfoRightObserver.observe(contactInfoRight);
+
+  // Office List
+  const officeItems = document.querySelectorAll(".office__item");
+  const officeItemsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        officeItemsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  officeItems.forEach((item) => {
+    officeItemsObserver.observe(item);
+  });
+});
 </script>
 
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
+        <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <h1 class="text-5xl md:text-6xl mb-6">Get In Touch</h1>
           <p class="text-xl text-blue-100 max-w-3xl mx-auto">
             Contact us to discuss your investment opportunities in Texas
@@ -66,11 +150,10 @@ const handleSubmit = (e) => {
     </section>
 
     <!-- Contact Form & Info -->
-    <section class="py-20 bg-white">
+    <section class="contact__section py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <!-- Contact Form -->
-          <div>
+        <div class="grid grid-cols-1 gap-12">
+          <!-- <div>
             <h2 class="text-3xl text-gray-900 mb-6">Send Us a Message</h2>
             <form @submit.prevent="handleSubmit" class="space-y-6">
               <div>
@@ -148,137 +231,141 @@ const handleSubmit = (e) => {
                 <Icon name="send" size="20" class="w-5 h-5" />
               </button>
             </form>
-          </div>
+          </div> -->
 
-          <!-- Quick Contact Info -->
           <div class="space-y-8">
-            <div>
-              <h2 class="text-3xl text-gray-900 mb-6">Contact Information</h2>
-              <p class="text-gray-600 mb-8">
+            <div
+              class="contact__info opacity-0 translate-y-10 transition-all duration-500 text-center"
+            >
+              <h2 class="text-4xl text-gray-900 mb-4">Contact Information</h2>
+              <p class="text-xl text-gray-600">
                 We're here to answer your questions and help you get started with your investment in
                 Texas.
               </p>
             </div>
-
-            <div class="space-y-6">
-              <div class="flex items-start space-x-4">
-                <div
-                  class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
-                >
-                  <Icon name="mail" size="20" class="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <h3 class="text-lg text-gray-900 mb-1">Email</h3>
-                  <a href="mailto:Contact@InvesTexas.com" class="text-blue-600 hover:text-blue-700">
-                    Contact@InvesTexas.com
-                  </a>
-                  <br />
-                  <a href="mailto:USA@Sinopac.us" class="text-blue-600 hover:text-blue-700">
-                    USA@Sinopac.us
-                  </a>
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-4">
-                <div
-                  class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0"
-                >
-                  <Icon name="phone" size="20" class="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <h3 class="text-lg text-gray-900 mb-1">Phone</h3>
-                  <a href="tel:+17137833122" class="text-gray-700 hover:text-blue-600">
-                    +1-713-783-3122
-                  </a>
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-4">
-                <div
-                  class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0"
-                >
-                  <Icon name="map_pin" size="20" class="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <h3 class="text-lg text-gray-900 mb-1">Address</h3>
-                  <p class="text-gray-700">
-                    7400 Harwin Drive<br />
-                    Houston, TX 77036<br />
-                    United States
-                  </p>
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-4">
-                <div
-                  class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0"
-                >
-                  <Icon name="earth" size="20" class="w-6 h-6 text-orange-600" />
-                </div>
-                <div>
-                  <h3 class="text-lg text-gray-900 mb-1">Website</h3>
-                  <a
-                    href="http://www.sinopac.us"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-blue-600 hover:text-blue-700"
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div
+                class="space-y-6 contact__infoLeft opacity-0 translate-x-[-100px] transition-all duration-500"
+              >
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
                   >
-                    www.Sinopac.us
-                  </a>
+                    <Icon name="mail" size="20" class="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 class="text-lg text-gray-900 mb-1">Email</h3>
+                    <a
+                      href="mailto:Contact@InvesTexas.com"
+                      class="text-blue-600 hover:text-blue-700"
+                    >
+                      Contact@InvesTexas.com
+                    </a>
+                    <span>, </span>
+                    <a href="mailto:USA@Sinopac.us" class="text-blue-600 hover:text-blue-700">
+                      USA@Sinopac.us
+                    </a>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
+                    <Icon name="phone" size="20" class="w-6 h-6 text-green-600" />
+                  </div>
+                  <div>
+                    <h3 class="text-lg text-gray-900 mb-1">Phone</h3>
+                    <a href="tel:+17137833122" class="text-gray-700 hover:text-blue-600">
+                      +1-713-783-3122
+                    </a>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
+                    <Icon name="map_pin" size="20" class="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 class="text-lg text-gray-900 mb-1">Address</h3>
+                    <p class="text-gray-700">7400 Harwin Drive Houston, TX 77036 United States</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div
+                    class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                  >
+                    <Icon name="earth" size="20" class="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div>
+                    <h3 class="text-lg text-gray-900 mb-1">Website</h3>
+                    <a
+                      href="http://www.sinopac.us"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-blue-600 hover:text-blue-700"
+                    >
+                      www.Sinopac.us
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div
-              class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-100"
-            >
-              <h3 class="text-lg text-gray-900 mb-3">Office Hours</h3>
-              <div class="space-y-2 text-gray-700">
-                <div class="flex justify-between">
-                  <span>Monday - Friday:</span>
-                  <span>9:00 AM - 6:00 PM</span>
+              <div
+                class="contact__infoRight bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-100 opacity-0 translate-x-[100px] transition-all duration-500"
+              >
+                <h3 class="text-lg text-gray-900 mb-3">Office Hours</h3>
+                <div class="space-y-2 text-gray-700">
+                  <div class="flex justify-between">
+                    <span>Monday - Friday:</span>
+                    <span>9:00 AM - 6:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Saturday:</span>
+                    <span>10:00 AM - 4:00 PM</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Sunday:</span>
+                    <span>Closed</span>
+                  </div>
+                  <p class="text-sm text-gray-600 mt-4">CST (Central Standard Time)</p>
                 </div>
-                <div class="flex justify-between">
-                  <span>Saturday:</span>
-                  <span>10:00 AM - 4:00 PM</span>
-                </div>
-                <div class="flex justify-between">
-                  <span>Sunday:</span>
-                  <span>Closed</span>
-                </div>
-                <p class="text-sm text-gray-600 mt-4">CST (Central Standard Time)</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
     <!-- Office Locations -->
-    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section class="office__section py-20 bg-gradient-to-b from-gray-50 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
+        <div
+          class="office__title text-center mb-16 opacity-0 translate-y-10 transition-all duration-500"
+        >
           <h2 class="text-4xl text-gray-900 mb-4">Our Offices</h2>
           <p class="text-xl text-gray-600">Visit us at any of our three locations</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="office__list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div
             v-for="(office, index) in offices"
             :key="index"
-            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+            class="office__item bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl opacity-0 translate-y-10 transition-all duration-500"
           >
             <div
               class="h-48 bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white"
             >
               <div class="text-center p-6">
                 <Icon name="map_pin" size="20" class="w-12 h-12 mx-auto mb-2" />
-                <p class="text-sm">{office.location}</p>
+                <p class="text-sm">{{ office.location }}</p>
               </div>
             </div>
 
             <div class="p-6">
-              <h3 class="text-xl text-gray-900 mb-3">{office.name}</h3>
+              <h3 class="text-xl text-gray-900 mb-3">{{ office.name }}</h3>
 
               <div v-if="office.address" class="mb-4 text-sm text-gray-600">
                 <Icon name="map_pin" size="20" class="w-4 h-4 inline mr-2" />
