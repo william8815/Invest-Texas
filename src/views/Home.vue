@@ -109,7 +109,6 @@ onMounted(() => {
   const MainFeaturesTitleObserver = new IntersectionObserver((entries) => {
     // entries 為陣列，裝有進入視窗範圍的元素資訊，並執行後面的 callback 函式
     entries.forEach((entry) => {
-      entry.target.classList.add("opacity-0", "translate-y-10");
       // 取消觀察指定元素
       if (entry.isIntersecting) {
         entry.target.classList.remove("opacity-0", "translate-y-10");
@@ -124,16 +123,18 @@ onMounted(() => {
   const MainFeaturesContent = document.querySelectorAll(".main-features-content");
   const MainFeaturesContentObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      entry.target.classList.add("opacity-0", "translate-y-10");
       if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${entry.target.dataset.index * 0.1}s`;
         entry.target.classList.remove("opacity-0", "translate-y-10");
         entry.target.classList.add("opacity-100", "translate-y-0");
+        setTimeout(() => {
+          entry.target.style.transitionDelay = "0s";
+        }, 300);
         MainFeaturesContentObserver.unobserve(entry.target);
       }
     });
   }, options);
   MainFeaturesContent.forEach((el, index) => {
-    el.style.transitionDelay = `${index * 0.1}s`;
     MainFeaturesContentObserver.observe(el);
   });
 
@@ -141,7 +142,6 @@ onMounted(() => {
   const statItem = document.querySelectorAll(".stat-item");
   const statItemObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      entry.target.classList.add("opacity-0", "translate-y-10", "transition-all", "duration-300");
       if (entry.isIntersecting) {
         entry.target.classList.remove("opacity-0", "translate-y-10");
         entry.target.classList.add("opacity-100", "translate-y-0");
@@ -285,7 +285,9 @@ function animateCount(el, start, end, duration = 1500) {
     <section class="main-features py-20 bg-transparent">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- title -->
-        <div class="main-features-title text-center mb-16 duration-1000">
+        <div
+          class="main-features-title text-center mb-16 opacity-0 translate-y-10 transition-all duration-300"
+        >
           <h2 class="text-4xl text-gray-900 mb-4">Why Choose InvesTexas?</h2>
           <p class="text-xl text-gray-600 max-w-3xl mx-auto">
             Strategic location, tariff advantages, and complete infrastructure for your business
@@ -297,7 +299,8 @@ function animateCount(el, start, end, duration = 1500) {
           <div
             v-for="(feature, index) in mainFeatures"
             :key="index"
-            class="main-features-content bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl border border-gray-100 group hover:translate-y-[-10px] transition-all duration-300"
+            class="main-features-content bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-xl border border-gray-100 group hover:translate-y-[-10px] opacity-0 translate-y-10 transition-all duration-300"
+            :data-index="index"
           >
             <div
               class="w-16 h-16 bg-gradient-to-br from-sky-500 to-amber-400 rounded-xl flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform duration-300"
@@ -315,7 +318,11 @@ function animateCount(el, start, end, duration = 1500) {
     <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div v-for="(stat, index) in quickStats" :key="index" class="text-center stat-item">
+          <div
+            v-for="(stat, index) in quickStats"
+            :key="index"
+            class="text-center stat-item opacity-0 translate-y-10 transition-all duration-300"
+          >
             <div class="flex justify-center mb-4 text-amber-400">
               <Icon :name="stat.icon" size="24" />
             </div>

@@ -1,11 +1,22 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, toRaw } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 // config
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
 // components
 import Icon from "@/components/base/Icon.vue";
+// images
+import process1_1 from "@/assets/images/process/process1_1.png";
+import process2_1 from "@/assets/images/process/process2_1.jpg";
+import process2_2 from "@/assets/images/process/process2_2.jpg";
+import process3_1 from "@/assets/images/process/process3_1.jpg";
+import process3_2 from "@/assets/images/process/process3_2.gif";
+import process3_3 from "@/assets/images/process/process3_3.jpg";
+import process3_4 from "@/assets/images/process/process3_4.jpg";
+import process4_1 from "@/assets/images/process/process4_1.png";
+import process5_1 from "@/assets/images/process/process5_1.jpg";
+import process6_1 from "@/assets/images/process/process6_1.png";
 
 // Scroll progress tracking
 const progressRef = ref(null);
@@ -39,7 +50,7 @@ onUnmounted(() => {
   window.removeEventListener("scroll", updateScrollProgress);
 });
 
-const steps = [
+const steps = ref([
   {
     number: 1,
     icon: "store",
@@ -53,8 +64,13 @@ const steps = [
       "Market Survey across USA",
       "Supported by Sinopac VP Felix Fu",
     ],
-    image:
-      "https://images.unsplash.com/photo-1697869812795-8a8014cd53a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB3YXJlaG91c2UlMjBzaG93cm9vbSUyMGludGVyaW9yfGVufDF8fHx8MTc2NDE2NjkwNnww&ixlib=rb-4.1.0&q=80&w=1080",
+    images: [
+      {
+        url: process1_1,
+        alt: "process1_1",
+        active: true,
+      },
+    ],
   },
   {
     number: 2,
@@ -71,6 +87,18 @@ const steps = [
       "Expert consultancy by Dr. Lin",
     ],
     imagePlaceholder: "Wholesale Center Lobby & Walk-Isle Images",
+    images: [
+      {
+        url: process2_1,
+        alt: "process2_1",
+        active: true,
+      },
+      {
+        url: process2_2,
+        alt: "process2_2",
+        active: false,
+      },
+    ],
   },
   {
     number: 3,
@@ -86,8 +114,28 @@ const steps = [
       "Full support for pilot production",
       "Detail info: www.Lintelmex.com",
     ],
-    image:
-      "https://images.unsplash.com/photo-1599765824376-a87eb981b2ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW51ZmFjdHVyaW5nJTIwZmFjdG9yeSUyMGZsb29yfGVufDF8fHx8MTc2NDA3MzQyOHww&ixlib=rb-4.1.0&q=80&w=1080",
+    images: [
+      {
+        url: process3_1,
+        alt: "process3_1",
+        active: true,
+      },
+      {
+        url: process3_2,
+        alt: "process3_2",
+        active: false,
+      },
+      {
+        url: process3_3,
+        alt: "process3_3",
+        active: false,
+      },
+      {
+        url: process3_4,
+        alt: "process3_4",
+        active: false,
+      },
+    ],
   },
   {
     number: 4,
@@ -103,8 +151,13 @@ const steps = [
       "Strong engineering background",
       "Tailored facility design",
     ],
-    image:
-      "https://images.unsplash.com/photo-1759922378222-47ad736a174d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBkZXZlbG9wbWVudCUyMHByb2plY3R8ZW58MXx8fHwxNzY0MTY3MDUwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    images: [
+      {
+        url: process4_1,
+        alt: "process4_1",
+        active: true,
+      },
+    ],
   },
   {
     number: 5,
@@ -116,12 +169,25 @@ const steps = [
     features: [
       "38 years International Marketing experience",
       "Brand Name Sales development",
-      "After Sale Service support",
       "Operations in both USA & Mexico",
-      "Alongside Hwy 69 - Pan-American Highway",
-      "Branch offices for after-sales service",
+      "Setup branch office to take care after sales service to back up our Brand Sales.",
+      "Our 60,000 sq.ft. Operation Building in Houston, Texas, USA",
+      "Our 50,000 sq.ft. Operation Building in Reynosa, Tam., Mexico",
+      "Pan-America Highway System run from Canada toArgentina.",
     ],
     imagePlaceholder: "Houston & Mexico Operations + Pan-American Highway",
+    images: [
+      {
+        url: process2_1,
+        alt: "process2_1",
+        active: true,
+      },
+      {
+        url: process5_1,
+        alt: "process5_1",
+        active: false,
+      },
+    ],
   },
   {
     number: 6,
@@ -140,8 +206,48 @@ const steps = [
       "Consultant: Mr. Victor Zhang",
     ],
     imagePlaceholder: "Facility Images",
+    images: [
+      {
+        url: process6_1,
+        alt: "process6_1",
+        active: true,
+      },
+    ],
   },
-];
+]);
+
+// 這個 Class 是用來管理圖片輪播的
+// 需要參數 : 容器元素(本身、寬度)、圖片列表(active, url, alt)
+// 功能 : 可以透過 prev 和 next 來設置當前 active 的圖片
+//
+const imageSliderRef = ref(null);
+
+const handlePrev = (images) => {
+  const activeIndex = images.findIndex((item) => item.active);
+  if (activeIndex === 0) return;
+  images[activeIndex].active = false;
+  images[activeIndex - 1].active = true;
+  // 讓容器水平滾動至 active image 的索引位置
+  let element = toRaw(imageSliderRef.value);
+  element[0]?.scrollBy({
+    left: -element[0].offsetWidth,
+    behavior: "smooth",
+  });
+};
+const handleNext = (images) => {
+  const activeIndex = images.findIndex((item) => item.active);
+  if (activeIndex === images.length - 1) return;
+  images[activeIndex].active = false;
+  images[activeIndex + 1].active = true;
+  // 讓容器水平滾動至 active image 的索引位置
+  let element = toRaw(imageSliderRef.value);
+  element[0]?.scrollBy({
+    left: element[0].offsetWidth,
+    behavior: "smooth",
+  });
+};
+
+import ImageSlider from "@/components/ImageSlider.vue";
 
 // animation
 onMounted(() => {
@@ -359,13 +465,56 @@ onMounted(() => {
               class="flex-1 lg:w-1/2 w-full process__image opacity-0 transition-all duration-300"
               :class="index % 2 === 0 ? 'translate-x-10' : '-translate-x-10'"
             >
-              <div class="hover:scale-105 transition-transform duration-300">
-                <img
-                  v-if="step.image"
-                  :src="step.image"
-                  :alt="step.title"
-                  class="w-full h-80 object-cover rounded-2xl shadow-2xl"
-                />
+              <!-- image slider -->
+              <ImageSlider
+                v-model:images="step.images"
+                :icon="step.icon"
+                :imagePlaceholder="step.imagePlaceholder"
+              />
+              <!-- <div class="">
+                <div v-if="step.images?.length">
+                  <div
+                    class="w-full h-80 rounded-lg shadow-2xl flex flex-nowrap overflow-x-hidden"
+                    ref="imageSliderRef"
+                  >
+                    <img
+                      v-for="(image, idx) in step.images"
+                      :key="idx"
+                      :src="image.url"
+                      :alt="image.alt"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  <div
+                    v-if="step.images?.length > 1"
+                    class="flex items-center justify-center gap-4 mt-4"
+                  >
+                    <button
+                      class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px]"
+                      :class="{ 'opacity-50 cursor-not-allowed': step.images?.length === 1 }"
+                      @click="handlePrev(step.images)"
+                    >
+                      <span
+                        class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                      >
+                        prev
+                      </span>
+                    </button>
+                    <button
+                      class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px]"
+                      :class="{ 'opacity-50 cursor-not-allowed': step.images?.length === 1 }"
+                      @click="handleNext(step.images)"
+                    >
+                      <span
+                        class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                      >
+                        next
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
                 <div
                   v-else
                   class="w-full h-80 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl shadow-2xl flex items-center justify-center"
@@ -379,7 +528,7 @@ onMounted(() => {
                     <p class="text-gray-600">{{ step.imagePlaceholder }}</p>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
