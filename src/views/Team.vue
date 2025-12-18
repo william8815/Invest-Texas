@@ -1,7 +1,23 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+// Modal state
+const showModal = ref(false);
+const selectedMember = ref(null);
+
+const openModal = (member) => {
+  selectedMember.value = member;
+  showModal.value = true;
+  document.body.style.overflow = "hidden";
+};
+
+const closeModal = () => {
+  showModal.value = false;
+  selectedMember.value = null;
+  document.body.style.overflow = "";
+};
 
 const teamMembers = [
   {
@@ -120,16 +136,55 @@ const teamMembers = [
       "He holds a Bachelor's in German Studies from Beijing Foreign Studies University and a Master's in Financial Engineering from the University of Bonn, With international experience in Germany, Switzerland, China and the U.S.",
   },
 ];
+
+onMounted(() => {
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  // Team List
+  const teamItems = document.querySelectorAll(".team__item");
+  const teamItemsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        if (entry.target.dataset.index % 2 === 0) {
+          entry.target.classList.remove("opacity-0", "translate-x-[100px]");
+          entry.target.classList.add("opacity-100", "translate-x-0");
+        } else {
+          entry.target.classList.remove("opacity-0", "translate-x-[-100px]");
+          entry.target.classList.add("opacity-100", "translate-x-0");
+        }
+        teamItemsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  teamItems.forEach((item) => {
+    teamItemsObserver.observe(item);
+  });
+});
 </script>
 
 <template>
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
+        <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <h1 class="text-5xl md:text-6xl mb-6">Our Expert Team</h1>
           <p class="text-xl text-blue-100 max-w-3xl mx-auto">
             Decades of combined experience in international business, finance, engineering, and
@@ -140,125 +195,147 @@ const teamMembers = [
     </section>
 
     <!-- Team Members -->
-    <section class="py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section class="team__section py-20 bg-gradient-to-b from-white via-gray-50 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="space-y-16">
+        <div class="space-y-16 team__list">
           <div v-for="(member, index) in teamMembers" :key="index">
             <div
-              class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+              class="team__item bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl duration-300 opacity-0 transition-all duration-500"
+              :class="{
+                'translate-x-[100px]': index % 2 === 0,
+                'translate-x-[-100px]': index % 2 !== 0,
+              }"
+              :data-index="index"
             >
-              <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div
-                  class="lg:col-span-1 bg-gradient-to-br from-sky-600 to-cyan-600 p-8 text-white"
+                  class="lg:col-span-1 bg-gradient-to-br from-sky-600 to-cyan-600 p-8 text-white flex lg:flex-col items-center lg:justify-center gap-4"
                 >
-                  <div class="flex flex-col items-center text-center">
+                  <!-- avatar -->
+                  <div>
                     <span class="text-6xl">{{ member.name.charAt(0) }}</span>
+                  </div>
+                  <div class="flex flex-col lg:items-center">
                     <h3 class="text-2xl mb-2">{{ member.name }}</h3>
                     <p class="text-blue-100 mb-2">{{ member.title }}</p>
                     <p v-if="member.subtitle" class="text-sm text-blue-200">
                       {{ member.subtitle }}
                     </p>
-                    <div class="flex gap-4 mt-6">
-                      <button
-                        class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                      >
-                        <Icon name="mail" size="20" class="w-5 h-5" />
-                      </button>
-                      <button
-                        class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
-                      >
-                        <Icon name="linkedin" size="20" class="w-5 h-5" />
-                      </button>
-                    </div>
                   </div>
                 </div>
 
-                <div class="lg:col-span-2 p-8">
-                  <p v-if="member.description" class="text-gray-700 mb-6 leading-relaxed">
-                    {{ member.description }}
-                  </p>
+                <div class="lg:col-span-2 p-8 flex flex-col">
+                  <!-- Content with height limit and fade effect -->
+                  <div class="relative max-h-[200px] overflow-hidden">
+                    <!-- Description -->
+                    <p v-if="member.description" class="text-gray-700 mb-6 leading-relaxed">
+                      {{ member.description }}
+                    </p>
 
-                  <div v-if="member.education" class="mb-6">
-                    <h4 class="text-xl text-gray-900 mb-3">Education</h4>
-                    <ul class="space-y-2">
-                      <li
-                        v-for="(edu, idx) in member.education"
-                        :key="idx"
-                        class="flex items-start space-x-3"
-                      >
-                        <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
-                        <span class="text-gray-700">{{ edu }}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div v-if="member.experience" class="mb-6">
-                    <h4 class="text-xl text-gray-900 mb-3">Experience</h4>
-                    <ul class="space-y-2">
-                      <li
-                        v-for="(exp, idx) in member.experience"
-                        :key="idx"
-                        class="flex items-start space-x-3"
-                      >
-                        <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
-                        <span class="text-gray-700">{{ exp }}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div v-if="member.certifications" class="mb-6">
-                    <h4 class="text-xl text-gray-900 mb-3">Certifications & Training</h4>
-                    <ul class="space-y-2">
-                      <li
-                        v-for="(cert, idx) in member.certifications"
-                        :key="idx"
-                        class="flex items-start space-x-3"
-                      >
-                        <div class="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" />
-                        <span class="text-gray-700">{{ cert }}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div v-if="member.skills" class="mb-6">
-                    <h4 class="text-xl text-gray-900 mb-3">Skills & Expertise</h4>
-                    <div class="flex flex-wrap gap-2">
-                      <span
-                        v-for="(skill, idx) in member.skills"
-                        :key="idx"
-                        class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
-                      >
-                        {{ skill }}
-                      </span>
+                    <!-- Experience -->
+                    <div v-if="member.experience" class="mb-6">
+                      <h4 class="text-xl text-gray-900 mb-3">Experience</h4>
+                      <ul class="space-y-2">
+                        <li
+                          v-for="(exp, idx) in member.experience"
+                          :key="idx"
+                          class="flex items-start space-x-3"
+                        >
+                          <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                          <span class="text-gray-700">{{ exp }}</span>
+                        </li>
+                      </ul>
                     </div>
+
+                    <!-- Certifications & Training -->
+                    <div v-if="member.certifications" class="mb-6">
+                      <h4 class="text-xl text-gray-900 mb-3">Certifications & Training</h4>
+                      <ul class="space-y-2">
+                        <li
+                          v-for="(cert, idx) in member.certifications"
+                          :key="idx"
+                          class="flex items-start space-x-3"
+                        >
+                          <div class="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                          <span class="text-gray-700">{{ cert }}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- Skills & Expertise -->
+                    <div v-if="member.skills" class="mb-6">
+                      <h4 class="text-xl text-gray-900 mb-3">Skills & Expertise</h4>
+                      <div class="flex flex-wrap gap-2">
+                        <span
+                          v-for="(skill, idx) in member.skills"
+                          :key="idx"
+                          class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                        >
+                          {{ skill }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- China Work Experience -->
+                    <div v-if="member.chinaExperience" class="mb-6">
+                      <h4 class="text-xl text-gray-900 mb-3">China Work Experience</h4>
+                      <ul class="space-y-2">
+                        <li
+                          v-for="(exp, idx) in member.chinaExperience"
+                          :key="idx"
+                          class="flex items-start space-x-3"
+                        >
+                          <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                          <span class="text-gray-700">{{ exp }}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- UK Work Experience -->
+                    <div v-if="member.ukExperience" class="mb-6">
+                      <h4 class="text-xl text-gray-900 mb-3">UK Work Experience</h4>
+                      <ul class="space-y-2">
+                        <li
+                          v-for="(exp, idx) in member.ukExperience"
+                          :key="idx"
+                          class="flex items-start space-x-3"
+                        >
+                          <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                          <span class="text-gray-700">{{ exp }}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- Education -->
+                    <div v-if="member.education" class="mb-6">
+                      <h4 class="text-xl text-gray-900 mb-3">Education</h4>
+                      <ul class="space-y-2">
+                        <li
+                          v-for="(edu, idx) in member.education"
+                          :key="idx"
+                          class="flex items-start space-x-3"
+                        >
+                          <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
+                          <span class="text-gray-700">{{ edu }}</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <!-- Fade overlay -->
+                    <div
+                      class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"
+                    />
                   </div>
 
-                  <div v-if="member.chinaExperience" class="mb-6">
-                    <h4 class="text-xl text-gray-900 mb-3">China Work Experience</h4>
-                    <ul class="space-y-2">
-                      <li
-                        v-for="(exp, idx) in member.chinaExperience"
-                        :key="idx"
-                        class="flex items-start space-x-3"
-                      >
-                        <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
-                        <span class="text-gray-700">{{ exp }}</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div v-if="member.ukExperience" class="mb-6">
-                    <h4 class="text-xl text-gray-900 mb-3">UK Work Experience</h4>
-                    <ul class="space-y-2">
-                      <li
-                        v-for="(exp, idx) in member.ukExperience"
-                        :key="idx"
-                        class="flex items-start space-x-3"
-                      >
-                        <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
-                        <span class="text-gray-700">{{ exp }}</span>
-                      </li>
-                    </ul>
+                  <!-- View More Button -->
+                  <div class="mt-4 pt-4 border-t border-gray-100">
+                    <button
+                      @click="openModal(member)"
+                      class="inline-flex items-center gap-2 px-4 py-2 text-sky-600 hover:text-sky-700 hover:bg-sky-50 rounded-lg transition-colors duration-200 font-medium"
+                    >
+                      <span>View More</span>
+                      <Icon name="arrow_forward" size="18" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -286,5 +363,198 @@ const teamMembers = [
         </div>
       </div>
     </section>
+
+    <!-- Member Detail Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="showModal && selectedMember"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4"
+          @click.self="closeModal"
+        >
+          <!-- Backdrop -->
+          <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="closeModal" />
+
+          <!-- Modal Content -->
+          <div
+            class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden z-10"
+          >
+            <!-- Modal Header -->
+            <div
+              class="bg-gradient-to-br from-sky-600 to-cyan-600 p-6 text-white flex items-center gap-4"
+            >
+              <div>
+                <span class="text-5xl font-light">{{ selectedMember.name.charAt(0) }}</span>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-2xl font-semibold mb-1">{{ selectedMember.name }}</h3>
+                <p class="text-blue-100">{{ selectedMember.title }}</p>
+                <p v-if="selectedMember.subtitle" class="text-sm text-blue-200 mt-1">
+                  {{ selectedMember.subtitle }}
+                </p>
+              </div>
+              <button
+                @click="closeModal"
+                class="p-2 hover:bg-white/20 rounded-full transition-colors"
+                aria-label="Close modal"
+              >
+                <Icon name="close" size="24" />
+              </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+              <!-- Description -->
+              <p
+                v-if="selectedMember.description"
+                class="text-gray-700 mb-6 leading-relaxed text-lg"
+              >
+                {{ selectedMember.description }}
+              </p>
+
+              <!-- Education -->
+              <div v-if="selectedMember.education" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-amber-500 rounded-full" />
+                  Education
+                </h4>
+                <ul class="space-y-2 pl-3">
+                  <li
+                    v-for="(edu, idx) in selectedMember.education"
+                    :key="idx"
+                    class="flex items-start space-x-3"
+                  >
+                    <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
+                    <span class="text-gray-700">{{ edu }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Experience -->
+              <div v-if="selectedMember.experience" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-indigo-600 rounded-full" />
+                  Experience
+                </h4>
+                <ul class="space-y-2 pl-3">
+                  <li
+                    v-for="(exp, idx) in selectedMember.experience"
+                    :key="idx"
+                    class="flex items-start space-x-3"
+                  >
+                    <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                    <span class="text-gray-700">{{ exp }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Certifications & Training -->
+              <div v-if="selectedMember.certifications" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-green-600 rounded-full" />
+                  Certifications & Training
+                </h4>
+                <ul class="space-y-2 pl-3">
+                  <li
+                    v-for="(cert, idx) in selectedMember.certifications"
+                    :key="idx"
+                    class="flex items-start space-x-3"
+                  >
+                    <div class="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                    <span class="text-gray-700">{{ cert }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Skills & Expertise -->
+              <div v-if="selectedMember.skills" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-blue-600 rounded-full" />
+                  Skills & Expertise
+                </h4>
+                <div class="flex flex-wrap gap-2 pl-3">
+                  <span
+                    v-for="(skill, idx) in selectedMember.skills"
+                    :key="idx"
+                    class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                  >
+                    {{ skill }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- China Work Experience -->
+              <div v-if="selectedMember.chinaExperience" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-red-600 rounded-full" />
+                  China Work Experience
+                </h4>
+                <ul class="space-y-2 pl-3">
+                  <li
+                    v-for="(exp, idx) in selectedMember.chinaExperience"
+                    :key="idx"
+                    class="flex items-start space-x-3"
+                  >
+                    <div class="w-2 h-2 bg-red-600 rounded-full mt-2 flex-shrink-0" />
+                    <span class="text-gray-700">{{ exp }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- UK Work Experience -->
+              <div v-if="selectedMember.ukExperience" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-purple-600 rounded-full" />
+                  UK Work Experience
+                </h4>
+                <ul class="space-y-2 pl-3">
+                  <li
+                    v-for="(exp, idx) in selectedMember.ukExperience"
+                    :key="idx"
+                    class="flex items-start space-x-3"
+                  >
+                    <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0" />
+                    <span class="text-gray-700">{{ exp }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="border-t border-gray-100 p-4 flex justify-end">
+              <button
+                @click="closeModal"
+                class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors font-medium"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </DefaultLayout>
 </template>
+
+<style scoped>
+/* Modal transition */
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-from .relative,
+.modal-leave-to .relative {
+  transform: scale(0.95) translateY(20px);
+}
+
+.modal-enter-active .relative,
+.modal-leave-active .relative {
+  transition: all 0.3s ease;
+}
+</style>
