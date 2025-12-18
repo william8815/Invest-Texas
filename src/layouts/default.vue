@@ -4,7 +4,7 @@ import Footer from "../components/layout/footer.vue";
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col w-full overflow-x-hidden">
+  <div class="min-h-screen flex flex-col w-full">
     <Header class="fixed top-0 left-0 w-full z-50" />
     <main class="grow mt-[70px]">
       <slot />

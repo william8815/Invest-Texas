@@ -150,7 +150,7 @@ onMounted(() => {
     </section>
 
     <!-- Contact Form & Info -->
-    <section class="contact__section py-20 bg-white">
+    <section class="contact__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-12">
           <!-- <div>
@@ -339,8 +339,9 @@ onMounted(() => {
         </div>
       </div>
     </section>
+
     <!-- Office Locations -->
-    <section class="office__section py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section class="office__section py-20 bg-gradient-to-b from-gray-50 to-white overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           class="office__title text-center mb-16 opacity-0 translate-y-10 transition-all duration-500"

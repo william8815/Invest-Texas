@@ -206,185 +206,136 @@ const dvhToPercent = (dvh) => {
 };
 
 // GSAP Scroll Animations
-onMounted(() => {
-  if (!containerRef.value) return;
+// onMounted(() => {
+//   if (!containerRef.value) return;
 
-  ctx = gsap.context(() => {
-    // Total scroll height calculation:
-    // Highway: 100dvh (0-100)
-    // Airport: 100dvh (100-200)
-    // Port: 100dvh (200-300)
-    // 9 Amenities: 9 * 60dvh = 540dvh (300-840)
-    // Total: 840dvh
+//   ctx = gsap.context(() => {
+//     gsap
+//       .timeline({
+//         scrollTrigger: {
+//           trigger: containerRef.value,
+//           start: "top 70%",
+//           end: `${dvhToPercent(80)}% top`,
+//           toggleActions: "play reverse play reverse",
+//         },
+//       })
+//       .fromTo(highwayCard.value, { opacity: 0, x: -100 }, { opacity: 1, x: 0, duration: 1 });
 
-    // ========== Section 1: Highway (0-100dvh) ==========
-    // 0-80dvh: Card fade in from left, route draws
-    // 80-100dvh: Card fade out to left, route fades, map moves right->left
+//     gsap
+//       .timeline({
+//         scrollTrigger: {
+//           trigger: containerRef.value,
+//           start: `${dvhToPercent(80)}% top`,
+//           end: `${dvhToPercent(100)}% top`,
+//           toggleActions: "play reverse play reverse",
+//         },
+//       })
+//       .to(highwayCard.value, { opacity: 0, x: -100, duration: 1 });
 
-    // Highway card entrance (0-80dvh)
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: containerRef.value,
-          start: "top 70%",
-          end: `${dvhToPercent(80)}% top`,
-          toggleActions: "play reverse play reverse",
-          // scrub: 1,
-          // onUpdate: (self) => {
-          //   animationState.value.activeSection = "highway";
-          //   animationState.value.routeProgress = self.progress;
-          // },
-        },
-      })
-      .fromTo(highwayCard.value, { opacity: 0, x: -100 }, { opacity: 1, x: 0, duration: 1 });
+//     gsap
+//       .timeline({
+//         scrollTrigger: {
+//           trigger: containerRef.value,
+//           start: `${dvhToPercent(100)}% top`,
+//           end: `${dvhToPercent(180)}% top`,
+//           toggleActions: "play reverse play reverse",
+//         },
+//       })
+//       .fromTo(airportCard.value, { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 });
 
-    // Highway card exit & map transition (80-100dvh)
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: containerRef.value,
-          start: `${dvhToPercent(80)}% top`,
-          end: `${dvhToPercent(100)}% top`,
-          toggleActions: "play reverse play reverse",
-          // scrub: 1,
-          // onUpdate: (self) => {
-          //   animationState.value.routeProgress = 1 - self.progress;
-          //   animationState.value.mapPosition = self.progress;
-          // },
-        },
-      })
-      .to(highwayCard.value, { opacity: 0, x: -100, duration: 1 });
+//     gsap
+//       .timeline({
+//         scrollTrigger: {
+//           trigger: containerRef.value,
+//           start: `${dvhToPercent(180)}% top`,
+//           end: `${dvhToPercent(200)}% top`,
+//           scrub: 1,
+//           onUpdate: (self) => {
+//             animationState.value.routeProgress = 1 - self.progress;
+//             animationState.value.mapPosition = 1 - self.progress;
+//           },
+//         },
+//       })
+//       .to(airportCard.value, { opacity: 0, x: 100, duration: 1 });
 
-    // ========== Section 2: Airport (100-200dvh) ==========
-    // 100-180dvh: Card fade in from right, route draws
-    // 180-200dvh: Card fade out to right, route fades, map moves left->right
+//     gsap
+//       .timeline({
+//         scrollTrigger: {
+//           trigger: containerRef.value,
+//           start: `${dvhToPercent(200)}% top`,
+//           end: `${dvhToPercent(280)}% top`,
+//           scrub: 1,
+//           onUpdate: (self) => {
+//             animationState.value.activeSection = "port";
+//             animationState.value.routeProgress = self.progress;
+//           },
+//         },
+//       })
+//       .fromTo(portCard.value, { opacity: 0, x: -100 }, { opacity: 1, x: 0, duration: 1 });
 
-    // Airport card entrance (100-180dvh)
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: containerRef.value,
-          start: `${dvhToPercent(100)}% top`,
-          end: `${dvhToPercent(180)}% top`,
-          toggleActions: "play reverse play reverse",
-          // scrub: 1,
-          // onUpdate: (self) => {
-          //   animationState.value.activeSection = "airport";
-          //   animationState.value.routeProgress = self.progress;
-          // },
-        },
-      })
-      .fromTo(airportCard.value, { opacity: 0, x: 100 }, { opacity: 1, x: 0, duration: 1 });
+//     gsap
+//       .timeline({
+//         scrollTrigger: {
+//           trigger: containerRef.value,
+//           start: `${dvhToPercent(280)}% top`,
+//           end: `${dvhToPercent(300)}% top`,
+//           scrub: 1,
+//           onUpdate: (self) => {
+//             animationState.value.routeProgress = 1 - self.progress;
+//             animationState.value.mapPosition = self.progress;
+//           },
+//         },
+//       })
+//       .to(portCard.value, { opacity: 0, x: -100, duration: 1 });
 
-    // Airport card exit & map transition (180-200dvh)
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: containerRef.value,
-          start: `${dvhToPercent(180)}% top`,
-          end: `${dvhToPercent(200)}% top`,
-          scrub: 1,
-          onUpdate: (self) => {
-            animationState.value.routeProgress = 1 - self.progress;
-            animationState.value.mapPosition = 1 - self.progress;
-          },
-        },
-      })
-      .to(airportCard.value, { opacity: 0, x: 100, duration: 1 });
+//     amenities.forEach((amenity, index) => {
+//       const startDvh = 300 + index * 60;
+//       const showEndDvh = startDvh + 50;
+//       const transitionEndDvh = startDvh + 60;
 
-    // ========== Section 3: Port (200-300dvh) ==========
-    // 200-280dvh: Card fade in from left, route draws
-    // 280-300dvh: Card fade out to left, route fades, map moves right->left
+//       gsap
+//         .timeline({
+//           scrollTrigger: {
+//             trigger: containerRef.value,
+//             start: `${dvhToPercent(startDvh)}% top`,
+//             end: `${dvhToPercent(showEndDvh)}% top`,
+//             scrub: 1,
+//             onUpdate: (self) => {
+//               animationState.value.activeSection = `amenity-${index}`;
+//               animationState.value.routeProgress = self.progress;
+//               animationState.value.mapPosition = 1; // Keep map on left
+//               activeAmenityIndex.value = index;
+//             },
+//           },
+//         })
+//         .fromTo(
+//           `.amenity-card-${index}`,
+//           { opacity: 0, y: 100 },
+//           { opacity: 1, y: 0, duration: 1 }
+//         );
 
-    // Port card entrance (200-280dvh)
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: containerRef.value,
-          start: `${dvhToPercent(200)}% top`,
-          end: `${dvhToPercent(280)}% top`,
-          scrub: 1,
-          onUpdate: (self) => {
-            animationState.value.activeSection = "port";
-            animationState.value.routeProgress = self.progress;
-          },
-        },
-      })
-      .fromTo(portCard.value, { opacity: 0, x: -100 }, { opacity: 1, x: 0, duration: 1 });
+//       gsap
+//         .timeline({
+//           scrollTrigger: {
+//             trigger: containerRef.value,
+//             start: `${dvhToPercent(showEndDvh)}% top`,
+//             end: `${dvhToPercent(transitionEndDvh)}% top`,
+//             scrub: 1,
+//             onUpdate: (self) => {
+//               animationState.value.routeProgress = 1 - self.progress;
+//               animationState.value.mapPosition = 1; // Keep map on left
+//             },
+//           },
+//         })
+//         .to(`.amenity-card-${index}`, { opacity: 0, y: -100, duration: 1 });
+//     });
+//   }, containerRef.value);
+// });
 
-    // Port card exit & map transition (280-300dvh)
-    // Map moves from right to left for amenity section
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: containerRef.value,
-          start: `${dvhToPercent(280)}% top`,
-          end: `${dvhToPercent(300)}% top`,
-          scrub: 1,
-          onUpdate: (self) => {
-            animationState.value.routeProgress = 1 - self.progress;
-            // Map transitions to left side (position = 1) for amenity section
-            animationState.value.mapPosition = self.progress;
-          },
-        },
-      })
-      .to(portCard.value, { opacity: 0, x: -100, duration: 1 });
-
-    // ========== Section 4: Amenities (300-840dvh) ==========
-    // Each amenity: 60dvh (50dvh show + 10dvh transition)
-    // 9 amenities total
-    // Map stays on left side (position = 1) throughout amenity section
-
-    amenities.forEach((amenity, index) => {
-      const startDvh = 300 + index * 60;
-      const showEndDvh = startDvh + 50;
-      const transitionEndDvh = startDvh + 60;
-
-      // Amenity card entrance (startDvh to showEndDvh)
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: containerRef.value,
-            start: `${dvhToPercent(startDvh)}% top`,
-            end: `${dvhToPercent(showEndDvh)}% top`,
-            scrub: 1,
-            onUpdate: (self) => {
-              animationState.value.activeSection = `amenity-${index}`;
-              animationState.value.routeProgress = self.progress;
-              animationState.value.mapPosition = 1; // Keep map on left
-              activeAmenityIndex.value = index;
-            },
-          },
-        })
-        .fromTo(
-          `.amenity-card-${index}`,
-          { opacity: 0, y: 100 },
-          { opacity: 1, y: 0, duration: 1 }
-        );
-
-      // Amenity card exit (showEndDvh to transitionEndDvh)
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: containerRef.value,
-            start: `${dvhToPercent(showEndDvh)}% top`,
-            end: `${dvhToPercent(transitionEndDvh)}% top`,
-            scrub: 1,
-            onUpdate: (self) => {
-              animationState.value.routeProgress = 1 - self.progress;
-              animationState.value.mapPosition = 1; // Keep map on left
-            },
-          },
-        })
-        .to(`.amenity-card-${index}`, { opacity: 0, y: -100, duration: 1 });
-    });
-  }, containerRef.value);
-});
-
-onUnmounted(() => {
-  if (ctx) ctx.revert();
-  ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-});
+// onUnmounted(() => {
+//   if (ctx) ctx.revert();
+//   ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+// });
 
 // Computed styles for map container position
 const mapContainerStyle = computed(() => {

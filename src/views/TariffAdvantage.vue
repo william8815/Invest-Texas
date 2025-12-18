@@ -62,116 +62,79 @@ onMounted(() => {
   }, options);
   heroContentObserver.observe(heroContent);
 
-  gsap.fromTo(
-    ".problemSolution__challenge",
-    {
-      opacity: 0,
-      x: -100,
-    },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".problemSolution__challenge",
-        start: "top bottom",
-        end: "bottom top",
-      },
-    }
-  );
-  gsap.fromTo(
-    ".problemSolution__solution",
-    {
-      opacity: 0,
-      x: 100,
-    },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".problemSolution__solution",
-        start: "top bottom",
-        end: "bottom top",
-      },
-    }
-  );
+  // Problem/Solution Section
+  const problemSolutionChallenge = document.querySelector(".problemSolution__challenge");
+  const problemSolutionChallengeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[-100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        problemSolutionChallengeObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  problemSolutionChallengeObserver.observe(problemSolutionChallenge);
+
+  const problemSolutionSolution = document.querySelector(".problemSolution__solution");
+  const problemSolutionSolutionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        problemSolutionSolutionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  problemSolutionSolutionObserver.observe(problemSolutionSolution);
 
   // Tariff Comparison Section
-  gsap.fromTo(
-    ".tariffComparison__title",
-    {
-      opacity: 0,
-      x: -100,
-    },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".tariffComparison__title",
-        start: "top bottom",
-        end: "bottom top",
-      },
-    }
-  );
-  gsap.fromTo(
-    ".tariffComparison__description",
-    {
-      opacity: 0,
-      x: 100,
-    },
-    {
-      opacity: 1,
-      x: 0,
-      duration: 1,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".tariffComparison__description",
-        start: "top bottom",
-        end: "bottom top",
-      },
-    }
-  );
-  gsap.fromTo(
-    ".tariffComparison__table",
-    {
-      opacity: 0,
-      y: 100,
-    },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "ease",
-      scrollTrigger: {
-        trigger: ".tariffComparison__table",
-        start: "top bottom",
-        end: "bottom top",
-      },
-    }
-  );
-  gsap.fromTo(
-    ".tariffComparison__savings",
-    {
-      opacity: 0,
-      y: 100,
-    },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "ease",
-      scrollTrigger: {
-        trigger: ".tariffComparison__savings",
-        start: "top bottom",
-        end: "bottom top",
-      },
-    }
-  );
+  const tariffComparisonTitle = document.querySelector(".tariffComparison__title");
+  const tariffComparisonTitleObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[-100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        tariffComparisonTitleObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  tariffComparisonTitleObserver.observe(tariffComparisonTitle);
+
+  const tariffComparisonDescription = document.querySelector(".tariffComparison__description");
+  const tariffComparisonDescriptionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-[100px]");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        tariffComparisonDescriptionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  tariffComparisonDescriptionObserver.observe(tariffComparisonDescription);
+
+  const tariffComparisonTable = document.querySelector(".tariffComparison__table");
+  const tariffComparisonTableObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        tariffComparisonTableObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  tariffComparisonTableObserver.observe(tariffComparisonTable);
+
+  const tariffComparisonSavings = document.querySelector(".tariffComparison__savings");
+  const tariffComparisonSavingsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        tariffComparisonSavingsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  tariffComparisonSavingsObserver.observe(tariffComparisonSavings);
 
   // animate numbers
   const tableNumbers = document.querySelectorAll(".table__number");
@@ -356,12 +319,12 @@ function eqal(timeFraction) {
     </section>
 
     <!-- Problem/Solution Section -->
-    <section class="problemSolution__section py-20 bg-white">
+    <section class="problemSolution__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <!-- The Challenge -->
           <div
-            class="problemSolution__challenge bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200"
+            class="problemSolution__challenge bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200 opacity-0 translate-x-[-100px] transition-all duration-500"
           >
             <h2 class="text-3xl text-gray-900 mb-6">The Challenge</h2>
             <div class="space-y-4">
@@ -417,7 +380,7 @@ function eqal(timeFraction) {
 
           <!-- The Solution -->
           <div
-            class="problemSolution__solution bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl border-2 border-green-200"
+            class="problemSolution__solution bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl border-2 border-green-200 opacity-0 translate-x-[100px] transition-all duration-500"
           >
             <h2 class="text-3xl text-gray-900 mb-6">The Solution</h2>
             <div class="space-y-4">
@@ -476,17 +439,25 @@ function eqal(timeFraction) {
 
     <!-- Tariff Comparison Table -->
     <section
-      class="tariffComparison__section py-20 bg-gradient-to-br from-gray-900 via-sky-900 to-cyan-900 text-white"
+      class="tariffComparison__section py-20 bg-gradient-to-br from-gray-900 via-sky-900 to-cyan-900 text-white overflow-x-hidden"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="tariffComparison__title text-4xl mb-4">Cost Comparison Analysis</h2>
-          <p class="tariffComparison__description text-xl text-blue-200">
+          <h2
+            class="tariffComparison__title text-4xl mb-4 opacity-0 translate-x-[-100px] transition-all duration-500"
+          >
+            Cost Comparison Analysis
+          </h2>
+          <p
+            class="tariffComparison__description text-xl text-blue-200 opacity-0 translate-x-[100px] transition-all duration-500"
+          >
             See the dramatic savings with our USMCA solution
           </p>
         </div>
 
-        <div class="tariffComparison__table overflow-x-auto">
+        <div
+          class="tariffComparison__table overflow-x-auto opacity-0 translate-y-10 transition-all duration-500"
+        >
           <table
             class="w-full border-collapse bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
           >
@@ -567,7 +538,9 @@ function eqal(timeFraction) {
         </div>
 
         <!-- Savings Highlight -->
-        <div class="tariffComparison__savings mt-12 text-center">
+        <div
+          class="tariffComparison__savings mt-12 text-center opacity-0 translate-y-10 transition-all duration-500"
+        >
           <div
             class="inline-block bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-8 shadow-2xl"
           >
@@ -611,7 +584,7 @@ function eqal(timeFraction) {
     </section>
 
     <!-- Benefits List -->
-    <section class="benefits__section py-20 bg-white">
+    <section class="benefits__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="benefits__title text-4xl text-gray-900 mb-4">
@@ -644,7 +617,9 @@ function eqal(timeFraction) {
     </section>
 
     <!-- USMCA & FTZ Section -->
-    <section class="usmcaFtz__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section
+      class="usmcaFtz__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div class="usmcaFtz__content">
@@ -738,7 +713,7 @@ function eqal(timeFraction) {
     </section>
 
     <!-- CTA Section -->
-    <section class="cta__section py-20 bg-white">
+    <section class="cta__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="cta__content">
           <h2 class="text-4xl text-gray-900 mb-6">Ready to Navigate Tariff Policies?</h2>

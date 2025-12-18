@@ -197,103 +197,219 @@ const surroundingAreaRef = ref(null);
 const surroundingAreaMapRef = ref(null);
 const activeAmenityIndex = ref(0);
 
+// onMounted(() => {
+//   gsap.timeline({
+//     scrollTrigger: {
+//       trigger: highwayRef.value,
+//       start: `top 80%`,
+//       end: `bottom 20%`,
+//       // markers: true,
+//       // toggleActions: "play reverse play reverse",
+//       onEnter: () => {
+//         isHighwayVisible.value = true;
+//       },
+//       onLeave: () => {
+//         isHighwayVisible.value = false;
+//       },
+//       onEnterBack: () => {
+//         isHighwayVisible.value = true;
+//       },
+//       onLeaveBack: () => {
+//         isHighwayVisible.value = false;
+//       },
+//     },
+//   });
+//   gsap.timeline({
+//     scrollTrigger: {
+//       trigger: portRef.value,
+//       start: `top 80%`,
+//       end: `bottom 20%`,
+//       // markers: true,
+//       // toggleActions: "play reverse play reverse",
+//       onEnter: () => {
+//         isPortVisible.value = true;
+//       },
+//       onLeave: () => {
+//         isPortVisible.value = false;
+//       },
+//       onEnterBack: () => {
+//         isPortVisible.value = true;
+//       },
+//       onLeaveBack: () => {
+//         isPortVisible.value = false;
+//       },
+//     },
+//   });
+//   gsap.timeline({
+//     scrollTrigger: {
+//       trigger: airportRef.value,
+//       start: `top 80%`,
+//       end: `bottom 20%`,
+//       // markers: true,
+//       // toggleActions: "play reverse play reverse",
+//       onEnter: () => {
+//         isAirportVisible.value = true;
+//       },
+//       onLeave: () => {
+//         isAirportVisible.value = false;
+//       },
+//       onEnterBack: () => {
+//         isAirportVisible.value = true;
+//       },
+//       onLeaveBack: () => {
+//         isAirportVisible.value = false;
+//       },
+//     },
+//   });
+//   let averageProgress = 1 / 9;
+//   gsap.timeline({
+//     scrollTrigger: {
+//       trigger: surroundingAreaRef.value,
+//       start: `top 70%`,
+//       end: `bottom 50%`,
+//       // markers: true,
+//       onUpdate: (self) => {
+//         activeAmenityIndex.value = Math.floor(self.progress / averageProgress);
+//       },
+//     },
+//   });
+// });
+
 onMounted(() => {
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: highwayRef.value,
-      start: `top 80%`,
-      end: `bottom 20%`,
-      // markers: true,
-      // toggleActions: "play reverse play reverse",
-      onEnter: () => {
-        isHighwayVisible.value = true;
-      },
-      onLeave: () => {
-        isHighwayVisible.value = false;
-      },
-      onEnterBack: () => {
-        isHighwayVisible.value = true;
-      },
-      onLeaveBack: () => {
-        isHighwayVisible.value = false;
-      },
-    },
-  });
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: portRef.value,
-      start: `top 80%`,
-      end: `bottom 20%`,
-      // markers: true,
-      // toggleActions: "play reverse play reverse",
-      onEnter: () => {
-        isPortVisible.value = true;
-      },
-      onLeave: () => {
-        isPortVisible.value = false;
-      },
-      onEnterBack: () => {
-        isPortVisible.value = true;
-      },
-      onLeaveBack: () => {
-        isPortVisible.value = false;
-      },
-    },
-  });
-  gsap.timeline({
-    scrollTrigger: {
-      trigger: airportRef.value,
-      start: `top 80%`,
-      end: `bottom 20%`,
-      // markers: true,
-      // toggleActions: "play reverse play reverse",
-      onEnter: () => {
-        isAirportVisible.value = true;
-      },
-      onLeave: () => {
-        isAirportVisible.value = false;
-      },
-      onEnterBack: () => {
-        isAirportVisible.value = true;
-      },
-      onLeaveBack: () => {
-        isAirportVisible.value = false;
-      },
-    },
-  });
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+  const heroContent = document.querySelector(".hero__content");
+  const heroContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        heroContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  heroContentObserver.observe(heroContent);
+
+  // Highway Section
+  const highwaySection = document.querySelector(".highway__section");
+  const highwaySectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let highwayContent = entry.target.querySelector(".highway__content");
+        let highwayMap = entry.target.querySelector(".highway__map");
+        highwayContent.classList.remove("opacity-0", "translate-x-[-100%]");
+        highwayContent.classList.add("opacity-100", "translate-x-0");
+        highwayMap.classList.remove("opacity-0", "translate-x-[100%]");
+        highwayMap.classList.add("opacity-100", "translate-x-0");
+        highwaySectionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  highwaySectionObserver.observe(highwaySection);
+
+  // Port Section
+  const portSection = document.querySelector(".port__section");
+  const portSectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let portContent = entry.target.querySelector(".port__content");
+        let portMap = entry.target.querySelector(".port__map");
+        portContent.classList.remove("opacity-0", "translate-x-[100%]");
+        portContent.classList.add("opacity-100", "translate-x-0");
+        portMap.classList.remove("opacity-0", "translate-x-[-100%]");
+        portMap.classList.add("opacity-100", "translate-x-0");
+        portSectionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  portSectionObserver.observe(portSection);
+
+  // Airport Section
+  const airportSection = document.querySelector(".airport__section");
+  const airportSectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let airportContent = entry.target.querySelector(".airport__content");
+        let airportMap = entry.target.querySelector(".airport__map");
+        airportContent.classList.remove("opacity-0", "translate-x-[-100%]");
+        airportContent.classList.add("opacity-100", "translate-x-0");
+        airportMap.classList.remove("opacity-0", "translate-x-[100%]");
+        airportMap.classList.add("opacity-100", "translate-x-0");
+        airportSectionObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  airportSectionObserver.observe(airportSection);
+
   let averageProgress = 1 / 9;
   gsap.timeline({
     scrollTrigger: {
       trigger: surroundingAreaRef.value,
-      start: `top 70%`,
-      end: `bottom 50%`,
+      start: `top 80%`,
+      end: `bottom 20%`,
       // markers: true,
       onUpdate: (self) => {
         activeAmenityIndex.value = Math.floor(self.progress / averageProgress);
       },
     },
   });
-});
-const isHighwayVisible = ref(false);
-const highwayClasses = computed(() => {
-  return {
-    "opacity-0 translate-x-[-100%]": !isHighwayVisible.value,
-    "opacity-100 translate-x-0": isHighwayVisible.value,
-  };
-});
-const isPortVisible = ref(false);
-const portClasses = computed(() => {
-  return {
-    "opacity-0 translate-x-[100%]": !isPortVisible.value,
-    "opacity-100 translate-x-0": isPortVisible.value,
-  };
-});
-const isAirportVisible = ref(false);
-const airportClasses = computed(() => {
-  return {
-    "opacity-0 translate-x-[-100%]": !isAirportVisible.value,
-    "opacity-100 translate-x-0": isAirportVisible.value,
-  };
+
+  // mobile version
+  const siteLocationMobileItems = document.querySelectorAll(".siteLocationMobile__item");
+  const siteLocationMobileItemsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        siteLocationMobileItemsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  siteLocationMobileItems.forEach((item) => {
+    siteLocationMobileItemsObserver.observe(item);
+  });
+
+  // surrounding area Section
+  const surroundingAreaContent = document.querySelector(".surroundingArea__content");
+  const surroundingAreaContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+        surroundingAreaContentObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  surroundingAreaContentObserver.observe(surroundingAreaContent);
+
+  const surroundingAreaItems = document.querySelectorAll(".surroundingArea__item");
+  const surroundingAreaItemsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-x-10");
+        entry.target.classList.add("opacity-100", "translate-x-0");
+        surroundingAreaItemsObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  surroundingAreaItems.forEach((item) => {
+    surroundingAreaItemsObserver.observe(item);
+  });
+
+  // CTA Section
+  const ctaContent = document.querySelector(".cta__content");
+  const ctaContentObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove("opacity-0", "translate-y-10");
+        entry.target.classList.add("opacity-100", "translate-y-0");
+      }
+    });
+  }, options);
+  ctaContentObserver.observe(ctaContent);
 });
 </script>
 
@@ -301,10 +417,10 @@ const airportClasses = computed(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
+        <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <Icon name="map_pin" size="24" class="w-16 h-16 mx-auto mb-6 text-amber-400" />
           <h1 class="text-5xl md:text-6xl mb-6">Strategic Location in Texas</h1>
           <p class="text-xl text-blue-100 max-w-3xl mx-auto">
@@ -313,22 +429,17 @@ const airportClasses = computed(() => {
           </p>
         </div>
       </div>
-
-      <!-- Scroll indicator -->
-      <div class="absolute bottom-6 left-1/2 -translate-x-1/2">
-        <div class="flex flex-col items-center gap-2 text-blue-100">
-          <span class="text-sm">Scroll to explore</span>
-          <Icon name="navigation" size="24" class="w-5 h-5 rotate-180" />
-        </div>
-      </div>
     </section>
 
     <!-- Interactive Scroll Section - Desktop Only -->
-    <div class="relative hidden lg:block">
-      <div class="">
+    <div class="hidden lg:block">
+      <div class="siteLocation__container">
         <!-- Highway Section -->
-        <div class="grid grid-cols-[6fr_4fr] h-screen overflow-hidden">
-          <div ref="highwayRef" class="p-12 duration-1000" :class="highwayClasses">
+        <div class="highway__section grid grid-cols-[1fr_1fr] overflow-x-hidden">
+          <div
+            ref="highwayRef"
+            class="highway__content p-12 duration-500 opacity-0 translate-x-[-100%] transition-all"
+          >
             <div class="max-w-lg">
               <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 rounded-full text-sky-700 mb-6"
@@ -367,7 +478,7 @@ const airportClasses = computed(() => {
             </div>
           </div>
           <!-- svg map -->
-          <div>
+          <div class="highway__map duration-500 opacity-0 translate-x-[100%] transition-all">
             <svg
               viewBox="0 0 100 100"
               class="w-full h-full"
@@ -463,8 +574,8 @@ const airportClasses = computed(() => {
         </div>
 
         <!-- port Section -->
-        <div class="grid grid-cols-[4fr_6fr] h-screen overflow-hidden">
-          <div>
+        <div class="port__section grid grid-cols-[1fr_1fr] overflow-x-hidden">
+          <div class="port__map duration-500 opacity-0 translate-x-[-100%] transition-all">
             <svg
               viewBox="0 0 100 100"
               class="w-full h-full"
@@ -528,7 +639,10 @@ const airportClasses = computed(() => {
               </text>
             </svg>
           </div>
-          <div ref="portRef" class="p-12 duration-1000" :class="portClasses">
+          <div
+            ref="portRef"
+            class="port__content p-12 duration-500 opacity-0 translate-x-[100%] transition-all"
+          >
             <div class="max-w-lg">
               <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6"
@@ -569,8 +683,11 @@ const airportClasses = computed(() => {
         </div>
 
         <!-- Airport Section -->
-        <div class="grid grid-cols-[6fr_4fr] h-screen overflow-hidden">
-          <div ref="airportRef" class="p-12 duration-1000" :class="airportClasses">
+        <div class="airport__section grid grid-cols-[1fr_1fr] overflow-x-hidden">
+          <div
+            ref="airportRef"
+            class="airport__content p-12 duration-500 opacity-0 translate-x-[-100%] transition-all"
+          >
             <div class="max-w-lg">
               <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 rounded-full text-cyan-700 mb-6"
@@ -608,7 +725,7 @@ const airportClasses = computed(() => {
               </div>
             </div>
           </div>
-          <div>
+          <div class="airport__map duration-500 opacity-0 translate-x-[100%] transition-all">
             <svg
               viewBox="0 0 100 100"
               class="w-full h-full"
@@ -677,8 +794,8 @@ const airportClasses = computed(() => {
         </div>
 
         <!-- surrounding area Section -->
-        <div class="grid grid-cols-[5fr_5fr]">
-          <div class="sticky top-[150px] grid grid-rows-[auto_1fr] h-[calc(100dvh-150px)]">
+        <div class="grid grid-cols-[1fr_1fr]">
+          <div class="p-12 sticky top-[150px] grid grid-rows-[auto_1fr] h-[calc(100dvh-150px)]">
             <div class="text-center mb-8">
               <h2 class="text-4xl text-gray-900 mb-3">Everything Within Reach</h2>
               <p class="text-lg text-gray-600">Scroll to explore each location</p>
@@ -777,10 +894,10 @@ const airportClasses = computed(() => {
             <div
               v-for="(amenity, index) in amenities"
               :key="amenity.id"
-              class="w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden transition-opacity duration-200"
+              class="w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden transition-all duration-200"
               :class="{
-                'opacity-50': index !== activeAmenityIndex,
-                'opacity-100': index === activeAmenityIndex,
+                'opacity-50 scale-95 translate-x-[30px]': index !== activeAmenityIndex,
+                'opacity-100 scale-100 translate-x-0': index === activeAmenityIndex,
               }"
             >
               <!-- Image -->
@@ -819,10 +936,12 @@ const airportClasses = computed(() => {
     </div>
 
     <!-- Mobile Version: Simple Card Layout -->
-    <div class="lg:hidden bg-white">
+    <div class="lg:hidden bg-white overflow-x-hidden">
       <!-- Transportation Sections -->
       <section v-for="section in sections" :key="section.id" class="py-16 px-4">
-        <div class="max-w-2xl mx-auto">
+        <div
+          class="max-w-2xl mx-auto siteLocationMobile__item opacity-0 translate-y-10 transition-all duration-500"
+        >
           <div>
             <div class="mb-8">
               <h2 class="text-4xl text-gray-900 mb-4">{{ section.title }}</h2>
@@ -860,18 +979,20 @@ const airportClasses = computed(() => {
       </section>
 
       <!-- Surrounding Area -->
-      <section class="py-16 px-4 bg-gradient-to-br from-sky-50 to-cyan-50">
+      <section class="surroundingArea__section py-16 px-4 bg-gradient-to-br from-sky-50 to-cyan-50">
         <div class="max-w-2xl mx-auto">
-          <div class="text-center mb-12">
+          <div
+            class="surroundingArea__content text-center mb-12 opacity-0 translate-y-10 transition-all duration-500"
+          >
             <h2 class="text-4xl text-gray-900 mb-4">Surrounding Amenities</h2>
             <p class="text-xl text-gray-600">Complete infrastructure within easy reach</p>
           </div>
 
-          <div class="grid grid-cols-1 gap-4">
+          <div class="surroundingArea__list grid grid-cols-1 gap-4">
             <div
               v-for="(amenity, index) in amenities"
               :key="index"
-              class="bg-white p-6 rounded-xl shadow-lg flex items-center justify-between"
+              class="surroundingArea__item opacity-0 translate-x-10 transition-all duration-500 bg-white p-6 rounded-xl shadow-lg flex items-center justify-between"
             >
               <div class="flex items-center gap-4">
                 <div
@@ -891,9 +1012,11 @@ const airportClasses = computed(() => {
     </div>
 
     <!-- CTA -->
-    <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section
+      class="cta__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
+    >
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div>
+        <div class="cta__content opacity-0 translate-y-10 transition-all duration-500">
           <h2 class="text-4xl mb-6">Experience Our Strategic Advantage</h2>
           <p class="text-xl text-blue-100 mb-8">
             See how our location connects you to continental and global markets
