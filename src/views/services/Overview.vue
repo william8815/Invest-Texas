@@ -345,9 +345,7 @@ onMounted(() => {
     </section>
 
     <!-- Main Facilities -->
-    <section
-      class="facilities__section py-20 bg-gradient-to-b from-gray-50 to-white overflow-x-hidden"
-    >
+    <section class="facilities__section py-20 bg-transparent overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2

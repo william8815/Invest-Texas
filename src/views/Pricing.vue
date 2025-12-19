@@ -280,7 +280,7 @@ onMounted(() => {
     </section>
 
     <!-- Pricing Tables -->
-    <section class="py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section class="py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="space-y-12">
           <div

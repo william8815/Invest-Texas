@@ -556,7 +556,7 @@ function eqal(timeFraction) {
     </section>
 
     <!-- Key Advantages -->
-    <section class="keyAdvantages__section py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section class="keyAdvantages__section py-20 bg-transparent">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <h2 class="keyAdvantages__title text-4xl text-gray-900 mb-4">Strategic Advantages</h2>

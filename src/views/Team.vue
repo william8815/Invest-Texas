@@ -209,9 +209,7 @@ onMounted(() => {
     </section>
 
     <!-- Team Members -->
-    <section
-      class="team__section py-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-x-hidden"
-    >
+    <section class="team__section py-20 overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="space-y-16 team__list">
           <div v-for="(member, index) in teamMembers" :key="index">
