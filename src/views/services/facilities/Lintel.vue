@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 import DefaultLayout from "@/layouts/default.vue";
@@ -7,10 +7,14 @@ import Icon from "@/components/base/Icon.vue";
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
 
+// images
+import facility4_1 from "@/assets/images/facilities/facility4_1.png";
+import facility4_2 from "@/assets/images/facilities/facility4_2.jpg";
+
 const facilities = {
   "mexican-facility": {
     title: "Mexican Facility - Lintel de Mex",
-    tagline: "50,000 sqft Manufacturing + 120,000 sqft Outlet Show Space",
+    tagline: "50,000 sqft Manufacturing + 120,000 sqft Outlet Show Space to serve for Latin Area",
     location: "Reynosa, Tamaulipas, Mexico",
     website: "www.Lintelmex.com",
     heroImage:
@@ -42,6 +46,20 @@ const facilities = {
       "Quality Control Systems",
       "After-Sales Service Center",
       "Pan-American Highway Access",
+    ],
+    images: [
+      {
+        url: facility4_1,
+        alt: "facility4_1",
+        aspect: "1080/720",
+        active: true,
+      },
+      {
+        url: facility4_2,
+        alt: "facility4_2",
+        aspect: "1080/720",
+        active: false,
+      },
     ],
   },
 };
@@ -125,6 +143,22 @@ onMounted(() => {
   }, options);
   descriptionFeaturesObserver.observe(descriptionFeatures);
 
+  const descriptionImages = document.querySelector(".description__images");
+  const descriptionImagesObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let title = entry.target.querySelector(".images__title");
+        let list = entry.target.querySelector(".images__list");
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        list.classList.remove("opacity-0");
+        list.classList.add("opacity-100");
+        descriptionImagesObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  descriptionImagesObserver.observe(descriptionImages);
+
   // Pricing Section
   const pricingCard = document.querySelector(".pricing__card");
   const pricingCardObserver = new IntersectionObserver((entries) => {
@@ -161,6 +195,34 @@ onMounted(() => {
     });
   }, options);
   ctaContentObserver.observe(ctaContent);
+
+  // 初始化圖片滾動陰影
+  initScrollShadow();
+});
+
+// 圖片滾動容器的陰影狀態
+const imagesListRef = ref(null);
+const showLeftShadow = ref(false);
+const showRightShadow = ref(true);
+
+const handleImagesScroll = () => {
+  if (!imagesListRef.value) return;
+  const { scrollLeft, scrollWidth, clientWidth } = imagesListRef.value;
+
+  // 左邊有內容可滾動
+  showLeftShadow.value = scrollLeft > 0;
+  // 右邊有內容可滾動（留一點緩衝）
+  showRightShadow.value = scrollLeft < scrollWidth - clientWidth - 1;
+};
+
+const initScrollShadow = () => {
+  if (imagesListRef.value) {
+    handleImagesScroll();
+  }
+};
+
+onUnmounted(() => {
+  // 清理事件監聽（如果需要）
 });
 </script>
 
@@ -256,7 +318,7 @@ onMounted(() => {
               >
                 Features & Amenities
               </h3>
-              <div class="features__list grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="features__list grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                 <div
                   v-for="(feature, index) in facility.features"
                   :key="index"
@@ -264,6 +326,42 @@ onMounted(() => {
                 >
                   <div class="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
                   <span class="text-gray-700">{{ feature }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="description__images">
+              <h3
+                class="images__title text-2xl text-gray-900 mb-6 opacity-0 translate-y-10 transition-all duration-500"
+              >
+                Reference Images
+              </h3>
+              <!-- 圖片滾動容器（含陰影提示） -->
+              <div class="images__wrapper relative">
+                <!-- 左側陰影 -->
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  :class="showLeftShadow ? 'opacity-100' : 'opacity-0'"
+                ></div>
+                <!-- 右側陰影 -->
+                <div
+                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  :class="showRightShadow ? 'opacity-100' : 'opacity-0'"
+                ></div>
+                <!-- 圖片列表 -->
+                <div
+                  ref="imagesListRef"
+                  class="images__list flex flex-nowrap overflow-x-auto scrollbar-hide opacity-0 transition-all duration-500"
+                  @scroll="handleImagesScroll"
+                >
+                  <div
+                    v-for="(image, index) in facility.images"
+                    :key="index"
+                    class="lg:w-auto w-[300px] h-[300px] flex-shrink-0 px-2"
+                    :class="`aspect-[${image.aspect}]`"
+                  >
+                    <img :src="image.url" :alt="image.alt" class="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -348,3 +446,14 @@ onMounted(() => {
     </section>
   </DefaultLayout>
 </template>
+
+<style scoped>
+/* 隱藏 scrollbar 但保留滾動功能 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+</style>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
 import DefaultLayout from "@/layouts/default.vue";
@@ -7,24 +7,36 @@ import Icon from "@/components/base/Icon.vue";
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
 
+// images
+import facility2_1 from "@/assets/images/facilities/facility2_1.png";
+import facility2_2 from "@/assets/images/facilities/facility2_2.png";
+import facility2_3 from "@/assets/images/facilities/facility2_3.png";
+import facility2_4 from "@/assets/images/facilities/facility2_4.png";
+import facility2_5 from "@/assets/images/facilities/facility2_5.png";
+import facility2_6 from "@/assets/images/facilities/facility2_6.png";
+import facility2_7 from "@/assets/images/facilities/facility2_7.png";
+import facility2_8 from "@/assets/images/facilities/facility2_8.png";
+import facility2_9 from "@/assets/images/facilities/facility2_9.png";
+
 const facilities = {
   "usmca-park": {
     title: "USMCA Park",
-    tagline: "480 acres Development with School, Gas Station & US FTZ 171",
+    tagline:
+      "480 acres Development with School, Gas Station , Store Built-in and US FTZ 171 Reservation",
     location: "Cross USA Hwy 69, Texas",
     website: "www.USMCAPARK.US",
     heroImage:
       "https://images.unsplash.com/photo-1649206349711-74ec8951dbd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZXhhcyUyMGFlcmlhbCUyMHZpZXclMjBpbmR1c3RyaWFsJTIwcGFya3xlbnwxfHx8fDE3NjQxNjY5MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
     description:
-      "80 acres New School District & Gas Store have been in USMCA Park which is on Cross USA Hwy 69. 400 acres Golden Property Development to be the Future Utopia for Biz & Life. 4D AI Green Construction Idea will be applied to this Future Biz & Life Utopia Development.",
+      "80 acres New School District & Gas Store have been in USMCA Park which is on Cross USA Hwy 69. 400 acres Golden Property Development to be the Future Utopia for Biz & Life. 4D AI Green Construction Idea will be applied to this Future Biz & Life Utopia Development.Subject Property has following Features: 1. Access  to Interstate Hwy 69 which connect to all US West to East, Ocean to Ocean Highway, to support US National-Wide Highway Transportation. 2. Hwy 69 is conneted to Pan-America Highway System which is from Canada to Argentina to support Whole American Continental Highway Transportation. 3. Subject Property is only about 20 miles to Houston International Airport to support Air Transportation to the Whole World. 4. Subject Property is only about 40 miles to Houston Ocean Port to support Ocean Transportation to the Whole World.USMCA Park is located on Cross USA Hwy 69, it connect to Pan-America Highway and nearby Houston Ocean Port. USMCA Park is located nearby both International Airport & Ocean Port to support Global Transportation. USMCA PARK  can support Investor not only Marketing across USA, but also to the World",
     highlights: [
-      "Access to Interstate Hwy 69 - Ocean to Ocean Highway for US National-Wide Transportation",
-      "Connected to Pan-America Highway System from Canada to Argentina",
-      "Only 20 miles to Houston International Airport",
-      "Only 40 miles to Houston Ocean Port",
-      "US FTZ 171 Reservation",
-      "4D AI Green Construction concept",
-      "Future Utopia for Business & Life development",
+      "480 acres Golden Property - Future Utopia for Business & Life",
+      "80 acres already developed with New School District & Gas Store",
+      "Located on Interstate Hwy 69 - Cross USA Highway (West to East, Ocean to Ocean)",
+      "Connected to Pan-American Highway System spanning Canada to Argentina",
+      "20 miles to Houston International Airport - Global air connectivity",
+      "40 miles to Houston Ocean Port - Worldwide ocean shipping access",
+      "4D AI Green Construction technology for sustainable development",
     ],
     pricing: [
       { item: "Land Sale", price: "From $250,000/acre" },
@@ -42,6 +54,62 @@ const facilities = {
       "Utilities Infrastructure",
       "Future Residential Development",
       "Business Park Zoning",
+    ],
+    images: [
+      {
+        url: facility2_1,
+        alt: "facility2_1",
+        aspect: "853/363",
+        active: true,
+      },
+      {
+        url: facility2_2,
+        alt: "facility2_2",
+        aspect: "172/133",
+        active: false,
+      },
+      {
+        url: facility2_3,
+        alt: "facility2_3",
+        aspect: "158/107",
+        active: false,
+      },
+      {
+        url: facility2_4,
+        alt: "facility2_4",
+        aspect: "599/339",
+        active: false,
+      },
+      {
+        url: facility2_5,
+        alt: "facility2_5",
+        aspect: "164/147",
+        active: false,
+      },
+      {
+        url: facility2_6,
+        alt: "facility2_6",
+        aspect: "697/899",
+        active: false,
+      },
+      {
+        url: facility2_7,
+        alt: "facility2_7",
+        aspect: "739/439",
+        active: false,
+      },
+      {
+        url: facility2_8,
+        alt: "facility2_8",
+        aspect: "595/372",
+        active: false,
+      },
+      {
+        url: facility2_9,
+        alt: "facility2_9",
+        aspect: "38/27",
+        active: false,
+      },
     ],
   },
 };
@@ -125,6 +193,22 @@ onMounted(() => {
   }, options);
   descriptionFeaturesObserver.observe(descriptionFeatures);
 
+  const descriptionImages = document.querySelector(".description__images");
+  const descriptionImagesObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        let title = entry.target.querySelector(".images__title");
+        let list = entry.target.querySelector(".images__list");
+        title.classList.remove("opacity-0", "translate-y-10");
+        title.classList.add("opacity-100", "translate-y-0");
+        list.classList.remove("opacity-0");
+        list.classList.add("opacity-100");
+        descriptionImagesObserver.unobserve(entry.target);
+      }
+    });
+  }, options);
+  descriptionImagesObserver.observe(descriptionImages);
+
   // Pricing Section
   const pricingCard = document.querySelector(".pricing__card");
   const pricingCardObserver = new IntersectionObserver((entries) => {
@@ -161,6 +245,34 @@ onMounted(() => {
     });
   }, options);
   ctaContentObserver.observe(ctaContent);
+
+  // 初始化圖片滾動陰影
+  initScrollShadow();
+});
+
+// 圖片滾動容器的陰影狀態
+const imagesListRef = ref(null);
+const showLeftShadow = ref(false);
+const showRightShadow = ref(true);
+
+const handleImagesScroll = () => {
+  if (!imagesListRef.value) return;
+  const { scrollLeft, scrollWidth, clientWidth } = imagesListRef.value;
+
+  // 左邊有內容可滾動
+  showLeftShadow.value = scrollLeft > 0;
+  // 右邊有內容可滾動（留一點緩衝）
+  showRightShadow.value = scrollLeft < scrollWidth - clientWidth - 1;
+};
+
+const initScrollShadow = () => {
+  if (imagesListRef.value) {
+    handleImagesScroll();
+  }
+};
+
+onUnmounted(() => {
+  // 清理事件監聽（如果需要）
 });
 </script>
 
@@ -256,7 +368,7 @@ onMounted(() => {
               >
                 Features & Amenities
               </h3>
-              <div class="features__list grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="features__list grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
                 <div
                   v-for="(feature, index) in facility.features"
                   :key="index"
@@ -264,6 +376,42 @@ onMounted(() => {
                 >
                   <div class="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
                   <span class="text-gray-700">{{ feature }}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="description__images">
+              <h3
+                class="images__title text-2xl text-gray-900 mb-6 opacity-0 translate-y-10 transition-all duration-500"
+              >
+                Reference Images
+              </h3>
+              <!-- 圖片滾動容器（含陰影提示） -->
+              <div class="images__wrapper relative">
+                <!-- 左側陰影 -->
+                <div
+                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  :class="showLeftShadow ? 'opacity-100' : 'opacity-0'"
+                ></div>
+                <!-- 右側陰影 -->
+                <div
+                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  :class="showRightShadow ? 'opacity-100' : 'opacity-0'"
+                ></div>
+                <!-- 圖片列表 -->
+                <div
+                  ref="imagesListRef"
+                  class="images__list flex flex-nowrap overflow-x-auto scrollbar-hide opacity-0 transition-all duration-500"
+                  @scroll="handleImagesScroll"
+                >
+                  <div
+                    v-for="(image, index) in facility.images"
+                    :key="index"
+                    class="lg:w-auto w-[300px] h-[300px] flex-shrink-0 px-2"
+                    :class="`aspect-[${image.aspect}]`"
+                  >
+                    <img :src="image.url" :alt="image.alt" class="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
             </div>
@@ -348,3 +496,14 @@ onMounted(() => {
     </section>
   </DefaultLayout>
 </template>
+
+<style scoped>
+/* 隱藏 scrollbar 但保留滾動功能 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+</style>
