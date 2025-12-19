@@ -3,7 +3,12 @@ import { ref, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
-const offices = [
+// images
+import contact1_1 from "@/assets/images/contact/contact1_1.png";
+import contact2_1 from "@/assets/images/contact/contact2_1.jpg";
+import contact3_1 from "@/assets/images/contact/contact3_1.png";
+
+const offices = ref([
   {
     name: "Sinopac Headquarter Building",
     location: "Houston, Texas, USA",
@@ -14,15 +19,18 @@ const offices = [
     contact: "Dr. Frank Lin",
     website: "www.Sinopac.us",
     imagePlaceholder: true,
+    image: contact1_1,
   },
   {
     name: "Lintel de Mexico",
     location: "Reynosa, Tamaulipas, Mexico",
+    address: "Brecha 99, Parque Industrial Reynosa, CD Reynosa, Tam. 88790, Mexico ",
     email: ["Lintelmex@gmail.com"],
     phone: "+52-899-951-3028",
     contact: "Mr. Luis G Rodrigue, GM",
     website: "www.lintelMex.com",
     imagePlaceholder: true,
+    image: contact2_1,
   },
   {
     name: "USMCA Park Asian Liaison Office",
@@ -30,9 +38,11 @@ const offices = [
     address: "15F, No. 552, Sec. 5, ZhongXiao E Rd, Xinyi Dist, Taipei City 110, Taiwan",
     email: ["info@usmcapark.com.tw"],
     phone: "+886-2-8758-5888",
+    contact: "VP Johnson Lee",
     imagePlaceholder: true,
+    image: contact3_1,
   },
-];
+]);
 
 const formData = ref({
   name: "",
@@ -356,7 +366,11 @@ onMounted(() => {
             :key="index"
             class="office__item bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl opacity-0 translate-y-10 transition-all duration-500"
           >
+            <div v-if="office.image" class="h-48">
+              <img :src="office.image" :alt="office.name" class="w-full h-full object-cover" />
+            </div>
             <div
+              v-else
               class="h-48 bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white"
             >
               <div class="text-center p-6">

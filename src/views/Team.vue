@@ -3,6 +3,14 @@ import { ref, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
+// images
+import teams1_1 from "@/assets/images/teams/teams1_1.png";
+import teams2_1 from "@/assets/images/teams/teams2_1.png";
+import teams3_1 from "@/assets/images/teams/teams3_1.png";
+import teams4_1 from "@/assets/images/teams/teams4_1.png";
+import teams5_1 from "@/assets/images/teams/teams5_1.png";
+import teams6_1 from "@/assets/images/teams/teams6_1.png";
+
 // Modal state
 const showModal = ref(false);
 const selectedMember = ref(null);
@@ -40,6 +48,7 @@ const teamMembers = [
       "Doctor of Business Management, International Academy of Education (I.A.E)",
       "Doctor of Natural Medicine, International Academy of Education (I.A.E)",
     ],
+    image: teams1_1,
   },
   {
     name: "Chien-Hua (Mike) Lin, Ph.D.",
@@ -59,6 +68,7 @@ const teamMembers = [
       "Professor | Computer and Electric Engineering, Washkewicz College Of Engineering, Cleveland State University",
       "Professor & Former Department Chair | Computer and Information Science Department, Cleveland State University",
     ],
+    image: teams2_1,
   },
   {
     name: "Carpenter Lee",
@@ -77,6 +87,7 @@ const teamMembers = [
       "Former Director of Asian Chinese Medical Management Association",
       "Former Director of Central University 80 Business Model Management Society",
     ],
+    image: teams3_1,
   },
   {
     name: "Felix Fu",
@@ -105,6 +116,7 @@ const teamMembers = [
       "Proficient in Office, Word, Excel, Works, and QuickBooks",
       "Capable of strategic planning for multi-year major capital projects",
     ],
+    image: teams4_1,
   },
   {
     name: "Greg Sheng",
@@ -126,6 +138,7 @@ const teamMembers = [
       "2001-2011, East London University",
       "2001-2009, Glas Architects, London",
     ],
+    image: teams5_1,
   },
   {
     name: "Victor Zhang",
@@ -134,6 +147,7 @@ const teamMembers = [
     imagePlaceholder: true,
     description:
       "He holds a Bachelor's in German Studies from Beijing Foreign Studies University and a Master's in Financial Engineering from the University of Bonn, With international experience in Germany, Switzerland, China and the U.S.",
+    image: teams6_1,
   },
 ];
 
@@ -214,8 +228,14 @@ onMounted(() => {
                   class="lg:col-span-1 bg-gradient-to-br from-sky-600 to-cyan-600 p-8 text-white flex lg:flex-col items-center lg:justify-center gap-4"
                 >
                   <!-- avatar -->
-                  <div>
-                    <span class="text-6xl">{{ member.name.charAt(0) }}</span>
+                  <div class="w-48 h-48 rounded-full overflow-hidden">
+                    <img
+                      v-if="member.image"
+                      :src="member.image"
+                      :alt="member.name"
+                      class="w-full h-full object-cover"
+                    />
+                    <span v-else class="text-6xl">{{ member.name.charAt(0) }}</span>
                   </div>
                   <div class="flex flex-col lg:items-center">
                     <h3 class="text-2xl mb-2">{{ member.name }}</h3>
@@ -383,10 +403,16 @@ onMounted(() => {
           >
             <!-- Modal Header -->
             <div
-              class="bg-gradient-to-br from-sky-600 to-cyan-600 p-6 text-white flex items-center gap-4"
+              class="h-[140px] bg-gradient-to-br from-sky-600 to-cyan-600 p-6 text-white flex items-center gap-4"
             >
-              <div>
-                <span class="text-5xl font-light">{{ selectedMember.name.charAt(0) }}</span>
+              <div class="w-24 h-24 rounded-lg overflow-hidden">
+                <img
+                  v-if="selectedMember.image"
+                  :src="selectedMember.image"
+                  :alt="selectedMember.name"
+                  class="w-24 h-24 rounded-lg object-contain"
+                />
+                <span v-else class="text-5xl font-light">{{ selectedMember.name.charAt(0) }}</span>
               </div>
               <div class="flex-1">
                 <h3 class="text-2xl font-semibold mb-1">{{ selectedMember.name }}</h3>
@@ -405,7 +431,7 @@ onMounted(() => {
             </div>
 
             <!-- Modal Body -->
-            <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+            <div class="p-6 overflow-y-auto max-h-[calc(90vh-210px)]">
               <!-- Description -->
               <p
                 v-if="selectedMember.description"
@@ -413,24 +439,6 @@ onMounted(() => {
               >
                 {{ selectedMember.description }}
               </p>
-
-              <!-- Education -->
-              <div v-if="selectedMember.education" class="mb-6">
-                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-amber-500 rounded-full" />
-                  Education
-                </h4>
-                <ul class="space-y-2 pl-3">
-                  <li
-                    v-for="(edu, idx) in selectedMember.education"
-                    :key="idx"
-                    class="flex items-start space-x-3"
-                  >
-                    <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
-                    <span class="text-gray-700">{{ edu }}</span>
-                  </li>
-                </ul>
-              </div>
 
               <!-- Experience -->
               <div v-if="selectedMember.experience" class="mb-6">
@@ -520,10 +528,30 @@ onMounted(() => {
                   </li>
                 </ul>
               </div>
+
+              <!-- Education -->
+              <div v-if="selectedMember.education" class="mb-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <div class="w-1 h-6 bg-amber-500 rounded-full" />
+                  Education
+                </h4>
+                <ul class="space-y-2 pl-3">
+                  <li
+                    v-for="(edu, idx) in selectedMember.education"
+                    :key="idx"
+                    class="flex items-start space-x-3"
+                  >
+                    <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
+                    <span class="text-gray-700">{{ edu }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <!-- Modal Footer -->
-            <div class="border-t border-gray-100 p-4 flex justify-end">
+            <div
+              class="h-[70px] border-t border-gray-100 p-4 flex justify-end sticky bottom-0 bg-white"
+            >
               <button
                 @click="closeModal"
                 class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors font-medium"
