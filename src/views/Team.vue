@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
@@ -10,6 +10,10 @@ import teams3_1 from "@/assets/images/teams/teams3_1.png";
 import teams4_1 from "@/assets/images/teams/teams4_1.png";
 import teams5_1 from "@/assets/images/teams/teams5_1.png";
 import teams6_1 from "@/assets/images/teams/teams6_1.png";
+
+// 圖片載入狀態
+const teamImagesLoaded = reactive({});
+const modalImageLoaded = ref(false);
 
 // Modal state
 const showModal = ref(false);
@@ -24,6 +28,7 @@ const openModal = (member) => {
 const closeModal = () => {
   showModal.value = false;
   selectedMember.value = null;
+  modalImageLoaded.value = false;
   document.body.style.overflow = "";
 };
 
@@ -226,14 +231,27 @@ onMounted(() => {
                   class="lg:col-span-1 bg-gradient-to-br from-sky-600 to-cyan-600 p-8 text-white flex lg:flex-col items-center lg:justify-center gap-4"
                 >
                   <!-- avatar -->
-                  <div class="w-48 h-48 rounded-full overflow-hidden">
+                  <div class="w-48 h-48 rounded-full overflow-hidden relative">
+                    <!-- Skeleton -->
+                    <div
+                      v-if="member.image && !teamImagesLoaded[index]"
+                      class="absolute inset-0 bg-white/20 animate-pulse rounded-full flex items-center justify-center"
+                    >
+                      <Icon name="group" size="48" class="text-white/50" />
+                    </div>
+                    <!-- 實際圖片 -->
                     <img
                       v-if="member.image"
                       :src="member.image"
                       :alt="member.name"
-                      class="w-full h-full object-cover"
+                      loading="lazy"
+                      class="w-full h-full object-cover transition-opacity duration-500"
+                      :class="teamImagesLoaded[index] ? 'opacity-100' : 'opacity-0'"
+                      @load="teamImagesLoaded[index] = true"
                     />
-                    <span v-else class="text-6xl">{{ member.name.charAt(0) }}</span>
+                    <span v-else class="text-6xl flex items-center justify-center w-full h-full">{{
+                      member.name.charAt(0)
+                    }}</span>
                   </div>
                   <div class="flex flex-col lg:items-center">
                     <h3 class="text-2xl mb-2">{{ member.name }}</h3>
@@ -403,14 +421,29 @@ onMounted(() => {
             <div
               class="h-[140px] bg-gradient-to-br from-sky-600 to-cyan-600 p-6 text-white flex items-center gap-4"
             >
-              <div class="w-24 h-24 rounded-lg overflow-hidden">
+              <div class="w-24 h-24 rounded-lg overflow-hidden relative">
+                <!-- Skeleton -->
+                <div
+                  v-if="selectedMember.image && !modalImageLoaded"
+                  class="absolute inset-0 bg-white/20 animate-pulse rounded-lg flex items-center justify-center"
+                >
+                  <Icon name="group" size="32" class="text-white/50" />
+                </div>
+                <!-- 實際圖片 -->
                 <img
                   v-if="selectedMember.image"
                   :src="selectedMember.image"
                   :alt="selectedMember.name"
-                  class="w-24 h-24 rounded-lg object-contain"
+                  loading="lazy"
+                  class="w-24 h-24 rounded-lg object-contain transition-opacity duration-500"
+                  :class="modalImageLoaded ? 'opacity-100' : 'opacity-0'"
+                  @load="modalImageLoaded = true"
                 />
-                <span v-else class="text-5xl font-light">{{ selectedMember.name.charAt(0) }}</span>
+                <span
+                  v-else
+                  class="text-5xl font-light flex items-center justify-center w-full h-full"
+                  >{{ selectedMember.name.charAt(0) }}</span
+                >
               </div>
               <div class="flex-1">
                 <h3 class="text-2xl font-semibold mb-1">{{ selectedMember.name }}</h3>

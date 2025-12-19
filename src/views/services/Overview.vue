@@ -1,10 +1,16 @@
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
+
+// images
+import facility1_1 from "@/assets/images/facilities/facility1_1.png";
+import facility2_1 from "@/assets/images/facilities/facility2_1.png";
+import facility3_1 from "@/assets/images/facilities/facility3_1.png";
+import facility4_1 from "@/assets/images/facilities/facility4_1.png";
 
 const investmentProjects = [
   {
@@ -45,7 +51,7 @@ const investmentProjects = [
   },
 ];
 
-const facilities = [
+const facilities = ref([
   {
     isd: "international-biz-center",
     title: "International Biz Center",
@@ -61,8 +67,8 @@ const facilities = [
       "Rental from $250/month",
     ],
     website: "www.InternationalBizCenter.com",
-    image:
-      "https://images.unsplash.com/photo-1726802147453-a3c55327e1ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjBidWlsZGluZyUyMGhvdXN0b258ZW58MXx8fHwxNzY0MTY2OTA4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: facility1_1,
+    imageLoaded: false,
     link_name: "facility_IBCenter",
   },
   {
@@ -82,8 +88,8 @@ const facilities = [
       "40 miles to Houston Ocean Port",
     ],
     website: "www.USMCAPARK.US",
-    image:
-      "https://images.unsplash.com/photo-1649206349711-74ec8951dbd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZXhhcyUyMGFlcmlhbCUyMHZpZXclMjBpbmR1c3RyaWFsJTIwcGFya3xlbnwxfHx8fDE3NjQxNjY5MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: facility2_1,
+    imageLoaded: false,
     link_name: "facility_USMCAPark",
   },
   {
@@ -101,8 +107,8 @@ const facilities = [
       "Land Rental from $1,000/ac/month",
     ],
     website: "www.Texas69.us",
-    image:
-      "https://images.unsplash.com/photo-1758429551604-885ca2c55ddd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb2dpc3RpY3MlMjB0cmFuc3BvcnRhdGlvbiUyMGhpZ2h3YXl8ZW58MXx8fHwxNzY0MTY2OTA3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: facility3_1,
+    imageLoaded: false,
     link_name: "facility_Texas69",
   },
   {
@@ -120,11 +126,11 @@ const facilities = [
       "Latin America market access",
     ],
     website: "www.Lintelmex.com",
-    image:
-      "https://images.unsplash.com/photo-1599765824376-a87eb981b2ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYW51ZmFjdHVyaW5nJTIwZmFjdG9yeSUyMGZsb29yfGVufDF8fHx8MTc2NDA3MzQyOHww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: facility4_1,
+    imageLoaded: false,
     link_name: "facility_Lintel",
   },
-];
+]);
 
 const infrastructureHighlights = [
   { icon: "buildings", label: "60K+ sqft", description: "Houston Facility" },
@@ -366,8 +372,30 @@ onMounted(() => {
             :key="facility.id"
             class="facilities__item opacity-0 translate-y-10 transition-all duration-500 bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl"
           >
-            <div class="w-full h-64">
-              <img :src="facility.image" :alt="facility.title" class="w-full h-full object-cover" />
+            <div class="w-full h-64 relative">
+              <!-- Skeleton -->
+              <div
+                v-if="!facility.imageLoaded"
+                class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+              >
+                <div class="text-center">
+                  <div
+                    class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2"
+                  >
+                    <Icon name="buildings" size="20" class="text-gray-400" />
+                  </div>
+                  <p class="text-gray-400 text-sm">Loading...</p>
+                </div>
+              </div>
+              <!-- 實際圖片 -->
+              <img
+                :src="facility.image"
+                :alt="facility.title"
+                loading="lazy"
+                class="w-full h-full object-cover transition-opacity duration-500"
+                :class="facility.imageLoaded ? 'opacity-100' : 'opacity-0'"
+                @load="facility.imageLoaded = true"
+              />
             </div>
             <div class="p-8">
               <div class="flex items-start justify-between mb-4">

@@ -15,6 +15,14 @@ import usaFlag from "@/assets/images/flag/US.gif";
 import txFlag from "@/assets/images/flag/Texas.gif";
 import nyFlag from "@/assets/images/flag/NewYork.gif";
 
+// 圖片載入狀態
+const heroImageLoaded = ref(false);
+const flagsLoaded = ref({
+  usa: false,
+  tx: false,
+  ny: false,
+});
+
 // data
 const mainFeatures = [
   {
@@ -196,10 +204,19 @@ function animateCount(el, start, end, duration = 1500) {
     >
       <!-- Background Image -->
       <div class="absolute inset-0 z-0 w-full">
+        <!-- Skeleton -->
+        <div
+          v-if="!heroImageLoaded"
+          class="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-pulse"
+        ></div>
+        <!-- 實際圖片 -->
         <img
           :src="heroImage"
           alt="Texas Investment Opportunity"
-          class="w-full h-full object-cover"
+          loading="lazy"
+          class="w-full h-full object-cover transition-opacity duration-500"
+          :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
+          @load="heroImageLoaded = true"
         />
         <div
           class="absolute inset-0 bg-gradient-to-r from-sky-900/90 via-cyan-800/80 to-transparent"
@@ -212,23 +229,56 @@ function animateCount(el, start, end, duration = 1500) {
           <div
             class="hero__flags flex items-center gap-4 mb-4 md:mb-8 opacity-0 translate-y-[-10px] transition-all duration-1000"
           >
+            <!-- USA Flag -->
             <div
-              class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center"
+              class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center overflow-hidden relative"
             >
-              <!-- <span class="text-xs text-white">USA Flag</span> -->
-              <img :src="usaFlag" alt="USA Flag" class="w-full h-full object-cover" />
+              <div
+                v-if="!flagsLoaded.usa"
+                class="absolute inset-0 bg-gray-300/50 animate-pulse"
+              ></div>
+              <img
+                :src="usaFlag"
+                alt="USA Flag"
+                loading="lazy"
+                class="w-full h-full object-cover transition-opacity duration-300"
+                :class="flagsLoaded.usa ? 'opacity-100' : 'opacity-0'"
+                @load="flagsLoaded.usa = true"
+              />
             </div>
+            <!-- TX Flag -->
             <div
-              class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center"
+              class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center overflow-hidden relative"
             >
-              <!-- <span class="text-xs text-white">TX Flag</span> -->
-              <img :src="txFlag" alt="TX Flag" class="w-full h-full object-cover" />
+              <div
+                v-if="!flagsLoaded.tx"
+                class="absolute inset-0 bg-gray-300/50 animate-pulse"
+              ></div>
+              <img
+                :src="txFlag"
+                alt="TX Flag"
+                loading="lazy"
+                class="w-full h-full object-cover transition-opacity duration-300"
+                :class="flagsLoaded.tx ? 'opacity-100' : 'opacity-0'"
+                @load="flagsLoaded.tx = true"
+              />
             </div>
+            <!-- NY Flag -->
             <div
-              class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center"
+              class="w-16 h-12 bg-white/20 backdrop-blur-sm rounded border-2 border-white/30 flex items-center justify-center overflow-hidden relative"
             >
-              <!-- <span class="text-xs text-white">NY Flag</span> -->
-              <img :src="nyFlag" alt="NY Flag" class="w-full h-full object-cover" />
+              <div
+                v-if="!flagsLoaded.ny"
+                class="absolute inset-0 bg-gray-300/50 animate-pulse"
+              ></div>
+              <img
+                :src="nyFlag"
+                alt="NY Flag"
+                loading="lazy"
+                class="w-full h-full object-cover transition-opacity duration-300"
+                :class="flagsLoaded.ny ? 'opacity-100' : 'opacity-0'"
+                @load="flagsLoaded.ny = true"
+              />
             </div>
           </div>
 

@@ -1,10 +1,23 @@
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, computed, reactive } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
+// images
+import siteLocation1_1 from "@/assets/images/siteLocation/siteLocation1_1.png";
+import siteLocation1_2 from "@/assets/images/siteLocation/siteLocation1_2.png";
+import siteLocation1_3 from "@/assets/images/siteLocation/siteLocation1_3.png";
+import siteLocation1_4 from "@/assets/images/siteLocation/siteLocation1_4.png";
+import siteLocation1_5 from "@/assets/images/siteLocation/siteLocation1_5.png";
+import siteLocation1_6 from "@/assets/images/siteLocation/siteLocation1_6.png";
+import siteLocation1_7 from "@/assets/images/siteLocation/siteLocation1_7.png";
+import siteLocation1_8 from "@/assets/images/siteLocation/siteLocation1_8.png";
+import siteLocation1_9 from "@/assets/images/siteLocation/siteLocation1_9.png";
+import siteLocation1_10 from "@/assets/images/siteLocation/siteLocation1_10.png";
+import siteLocation1_11 from "@/assets/images/siteLocation/siteLocation1_11.png";
+
 // 各 Section 的文字內容
-const sections = [
+const sections = ref([
   {
     id: "highway",
     title: "Interstate Highway 69",
@@ -13,6 +26,7 @@ const sections = [
       "Direct access to Interstate Highway 69, the critical north-south corridor connecting Canada to Mexico. Part of the Pan-American Highway System, providing seamless continental distribution.",
     image:
       "https://images.unsplash.com/photo-1729879679733-8ca2ac28fcc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZXhhcyUyMGhpZ2h3YXklMjByb2FkJTIwdHJhbnNwb3J0YXRpb258ZW58MXx8fHwxNzY0MjM2NDgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    imageLoaded: false,
     distance: "On-site Access",
     features: [
       "Ocean to ocean connectivity",
@@ -27,8 +41,8 @@ const sections = [
     subtitle: "Global Air Transportation Hub",
     description:
       "Only 15-20 miles from George Bush Intercontinental Airport, one of the busiest airports in the United States with connections to over 180 destinations worldwide.",
-    image:
-      "https://images.unsplash.com/photo-1762648137108-ccc7fac73b72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaXJwb3J0JTIwY2FyZ28lMjB0ZXJtaW5hbCUyMG1vZGVybnxlbnwxfHx8fDE3NjQyMzY0ODN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_8,
+    imageLoaded: false,
     distance: "~15-20 miles",
     features: [
       "180+ worldwide destinations",
@@ -43,8 +57,8 @@ const sections = [
     subtitle: "America's Largest Container Port",
     description:
       "Approximately 30-40 miles from the Port of Houston, the #1 port in the United States for foreign tonnage. Complete access to international maritime shipping lanes.",
-    image:
-      "https://images.unsplash.com/photo-1611224111800-0eaf3e53aa45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzaGlwcGluZyUyMHBvcnQlMjBjb250YWluZXJzJTIwY2FyZ298ZW58MXx8fHwxNzY0MjM2NDg0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_11,
+    imageLoaded: false,
     distance: "~30-40 miles",
     features: [
       "#1 US port for foreign tonnage",
@@ -53,10 +67,10 @@ const sections = [
       "Strategic Gulf Coast location",
     ],
   },
-];
+]);
 
 // 周邊設施數據 - 包含圖片和描述
-const amenities = [
+const amenities = ref([
   {
     icon: "cart",
     name: "Gas & Cafe",
@@ -67,8 +81,8 @@ const amenities = [
     titleY: 49,
     distanceX: 62,
     distanceY: 52,
-    image:
-      "https://images.unsplash.com/photo-1670451509978-2808dd55c7e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYXMlMjBzdGF0aW9uJTIwY29udmVuaWVuY2UlMjBzdG9yZXxlbnwxfHx8fDE3NjQyMTYwMDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_1,
+    imageLoaded: false,
     description: "On-site convenience store and fuel station for daily needs",
   },
   {
@@ -81,8 +95,8 @@ const amenities = [
     titleY: 62,
     distanceX: 54,
     distanceY: 56,
-    image:
-      "https://images.unsplash.com/photo-1696079196661-a5cbfb884255?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaXR5JTIwcGFyayUyMGdyZWVuJTIwc3BhY2V8ZW58MXx8fHwxNzY0Mjk3OTUxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_2,
+    imageLoaded: false,
     description: "Public park directly across the street with green spaces and walking trails",
   },
   {
@@ -95,8 +109,8 @@ const amenities = [
     titleY: 35,
     distanceX: 60,
     distanceY: 48,
-    image:
-      "https://images.unsplash.com/photo-1662414185445-b9a05e26dba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBob3NwaXRhbCUyMGJ1aWxkaW5nfGVufDF8fHx8MTc2NDI3OTY1Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_3,
+    imageLoaded: false,
     description: "Modern medical facility with emergency and specialized care",
   },
   {
@@ -109,8 +123,8 @@ const amenities = [
     titleY: 40,
     distanceX: 42,
     distanceY: 55,
-    image:
-      "https://images.unsplash.com/photo-1708484061139-6a6a8daacccc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3YWxtYXJ0JTIwc2hvcHBpbmclMjBwbGF6YXxlbnwxfHx8fDE3NjQyOTc5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_4,
+    imageLoaded: false,
     description: "Major retail center with grocery and general merchandise",
   },
   {
@@ -123,8 +137,8 @@ const amenities = [
     titleY: 40,
     distanceX: 62,
     distanceY: 55,
-    image:
-      "https://images.unsplash.com/photo-1764072955152-5d1ff1610ea2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYWtlJTIwcGFyayUyMHJlY3JlYXRpb258ZW58MXx8fHwxNzY0Mjk3OTUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_5,
+    imageLoaded: false,
     description: "Recreation area with fishing, camping, and water activities",
   },
   {
@@ -137,8 +151,8 @@ const amenities = [
     titleY: 64,
     distanceX: 63,
     distanceY: 52,
-    image:
-      "https://images.unsplash.com/photo-1717535334631-b8dfaffb8d9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzaG9wcGluZyUyMGNlbnRlciUyMG1hbGx8ZW58MXx8fHwxNzY0Mjk3OTUyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_7,
+    imageLoaded: false,
     description: "Modern shopping mall with dining and entertainment options",
   },
   {
@@ -151,8 +165,8 @@ const amenities = [
     titleY: 68,
     distanceX: 57,
     distanceY: 55,
-    image:
-      "https://images.unsplash.com/photo-1664305693514-a41cab4db858?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0aGVtZSUyMHBhcmslMjBhbXVzZW1lbnR8ZW58MXx8fHwxNzY0Mjk3OTUzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_6,
+    imageLoaded: false,
     description: "Family entertainment complex with theme park and attractions",
   },
   {
@@ -165,8 +179,8 @@ const amenities = [
     titleY: 70,
     distanceX: 53,
     distanceY: 58,
-    image:
-      "https://images.unsplash.com/photo-1653149870708-50f54131a536?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob3VzdG9uJTIwZG93bnRvd24lMjBza3lsaW5lfGVufDF8fHx8MTc2NDI5Nzk1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_7,
+    imageLoaded: false,
     description: "Houston city center with business district and cultural venues",
   },
   {
@@ -179,102 +193,19 @@ const amenities = [
     titleY: 65,
     distanceX: 50,
     distanceY: 58,
-    image:
-      "https://images.unsplash.com/photo-1762956786482-0912f5322fa6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGluYXRvd24lMjBhc2lhbiUyMGRpc3RyaWN0fGVufDF8fHx8MTc2NDI5Nzk1M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+    image: siteLocation1_10,
+    imageLoaded: false,
     description: "Asian cultural district with authentic dining and shopping",
   },
-];
+]);
 
 // GSAP
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-const highwayRef = ref(null);
-const portRef = ref(null);
-const airportRef = ref(null);
 const surroundingAreaRef = ref(null);
-const surroundingAreaMapRef = ref(null);
 const activeAmenityIndex = ref(0);
-
-// onMounted(() => {
-//   gsap.timeline({
-//     scrollTrigger: {
-//       trigger: highwayRef.value,
-//       start: `top 80%`,
-//       end: `bottom 20%`,
-//       // markers: true,
-//       // toggleActions: "play reverse play reverse",
-//       onEnter: () => {
-//         isHighwayVisible.value = true;
-//       },
-//       onLeave: () => {
-//         isHighwayVisible.value = false;
-//       },
-//       onEnterBack: () => {
-//         isHighwayVisible.value = true;
-//       },
-//       onLeaveBack: () => {
-//         isHighwayVisible.value = false;
-//       },
-//     },
-//   });
-//   gsap.timeline({
-//     scrollTrigger: {
-//       trigger: portRef.value,
-//       start: `top 80%`,
-//       end: `bottom 20%`,
-//       // markers: true,
-//       // toggleActions: "play reverse play reverse",
-//       onEnter: () => {
-//         isPortVisible.value = true;
-//       },
-//       onLeave: () => {
-//         isPortVisible.value = false;
-//       },
-//       onEnterBack: () => {
-//         isPortVisible.value = true;
-//       },
-//       onLeaveBack: () => {
-//         isPortVisible.value = false;
-//       },
-//     },
-//   });
-//   gsap.timeline({
-//     scrollTrigger: {
-//       trigger: airportRef.value,
-//       start: `top 80%`,
-//       end: `bottom 20%`,
-//       // markers: true,
-//       // toggleActions: "play reverse play reverse",
-//       onEnter: () => {
-//         isAirportVisible.value = true;
-//       },
-//       onLeave: () => {
-//         isAirportVisible.value = false;
-//       },
-//       onEnterBack: () => {
-//         isAirportVisible.value = true;
-//       },
-//       onLeaveBack: () => {
-//         isAirportVisible.value = false;
-//       },
-//     },
-//   });
-//   let averageProgress = 1 / 9;
-//   gsap.timeline({
-//     scrollTrigger: {
-//       trigger: surroundingAreaRef.value,
-//       start: `top 70%`,
-//       end: `bottom 50%`,
-//       // markers: true,
-//       onUpdate: (self) => {
-//         activeAmenityIndex.value = Math.floor(self.progress / averageProgress);
-//       },
-//     },
-//   });
-// });
-
 onMounted(() => {
   const options = {
     root: null,
@@ -437,7 +368,6 @@ onMounted(() => {
         <!-- Highway Section -->
         <div class="highway__section grid grid-cols-[1fr_1fr] overflow-x-hidden">
           <div
-            ref="highwayRef"
             class="highway__content p-12 duration-500 opacity-0 translate-x-[-100%] transition-all"
           >
             <div class="max-w-lg">
@@ -469,10 +399,20 @@ onMounted(() => {
               </div>
 
               <div class="relative h-48 rounded-xl overflow-hidden shadow-xl">
+                <!-- Skeleton -->
+                <div
+                  v-if="!sections[0].imageLoaded"
+                  class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+                >
+                  <Icon name="navigation" size="32" class="text-gray-400" />
+                </div>
                 <img
                   :src="sections[0].image"
                   :alt="sections[0].title"
-                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-opacity duration-500"
+                  :class="sections[0].imageLoaded ? 'opacity-100' : 'opacity-0'"
+                  @load="sections[0].imageLoaded = true"
                 />
               </div>
             </div>
@@ -639,10 +579,7 @@ onMounted(() => {
               </text>
             </svg>
           </div>
-          <div
-            ref="portRef"
-            class="port__content p-12 duration-500 opacity-0 translate-x-[100%] transition-all"
-          >
+          <div class="port__content p-12 duration-500 opacity-0 translate-x-[100%] transition-all">
             <div class="max-w-lg">
               <div
                 class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6"
@@ -672,10 +609,20 @@ onMounted(() => {
               </div>
 
               <div class="relative h-48 rounded-xl overflow-hidden shadow-xl">
+                <!-- Skeleton -->
+                <div
+                  v-if="!sections[2].imageLoaded"
+                  class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+                >
+                  <Icon name="ship" size="32" class="text-gray-400" />
+                </div>
                 <img
                   :src="sections[2].image"
                   :alt="sections[2].title"
-                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-opacity duration-500"
+                  :class="sections[2].imageLoaded ? 'opacity-100' : 'opacity-0'"
+                  @load="sections[2].imageLoaded = true"
                 />
               </div>
             </div>
@@ -685,7 +632,6 @@ onMounted(() => {
         <!-- Airport Section -->
         <div class="airport__section grid grid-cols-[1fr_1fr] overflow-x-hidden">
           <div
-            ref="airportRef"
             class="airport__content p-12 duration-500 opacity-0 translate-x-[-100%] transition-all"
           >
             <div class="max-w-lg">
@@ -717,10 +663,20 @@ onMounted(() => {
               </div>
 
               <div class="relative h-48 rounded-xl overflow-hidden shadow-xl">
+                <!-- Skeleton -->
+                <div
+                  v-if="!sections[1].imageLoaded"
+                  class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+                >
+                  <Icon name="plane" size="32" class="text-gray-400" />
+                </div>
                 <img
                   :src="sections[1].image"
                   :alt="sections[1].title"
-                  class="w-full h-full object-cover"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-opacity duration-500"
+                  :class="sections[1].imageLoaded ? 'opacity-100' : 'opacity-0'"
+                  @load="sections[1].imageLoaded = true"
                 />
               </div>
             </div>
@@ -902,7 +858,28 @@ onMounted(() => {
             >
               <!-- Image -->
               <div class="relative h-80 overflow-hidden">
-                <img :src="amenity.image" :alt="amenity.name" class="w-full h-full object-cover" />
+                <!-- Skeleton -->
+                <div
+                  v-if="!amenity.imageLoaded"
+                  class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center z-10"
+                >
+                  <div class="text-center">
+                    <div
+                      class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2"
+                    >
+                      <Icon :name="amenity.icon" size="24" class="text-gray-400" />
+                    </div>
+                    <p class="text-gray-400 text-sm">Loading...</p>
+                  </div>
+                </div>
+                <img
+                  :src="amenity.image"
+                  :alt="amenity.name"
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-opacity duration-500"
+                  :class="amenity.imageLoaded ? 'opacity-100' : 'opacity-0'"
+                  @load="amenity.imageLoaded = true"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div class="absolute bottom-6 left-6 text-white">
                   <div className="flex items-center gap-3 mb-3">
@@ -972,7 +949,21 @@ onMounted(() => {
             </div>
 
             <div class="relative h-64 rounded-xl overflow-hidden shadow-xl">
-              <img :src="section.image" :alt="section.title" class="w-full h-full object-cover" />
+              <!-- Skeleton -->
+              <div
+                v-if="!section.imageLoaded"
+                class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+              >
+                <Icon name="map_pin" size="32" class="text-gray-400" />
+              </div>
+              <img
+                :src="section.image"
+                :alt="section.title"
+                loading="lazy"
+                class="w-full h-full object-cover transition-opacity duration-500"
+                :class="section.imageLoaded ? 'opacity-100' : 'opacity-0'"
+                @load="section.imageLoaded = true"
+              />
             </div>
           </div>
         </div>

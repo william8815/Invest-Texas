@@ -8,6 +8,8 @@ import contact1_1 from "@/assets/images/contact/contact1_1.png";
 import contact2_1 from "@/assets/images/contact/contact2_1.jpg";
 import contact3_1 from "@/assets/images/contact/contact3_1.png";
 
+// 圖片載入狀態追蹤在 offices 資料內
+
 const offices = ref([
   {
     name: "Sinopac Headquarter Building",
@@ -20,6 +22,7 @@ const offices = ref([
     website: "www.Sinopac.us",
     imagePlaceholder: true,
     image: contact1_1,
+    imageLoaded: false,
   },
   {
     name: "Lintel de Mexico",
@@ -31,6 +34,7 @@ const offices = ref([
     website: "www.lintelMex.com",
     imagePlaceholder: true,
     image: contact2_1,
+    imageLoaded: false,
   },
   {
     name: "USMCA Park Asian Liaison Office",
@@ -41,6 +45,7 @@ const offices = ref([
     contact: "VP Johnson Lee",
     imagePlaceholder: true,
     image: contact3_1,
+    imageLoaded: false,
   },
 ]);
 
@@ -366,8 +371,30 @@ onMounted(() => {
             :key="index"
             class="office__item bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl opacity-0 translate-y-10 transition-all duration-500"
           >
-            <div v-if="office.image" class="h-48">
-              <img :src="office.image" :alt="office.name" class="w-full h-full object-cover" />
+            <div v-if="office.image" class="h-48 relative">
+              <!-- Skeleton -->
+              <div
+                v-if="!office.imageLoaded"
+                class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse flex items-center justify-center"
+              >
+                <div class="text-center">
+                  <div
+                    class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2"
+                  >
+                    <Icon name="map_pin" size="20" class="text-gray-400" />
+                  </div>
+                  <p class="text-gray-400 text-sm">Loading...</p>
+                </div>
+              </div>
+              <!-- 實際圖片 -->
+              <img
+                :src="office.image"
+                :alt="office.name"
+                loading="lazy"
+                class="w-full h-full object-cover transition-opacity duration-500"
+                :class="office.imageLoaded ? 'opacity-100' : 'opacity-0'"
+                @load="office.imageLoaded = true"
+              />
             </div>
             <div
               v-else

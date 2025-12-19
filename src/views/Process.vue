@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, toRaw } from "vue";
 import DefaultLayout from "@/layouts/default.vue";
+import ImageSlider from "@/components/ImageSlider.vue";
 // config
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
@@ -215,39 +216,6 @@ const steps = ref([
     ],
   },
 ]);
-
-// 這個 Class 是用來管理圖片輪播的
-// 需要參數 : 容器元素(本身、寬度)、圖片列表(active, url, alt)
-// 功能 : 可以透過 prev 和 next 來設置當前 active 的圖片
-//
-const imageSliderRef = ref(null);
-
-const handlePrev = (images) => {
-  const activeIndex = images.findIndex((item) => item.active);
-  if (activeIndex === 0) return;
-  images[activeIndex].active = false;
-  images[activeIndex - 1].active = true;
-  // 讓容器水平滾動至 active image 的索引位置
-  let element = toRaw(imageSliderRef.value);
-  element[0]?.scrollBy({
-    left: -element[0].offsetWidth,
-    behavior: "smooth",
-  });
-};
-const handleNext = (images) => {
-  const activeIndex = images.findIndex((item) => item.active);
-  if (activeIndex === images.length - 1) return;
-  images[activeIndex].active = false;
-  images[activeIndex + 1].active = true;
-  // 讓容器水平滾動至 active image 的索引位置
-  let element = toRaw(imageSliderRef.value);
-  element[0]?.scrollBy({
-    left: element[0].offsetWidth,
-    behavior: "smooth",
-  });
-};
-
-import ImageSlider from "@/components/ImageSlider.vue";
 
 // animation
 onMounted(() => {
@@ -471,64 +439,6 @@ onMounted(() => {
                 :icon="step.icon"
                 :imagePlaceholder="step.imagePlaceholder"
               />
-              <!-- <div class="">
-                <div v-if="step.images?.length">
-                  <div
-                    class="w-full h-80 rounded-lg shadow-2xl flex flex-nowrap overflow-x-hidden"
-                    ref="imageSliderRef"
-                  >
-                    <img
-                      v-for="(image, idx) in step.images"
-                      :key="idx"
-                      :src="image.url"
-                      :alt="image.alt"
-                      class="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  <div
-                    v-if="step.images?.length > 1"
-                    class="flex items-center justify-center gap-4 mt-4"
-                  >
-                    <button
-                      class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px]"
-                      :class="{ 'opacity-50 cursor-not-allowed': step.images?.length === 1 }"
-                      @click="handlePrev(step.images)"
-                    >
-                      <span
-                        class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
-                      >
-                        prev
-                      </span>
-                    </button>
-                    <button
-                      class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px]"
-                      :class="{ 'opacity-50 cursor-not-allowed': step.images?.length === 1 }"
-                      @click="handleNext(step.images)"
-                    >
-                      <span
-                        class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
-                      >
-                        next
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
-                <div
-                  v-else
-                  class="w-full h-80 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl shadow-2xl flex items-center justify-center"
-                >
-                  <div class="text-center p-8">
-                    <div
-                      class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4"
-                    >
-                      <Icon :name="step.icon" size="24" />
-                    </div>
-                    <p class="text-gray-600">{{ step.imagePlaceholder }}</p>
-                  </div>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>

@@ -12,7 +12,18 @@ import facility3_1 from "@/assets/images/facilities/facility3_1.png";
 import facility3_2 from "@/assets/images/facilities/facility3_2.png";
 import facility3_3 from "@/assets/images/facilities/facility3_3.png";
 
-const facilities = {
+// Hero 圖片載入狀態
+const heroImageLoaded = ref(false);
+
+// 根據 aspect ratio 計算容器寬度
+const getImageWidth = (aspect, fixHeight = 300) => {
+  if (!aspect) return fixHeight;
+  const [width, height] = aspect.split("/").map(Number);
+  const ratio = width / height;
+  return Math.round(fixHeight * ratio);
+};
+
+const facilities = ref({
   "texas69-outlet": {
     title: "Texas*69 Global Outlet Place",
     tagline: "18 acres with 1,600 ft. frontage on US Cross Country Hwy 69",
@@ -52,25 +63,29 @@ const facilities = {
         url: facility3_1,
         alt: "facility3_1",
         aspect: "1080/720",
+        imageLoaded: false,
         active: true,
       },
       {
         url: facility3_2,
         alt: "facility3_2",
         aspect: "1080/720",
+        imageLoaded: false,
         active: false,
       },
       {
         url: facility3_3,
         alt: "facility3_3",
         aspect: "1080/720",
+        imageLoaded: false,
         active: false,
       },
     ],
   },
-};
+});
 
-const facility = ref(facilities["texas69-outlet"]);
+const facility = ref({});
+facility.value = facilities.value["texas69-outlet"];
 
 onMounted(() => {
   const options = {
@@ -236,7 +251,20 @@ onUnmounted(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section class="hero__section relative h-96 overflow-hidden">
-      <img :src="facility.heroImage" :alt="facility.title" class="w-full h-full object-cover" />
+      <!-- Hero Skeleton -->
+      <div
+        v-if="!heroImageLoaded"
+        class="absolute inset-0 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 animate-pulse"
+      ></div>
+      <!-- Hero Image -->
+      <img
+        :src="facility.heroImage"
+        :alt="facility.title"
+        loading="lazy"
+        class="w-full h-full object-cover transition-opacity duration-500"
+        :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
+        @load="heroImageLoaded = true"
+      />
       <div class="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-800/70" />
 
       <div class="absolute inset-0 flex items-center">
@@ -363,10 +391,32 @@ onUnmounted(() => {
                   <div
                     v-for="(image, index) in facility.images"
                     :key="index"
-                    class="lg:w-auto w-[300px] h-[300px] flex-shrink-0 px-2"
-                    :class="`aspect-[${image.aspect}]`"
+                    class="h-[200px] lg:h-[300px] flex-shrink-0 px-2 relative"
+                    :style="{ width: `${getImageWidth(image.aspect, 300)}px` }"
                   >
-                    <img :src="image.url" :alt="image.alt" class="w-full h-full object-contain" />
+                    <!-- Skeleton -->
+                    <div
+                      v-if="!image.imageLoaded"
+                      class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse rounded-lg flex items-center justify-center mx-2"
+                    >
+                      <div class="text-center">
+                        <div
+                          class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2"
+                        >
+                          <Icon name="truck" size="16" class="text-gray-400" />
+                        </div>
+                        <p class="text-gray-400 text-xs">Loading...</p>
+                      </div>
+                    </div>
+                    <!-- 實際圖片 -->
+                    <img
+                      :src="image.url"
+                      :alt="image.alt"
+                      loading="lazy"
+                      class="w-full h-full object-contain transition-opacity duration-500"
+                      :class="image.imageLoaded ? 'opacity-100' : 'opacity-0'"
+                      @load="image.imageLoaded = true"
+                    />
                   </div>
                 </div>
               </div>

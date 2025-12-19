@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRaw } from "vue";
+import { ref, toRaw, reactive } from "vue";
 import Icon from "@/components/base/Icon.vue";
 
 const images = defineModel("images", {
@@ -19,6 +19,13 @@ const props = defineProps({
 });
 
 const imageSliderRef = ref(null);
+
+// 圖片載入狀態（使用 reactive 物件追蹤每張圖片）
+const imageLoadedStates = reactive({});
+
+const handleImageLoad = (index) => {
+  imageLoadedStates[index] = true;
+};
 
 const handlePrev = () => {
   const activeIndex = images.value.findIndex((item) => item.active);
@@ -53,14 +60,31 @@ const handleNext = () => {
         class="w-full h-80 rounded-lg shadow-2xl flex flex-nowrap overflow-x-hidden"
         ref="imageSliderRef"
       >
-        <img
-          v-for="(image, idx) in images"
-          :key="idx"
-          :src="image.url"
-          :alt="image.alt"
-          class="w-full h-full object-cover min-w-full"
-          loading="lazy"
-        />
+        <div v-for="(image, idx) in images" :key="idx" class="relative min-w-full h-full">
+          <!-- Skeleton -->
+          <div
+            v-if="!imageLoadedStates[idx]"
+            class="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse rounded-lg flex items-center justify-center"
+          >
+            <div class="text-center">
+              <div
+                class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-2"
+              >
+                <Icon :name="props.icon" size="20" class="text-gray-400" />
+              </div>
+              <p class="text-gray-400 text-sm">Loading...</p>
+            </div>
+          </div>
+          <!-- 實際圖片 -->
+          <img
+            :src="image.url"
+            :alt="image.alt"
+            class="w-full h-full object-cover transition-opacity duration-500"
+            :class="imageLoadedStates[idx] ? 'opacity-100' : 'opacity-0'"
+            loading="lazy"
+            @load="handleImageLoad(idx)"
+          />
+        </div>
       </div>
 
       <!-- prev and next button -->
