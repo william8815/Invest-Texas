@@ -1,11 +1,220 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { useSeoMeta, useHead } from "@unhead/vue";
 const router = useRouter();
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
+
+// SEO Meta
+useSeoMeta({
+  title: "Texas*69 Global Outlet - 18 Acres with 1,600 ft Highway Frontage | InvesTexas",
+  description:
+    "18 acres prime land with 1,600 ft frontage on Highway 69 at E. River Rd intersection. Part of Pan-American Highway System (Canada to Argentina). Land from $250k/acre. Perfect for local & Latin America export.",
+  keywords:
+    "Texas 69 outlet, Highway 69 frontage, 1600 ft highway frontage, Pan-American Highway, Texas land sale, Latin America export, commercial land Texas, highway intersection property, Texas 69 real estate",
+
+  // Open Graph
+  ogTitle: "Texas*69 Global Outlet - 1,600 ft Highway Frontage on Pan-American Highway",
+  ogDescription:
+    "18 acres strategic location at Hwy 69 & E. River Rd. 1,600 ft frontage, Pan-American Highway access. Excellent for local & export sales. From $250k/acre.",
+  ogImage:
+    "https://images.unsplash.com/photo-1758429551604-885ca2c55ddd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Texas*69 Global Outlet - Premium Highway Frontage Property",
+  twitterDescription:
+    "18 acres, 1,600 ft Highway 69 frontage. Pan-American Highway access. Perfect for export to Latin America. From $250k/acre.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1758429551604-885ca2c55ddd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: "Texas*69 Global Outlet Place",
+        description:
+          "18 acres with 1,600 ft. frontage on US Cross Country Highway 69 at strategic intersection with E. River Dr. Part of Pan-American Highway System, excellent for local and export sales to Latin America.",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Hwy 69 @ E. River Rd",
+          addressRegion: "Texas",
+          addressCountry: "US",
+        },
+        url: "http://www.Texas69.us",
+        geo: {
+          "@type": "GeoCoordinates",
+          description: "Strategic intersection location at Hwy 69 & E. River Dr",
+        },
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Highway Frontage",
+            value: "1,600 ft on Highway 69",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Corner Location",
+            value: "Intersection of Hwy 69 & E. River Dr",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Pan-American Highway Access",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "High Visibility",
+            value: "Premium visibility on major highway",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Commercial Zoning",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Easy Truck Access",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Export-Friendly Location",
+            value: "Gateway to Latin America markets",
+          },
+        ],
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Total Size",
+            value: "18 acres",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Highway Frontage",
+            value: "1,600 feet on Highway 69",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Highway System",
+            value: "Part of Pan-American Highway (Canada to Argentina)",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Traffic Volume",
+            value: "High traffic volume area",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Market Access",
+            value: "Excellent for local and Latin America export sales",
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: "Texas*69 Global Outlet Commercial Land",
+        description:
+          "18 acres prime commercial land with 1,600 ft highway frontage on Pan-American Highway System",
+        offers: [
+          {
+            "@type": "Offer",
+            name: "Land Sale",
+            price: "250000",
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: "250000",
+              priceCurrency: "USD",
+              unitText: "per acre",
+              minPrice: "250000",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Land Rental",
+            price: "1000",
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: "1000",
+              priceCurrency: "USD",
+              unitText: "per acre per month",
+              minPrice: "1000",
+            },
+          },
+        ],
+        category: "Commercial Real Estate",
+        brand: {
+          "@type": "Brand",
+          name: "InvesTexas",
+        },
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is the size and frontage of Texas*69 Global Outlet?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Texas*69 Global Outlet is 18 acres with 1,600 feet of highway frontage on US Cross Country Highway 69. It's located at the strategic intersection of Hwy 69 and E. River Dr.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Why is this location good for export business?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The property is located on Highway 69, which is part of the Pan-American Highway System connecting Canada to Argentina. This makes it excellent not only for local sales but also for export sales to Latin American countries.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the pricing for Texas*69 Global Outlet?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Land sale starts from $250,000 per acre. Land rental is available from $1,000 per acre per month.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What are the main advantages of this location?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Key advantages include: 1,600 ft premium highway visibility, strategic corner location at major intersection, part of Pan-American Highway System, high traffic volume, easy commercial vehicle access, and excellent positioning for both local and Latin America export markets.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 // images
 import facility3_1 from "@/assets/images/facilities/facility3_1.png";

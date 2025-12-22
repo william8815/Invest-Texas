@@ -1,11 +1,310 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { useSeoMeta, useHead } from "@unhead/vue";
 const router = useRouter();
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
+
+// SEO Meta
+useSeoMeta({
+  title: "Mexican Facility - Lintel de Mex | Low-Cost Manufacturing & Latin America Gateway",
+  description:
+    "50,000 sqft manufacturing + 120,000 sqft outlet space in Reynosa, Mexico. Only ONE engineer needed for pilot run. USMCA benefits, $0.35/sqft/month. Perfect for low-cost production & Latin America market access.",
+  keywords:
+    "Mexico manufacturing, Lintel de Mex, Reynosa facility, USMCA manufacturing, low cost production Mexico, pilot run support, Latin America manufacturing, after-sales service Mexico, Pan-American Highway, Mexico outlet space",
+
+  // Open Graph
+  ogTitle: "Lintel de Mex - Low-Cost Manufacturing Facility in Mexico | USMCA Benefits",
+  ogDescription:
+    "170,000 sqft total space in Reynosa, Mexico. 50k sqft manufacturing + 120k sqft outlet. Only 1 engineer needed. USMCA qualified. $0.35/sqft/month.",
+  ogImage:
+    "https://images.unsplash.com/photo-1599765824376-a87eb981b2ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Lintel de Mex - Mexico Manufacturing Facility with USMCA Benefits",
+  twitterDescription:
+    "50k sqft manufacturing + 120k sqft outlet in Reynosa. Only 1 engineer for pilot run. USMCA qualified. From $0.35/sqft/month.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1599765824376-a87eb981b2ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: "Mexican Facility - Lintel de Mex",
+        description:
+          "50,000 sqft Manufacturing Floor + 120,000 sqft Outlet Show Space serving Latin American market with comprehensive manufacturing and showroom capabilities.",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Reynosa",
+          addressRegion: "Tamaulipas",
+          addressCountry: "Mexico",
+        },
+        url: "http://www.Lintelmex.com",
+        geo: {
+          "@type": "GeoCoordinates",
+          description: "Reynosa, Tamaulipas, Mexico - Near US border",
+        },
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Manufacturing Floor Space",
+            value: "50,000 square feet",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Outlet Show Space",
+            value: "120,000 square feet",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Pilot Run Capabilities",
+            value: "Only ONE engineer needed",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "USMCA Qualified",
+            value: "Duty-free US market access",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "US Border Proximity",
+            value: "Near US border for easy logistics",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Pan-American Highway Access",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "After-Sales Service Center",
+            value: "Full infrastructure support",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Latin Market Gateway",
+            value: "Access to Latin American markets",
+          },
+        ],
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Total Manufacturing Space",
+            value: "50,000 sqft",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Total Outlet Space",
+            value: "120,000 sqft",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Minimum Staff Required",
+            value: "Only ONE engineer for pilot run",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Trade Agreement",
+            value: "USMCA qualified for duty-free US access",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Cost Advantage",
+            value: "Low-cost manufacturing location",
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Manufacturing & Production Support",
+        name: "Lintel de Mex Manufacturing Services",
+        description:
+          "Low-cost manufacturing and pilot run support in Mexico with USMCA benefits and Latin America market access.",
+        provider: {
+          "@type": "Organization",
+          name: "InvesTexas - Lintel de Mex",
+        },
+        areaServed: [
+          {
+            "@type": "Place",
+            name: "United States",
+            description: "USMCA duty-free access",
+          },
+          {
+            "@type": "Place",
+            name: "Latin America",
+            description: "Regional market gateway",
+          },
+          {
+            "@type": "Place",
+            name: "Mexico",
+            description: "Local manufacturing base",
+          },
+        ],
+        offers: [
+          {
+            "@type": "Offer",
+            name: "Floor Space Rental",
+            price: "0.35",
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: "0.35",
+              priceCurrency: "USD",
+              unitText: "per square foot per month",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Pilot Run Support",
+            description: "Only ONE engineer needed for pilot run production",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              priceCurrency: "USD",
+              price: "Negotiable",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "After-Sales Service",
+            description: "Comprehensive after-sales service infrastructure",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              priceCurrency: "USD",
+              price: "Negotiable",
+            },
+          },
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Manufacturing Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Low-Cost Manufacturing",
+                description: "Cost-effective production in Mexico",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Pilot Run Production",
+                description: "Test production with minimal staffing",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "USMCA Market Access",
+                description: "Duty-free access to US market",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Latin America Distribution",
+                description: "Gateway to Latin American markets",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Engineering Support",
+                description: "Professional engineering assistance",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Quality Control Systems",
+                description: "Comprehensive quality assurance",
+              },
+            },
+          ],
+        },
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is the size of Lintel de Mex facility?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Lintel de Mex offers 50,000 square feet of manufacturing floor space and 120,000 square feet of outlet show space, totaling 170,000 square feet to serve the Latin American market.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How many staff do I need for pilot run production?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "You need only ONE engineer to support pilot run production in our facility. This significantly reduces your initial staffing costs and operational complexity.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What are the USMCA benefits for manufacturing in Mexico?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Our USMCA-qualified facility provides duty-free access to the US market. This means products manufactured here can enter the United States without import duties, significantly reducing your costs and improving competitiveness.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the rental cost for manufacturing space?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Floor space rental is $0.35 per square foot per month. Pilot run support and after-sales service pricing are negotiable based on your specific needs.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Why choose Mexico for manufacturing?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Key advantages include: low-cost manufacturing, USMCA benefits for US market access, proximity to US border, gateway to Latin America markets, location alongside Pan-American Highway, comprehensive after-sales service infrastructure, and minimal staffing requirements for pilot runs.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 // images
 import facility4_1 from "@/assets/images/facilities/facility4_1.png";

@@ -1,10 +1,224 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
+
+// SEO Meta
+useSeoMeta({
+  title: "Master Plan & Facilities - Complete Infrastructure in Texas & Mexico | InvesTexas",
+  description:
+    "Comprehensive facilities: 60,000 sqft Houston Biz Center, 480 acres USMCA Park, 18 acres Texas*69 Outlet, 50,000 sqft Mexico manufacturing. 6 innovative investment projects available.",
+  keywords:
+    "Texas facilities, USMCA Park 480 acres, Houston wholesale center, Mexico manufacturing facility, investment projects Texas, AI PC, RV Villas, School Villas, Finance IPO, Pan-American Highway, FTZ 171",
+
+  // Open Graph
+  ogTitle: "Master Plan & Facilities - Complete Infrastructure Across Texas & Mexico",
+  ogDescription:
+    "4 strategic facilities: Houston 60K sqft, USMCA Park 480 acres, Texas*69 18 acres, Mexico 50K sqft. 6 investment projects including AI PC, RV Villas, and Finance/IPO support.",
+  ogImage: "https://via.placeholder.com/1200x630?text=Master+Plan+Facilities",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Complete Infrastructure & Investment Projects in Texas & Mexico",
+  twitterDescription:
+    "60K+ sqft Houston facility, 480 acres USMCA Park, Mexico manufacturing, and 6 innovative investment opportunities.",
+  twitterImage: "https://via.placeholder.com/1200x630?text=Master+Plan+Facilities",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "InvesTexas Facilities",
+        description: "Strategic locations across USA and Mexico for business operations",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "Place",
+              name: "International Biz Center",
+              description:
+                "60,000 sqft facility at the center of Houston Wholesale Area on Harwin Drive. Landmark location with wholesale showroom and office space.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Houston",
+                addressRegion: "Texas",
+                addressCountry: "US",
+              },
+              amenityFeature: [
+                "Wholesale Showroom & Office",
+                "National-wide sales support",
+                "US Foreign Trade Zone member",
+                "Rental from $250/month",
+              ],
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "Place",
+              name: "USMCA Park",
+              description:
+                "480 acres development with school district and gas station. US FTZ 171 Reservation with access to Interstate Hwy 69 and Pan-America Highway.",
+              address: {
+                "@type": "PostalAddress",
+                addressRegion: "Texas",
+                addressCountry: "US",
+              },
+              amenityFeature: [
+                "School, Gas Station built-in",
+                "US FTZ 171 Reservation",
+                "Access to Interstate Hwy 69",
+                "20 miles to IAH Airport",
+                "40 miles to Houston Ocean Port",
+              ],
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "Place",
+              name: "Texas*69 Global Outlet Place",
+              description:
+                "18 acres with 1,600 ft. frontage on US Cross Country Hwy 69. Strategic intersection location for local and export sales to Latin Countries.",
+              address: {
+                "@type": "PostalAddress",
+                addressRegion: "Texas",
+                addressCountry: "US",
+              },
+              amenityFeature: [
+                "1,600 ft. Highway frontage",
+                "Part of Pan-American Highway",
+                "Land Sale from $250k/acre",
+                "Land Rental from $1,000/ac/month",
+              ],
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            item: {
+              "@type": "Place",
+              name: "Mexican Facility - Lintel de Mex",
+              description:
+                "50,000 sqft Manufacturing Floor + 120,000 sqft Outlet Show Space in Reynosa, Tamaulipas, Mexico for low cost manufacturing and Latin America market access.",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Reynosa",
+                addressRegion: "Tamaulipas",
+                addressCountry: "Mexico",
+              },
+              amenityFeature: [
+                "50,000 sqft Manufacturing Floor",
+                "120,000 sqft Outlet Show Space",
+                "Only One Engineer needed for pilot run",
+                "Floor Space Rental $0.35/sqft/month",
+              ],
+            },
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Complete Infrastructure Support",
+        description:
+          "Comprehensive infrastructure and investment opportunities across Texas and Mexico",
+        provider: {
+          "@type": "Organization",
+          name: "InvesTexas",
+        },
+        areaServed: [
+          {
+            "@type": "Country",
+            name: "United States",
+          },
+          {
+            "@type": "Country",
+            name: "Mexico",
+          },
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Investment Projects",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Product",
+                name: "X * AI PC",
+                description: "AI PC Products for RV integration",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Product",
+                name: "IonOxy Air System",
+                description: "Patented Ion-Oxygen Products for RV",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Product",
+                name: "Modular HomeLift",
+                description: "Patented Home Lift Products for 2 Floor RV",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Product",
+                name: "Leisure RV Villas",
+                description: "RV-based leisure villa development",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Product",
+                name: "School Front Villas",
+                description: "Villas Condo development in front of New School District",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Finance / Go Public",
+                description: "Finance Loan and IPO support for investors",
+              },
+            },
+          ],
+        },
+      }),
+    },
+  ],
+});
 
 // images
 import facility1_1 from "@/assets/images/facilities/facility1_1.png";

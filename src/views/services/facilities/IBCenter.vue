@@ -1,12 +1,216 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { useSeoMeta, useHead } from "@unhead/vue";
 const router = useRouter();
 
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+// SEO Meta
+useSeoMeta({
+  title: "International Biz Center - 60,000 sqft Houston Wholesale Facility | InvesTexas",
+  description:
+    "60,000 sqft landmark building on Harwin Drive, Houston's largest wholesale area. Showroom from $250/mo, Virtual Office $99/mo. 38 years experience, FTZ member, national sales support.",
+  keywords:
+    "International Biz Center, Houston wholesale, Harwin Drive, 60000 sqft facility, wholesale showroom Houston, office rental Houston, virtual office $99, FTZ member, Houston business center, Texas wholesale district",
+
+  // Open Graph
+  ogTitle: "International Biz Center - Houston's Premier Wholesale Facility",
+  ogDescription:
+    "60,000 sqft on Harwin Drive. Showroom $250/mo, Virtual Office $99/mo. Landmark building with 38 years FTZ expertise and national sales support.",
+  ogImage:
+    "https://images.unsplash.com/photo-1726802147453-a3c55327e1ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "International Biz Center - 60,000 sqft Houston Wholesale Hub",
+  twitterDescription:
+    "Premier wholesale facility on Harwin Drive. From $99/mo virtual office to full showroom spaces. 38 years experience.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1726802147453-a3c55327e1ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: "International Biz Center",
+        description:
+          "60,000 sqft landmark building at the center of Houston's largest wholesale area on Harwin Drive. Offering wholesale showroom, office spaces, and national-wide sales support.",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Harwin Drive",
+          addressLocality: "Houston",
+          addressRegion: "Texas",
+          addressCountry: "US",
+        },
+        url: "http://www.InternationalBizCenter.com",
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Wholesale Showroom Space",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Private Office Spaces",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Retail Store Fronts",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Multimedia Facilities",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "US Foreign Trade Zone Access",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "High-Speed Internet",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Security Systems",
+            value: true,
+          },
+        ],
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Size",
+            value: "60,000 sqft",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Location Type",
+            value: "Landmark building on Harwin Drive",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Experience",
+            value: "38 years in International Business",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "FTZ Status",
+            value: "Regular/Active member of US Foreign Trade Zone",
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Offer",
+        name: "International Biz Center Office & Showroom Rental",
+        description: "Flexible office and showroom spaces in Houston's premier wholesale district",
+        priceSpecification: [
+          {
+            "@type": "UnitPriceSpecification",
+            name: "Showroom Office Rental",
+            price: "250",
+            priceCurrency: "USD",
+            unitText: "per month",
+            minPrice: "250",
+          },
+          {
+            "@type": "UnitPriceSpecification",
+            name: "Virtual Office",
+            price: "99",
+            priceCurrency: "USD",
+            unitText: "per month",
+            minPrice: "99",
+          },
+          {
+            "@type": "UnitPriceSpecification",
+            name: "Multimedia Showroom Space",
+            price: "50",
+            priceCurrency: "USD",
+            unitText: "per 27 cuft per month",
+          },
+        ],
+        seller: {
+          "@type": "Organization",
+          name: "InvesTexas",
+        },
+        areaServed: {
+          "@type": "City",
+          name: "Houston",
+          containedIn: {
+            "@type": "State",
+            name: "Texas",
+          },
+        },
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Where is International Biz Center located?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "International Biz Center is located on Harwin Drive in Houston, Texas, at the center of Houston's largest wholesale area. It's a landmark building with 3-side street access.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the size of the facility?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The facility is 60,000 square feet, offering wholesale showroom space, private offices, retail store fronts, and multimedia facilities.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What are the rental prices?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Showroom Office Rental starts from $250/month, Virtual Office from $99/month, and Multimedia Showroom Space is $50 per 27 cubic feet per month.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What makes International Biz Center special?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "It's a landmark building featured in Yelp magazine, located at the center of Harwin Wholesale District. Sinopac has 38 years of international business experience and is a Regular/Active member of the US Foreign Trade Zone, providing national-wide sales support.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 // images
 import facility1_1 from "@/assets/images/facilities/facility1_1.png";

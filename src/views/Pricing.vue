@@ -1,7 +1,266 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+// SEO Meta
+useSeoMeta({
+  title: "Pricing & Services - Transparent Pricing for Texas Facilities | InvesTexas",
+  description:
+    "Transparent pricing: Virtual Office $99/mo, Showroom from $250/mo, Texas69 Land $250k/acre, Mexico Manufacturing $0.35/sqft/mo. Free company setup, FTZ services, and IPO support available.",
+  keywords:
+    "Texas office pricing, virtual office $99, showroom rental Houston, Texas land price, Mexico manufacturing cost, business setup Texas, FTZ services, company formation, IPO support pricing, wholesale space Houston",
+
+  // Open Graph
+  ogTitle: "Pricing & Services - Affordable Texas Business Solutions",
+  ogDescription:
+    "Virtual Office $99/mo, Showroom $250/mo, Land $250k/acre, Mexico Floor $0.35/sqft/mo. Free company setup, 38 years experience, flexible investment options.",
+  ogImage: "https://via.placeholder.com/1200x630?text=Pricing+Services",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Transparent Pricing for Texas Business Facilities & Services",
+  twitterDescription:
+    "From $99/mo virtual office to custom manufacturing. Free company setup, FTZ expertise, and IPO support.",
+  twitterImage: "https://via.placeholder.com/1200x630?text=Pricing+Services",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "PriceSpecification",
+        name: "InvesTexas Pricing & Services",
+        description: "Transparent pricing for all facilities and services",
+        priceCurrency: "USD",
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Service Pricing Categories",
+        description:
+          "Comprehensive pricing for office spaces, manufacturing, and business services",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "Offer",
+              name: "Virtual Office",
+              description: "Include basic Showroom Space",
+              price: "99",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "99",
+                priceCurrency: "USD",
+                unitText: "per month",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "Offer",
+              name: "Multimedia Product Showroom Space",
+              description: "27 cubic feet showroom space",
+              price: "50",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "50",
+                priceCurrency: "USD",
+                unitText: "per 27 cuft per month",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "Offer",
+              name: "Operation Office Space",
+              price: "1.20",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "1.20",
+                priceCurrency: "USD",
+                unitText: "per sqft per month",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            item: {
+              "@type": "Offer",
+              name: "Sales Showroom Office",
+              description: "With whole glass frontage",
+              price: "1.50",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "1.50",
+                priceCurrency: "USD",
+                unitText: "per sqft per month",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 5,
+            item: {
+              "@type": "Offer",
+              name: "Texas69 Land Sale",
+              price: "250000",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "250000",
+                priceCurrency: "USD",
+                unitText: "per acre",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 6,
+            item: {
+              "@type": "Offer",
+              name: "Mexico Manufacturing Floor Space",
+              price: "0.35",
+              priceCurrency: "USD",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                price: "0.35",
+                priceCurrency: "USD",
+                unitText: "per sqft per month",
+              },
+            },
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Business Setup & Support Services",
+        description: "Comprehensive business services with value-added benefits",
+        provider: {
+          "@type": "Organization",
+          name: "InvesTexas",
+        },
+        offers: [
+          {
+            "@type": "Offer",
+            name: "US Visa Application Support",
+            description: "Free service with other services (only Lawyer & CPA charge)",
+            price: "0",
+            priceCurrency: "USD",
+          },
+          {
+            "@type": "Offer",
+            name: "Company Setup Service",
+            description: "Free service with other services (only Lawyer & CPA charge)",
+            price: "0",
+            priceCurrency: "USD",
+          },
+        ],
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Experience",
+            value: "38 years of international business experience",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "FTZ Expertise",
+            value: "US Foreign Trade Zone expertise",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Finance Partners",
+            value: "Access to New York finance partners",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Logistics",
+            value: "Pan-American Highway logistics support",
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is the cost of a virtual office?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Virtual office starts from $99/month and includes basic showroom space.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Are there any free services available?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes, we offer free US Visa Application support and Company Setup Service when you use our other services. You only pay for lawyer and CPA charges.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How much does manufacturing space cost in Mexico?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Mexico manufacturing floor space rental is $0.35 per square foot per month, providing low-cost manufacturing solutions.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What value-added services are included?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "We provide 38 years of international business experience, US Foreign Trade Zone (FTZ) expertise, access to New York finance partners, Pan-American Highway logistics support, market survey and wholesale promotion, company operation consultancy by Dr. Lin, and after-sales service infrastructure.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Do you offer flexible investment options?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes, we offer Property Partnership (our property or finance as share partner), Profit Guarantee Program, and Flexible Terms negotiable to your business model.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 const pricingTiers = [
   {

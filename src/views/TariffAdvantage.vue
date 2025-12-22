@@ -1,7 +1,152 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+import { appConfig } from "@/config/env";
+const pathUrl = appConfig.pathUrl;
+
+// SEO Meta
+useSeoMeta({
+  title: "Trump's Tariff Solution - Avoid Heavy Import Tariffs | InvesTexas",
+  description:
+    "Navigate Trump's tariff policies with USMCA manufacturing in Texas. Avoid 60% import tariffs, qualify for duty-free US sales, and save up to 40% on costs. 38 years FTZ experience.",
+  keywords:
+    "Trump tariff solution, USMCA benefits, avoid import tariffs, duty-free USA sales, Foreign Trade Zone FTZ, Texas manufacturing, Mexico assembly, tariff reduction strategy, import cost savings",
+
+  // Open Graph
+  ogTitle: "Trump's Tariff Solution - Avoid Heavy Import Tariffs with USMCA",
+  ogDescription:
+    "Save 40% on average with our USMCA solution. Avoid 60% tariffs, qualify for duty-free US sales, and access FTZ benefits. Expert guidance with 38 years experience.",
+  ogImage:
+    "https://images.unsplash.com/photo-1730382624761-af8112d26209?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Trump's Tariff Solution - Save 40% with USMCA Manufacturing",
+  twitterDescription:
+    "Avoid heavy import tariffs with strategic Texas + Mexico manufacturing. Duty-free US sales, low-cost operations, and FTZ benefits.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1730382624761-af8112d26209?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Trump's Tariff Solution",
+        description:
+          "Navigate the new tariff landscape with strategic manufacturing and assembly in the USMCA zone. Avoid heavy import tariffs and qualify for duty-free sales.",
+        provider: {
+          "@type": "Organization",
+          name: "InvesTexas",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "United States",
+        },
+        serviceType: "International Trade Consulting",
+        offers: {
+          "@type": "Offer",
+          description: "USMCA Manufacturing and FTZ Benefits",
+          price: "0",
+          priceCurrency: "USD",
+          priceSpecification: {
+            "@type": "PriceSpecification",
+            description: "Average savings of 40% compared to traditional import methods",
+          },
+        },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Tariff Advantages",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Avoid Heavy Import Tariffs",
+                description:
+                  "Manufacture or assemble in Texas/Mexico to qualify for duty-free or reduced tariff treatment under USMCA",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Free Duty Sales in USA",
+                description:
+                  "Products manufactured within USMCA zone can be sold duty-free throughout the United States",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Low Duty Global Sales",
+                description:
+                  "Export to international markets with competitive advantages and lower duty rates",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Foreign Trade Zone Access",
+                description: "Access to US FTZ 171 designation with 38 years of experience",
+              },
+            },
+          ],
+        },
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How much can I save with the USMCA solution?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Average savings are 40% compared to traditional import methods. Direct imports from China face 60% tariffs with 45% cost impact, while our USMCA solution offers 0% tariffs and optimized costs.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the Foreign Trade Zone (FTZ) benefit?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "FTZ allows you to defer, reduce, or eliminate customs duties. Materials can enter the zone tariff-deferred, undergo manufacturing/assembly, and then be distributed with optimized duty rates.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How does USMCA help avoid Trump's tariffs?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "By manufacturing or assembling products within the USMCA zone (USA, Mexico, Canada), you qualify for duty-free or reduced tariff treatment, bypassing heavy tariffs on direct imports from certain countries.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 const advantages = [
   {

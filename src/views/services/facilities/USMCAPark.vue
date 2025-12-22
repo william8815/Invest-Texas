@@ -1,11 +1,238 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
+import { useSeoMeta, useHead } from "@unhead/vue";
 const router = useRouter();
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
+
+// SEO Meta
+useSeoMeta({
+  title: "USMCA Park - 480 Acres Development with FTZ 171 on Highway 69 | InvesTexas",
+  description:
+    "480 acres Texas development on Interstate Hwy 69 with school district, gas station, and US FTZ 171. Land from $250k/acre. 20mi to Houston Airport, 40mi to Port. Pan-American Highway access.",
+  keywords:
+    "USMCA Park, 480 acres Texas, Highway 69 development, FTZ 171, Texas land sale, Pan-American Highway, Houston Airport 20 miles, Houston Port 40 miles, Texas industrial park, 4D AI Green Construction",
+
+  // Open Graph
+  ogTitle: "USMCA Park - 480 Acres on Highway 69 with FTZ 171",
+  ogDescription:
+    "Future Utopia for Business & Life. 480 acres with school, gas station built-in. Highway 69 access, 20mi to airport, 40mi to port. Land from $250k/acre.",
+  ogImage:
+    "https://images.unsplash.com/photo-1649206349711-74ec8951dbd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "USMCA Park - 480 Acres Texas Development on Highway 69",
+  twitterDescription:
+    "School district & gas station built-in. FTZ 171, Pan-American Highway, 20mi to airport, 40mi to port. From $250k/acre.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1649206349711-74ec8951dbd3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: "USMCA Park",
+        description:
+          "480 acres Golden Property development on Interstate Highway 69 with school district, gas station, and US Foreign Trade Zone 171 reservation. Future Utopia for Business & Life with 4D AI Green Construction.",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Cross USA Hwy 69",
+          addressRegion: "Texas",
+          addressCountry: "US",
+        },
+        url: "http://www.USMCAPARK.US",
+        geo: {
+          "@type": "GeoCoordinates",
+          description: "Located on Interstate Highway 69 in Texas",
+        },
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "New School District",
+            value: "80 acres",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Gas Station & Store",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Highway 69 Frontage",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Pan-American Highway Access",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "US Foreign Trade Zone 171",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "4D AI Green Construction",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Airport Proximity",
+            value: "20 miles to Houston International Airport",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Seaport Proximity",
+            value: "40 miles to Houston Ocean Port",
+          },
+        ],
+        additionalProperty: [
+          {
+            "@type": "PropertyValue",
+            name: "Total Size",
+            value: "480 acres",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Developed Area",
+            value: "80 acres with school district and gas station",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Available for Development",
+            value: "400 acres",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Highway Access",
+            value: "Interstate Hwy 69 - Cross USA Highway (West to East, Ocean to Ocean)",
+          },
+          {
+            "@type": "PropertyValue",
+            name: "Continental Connection",
+            value: "Pan-American Highway System (Canada to Argentina)",
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: "USMCA Park Land Development",
+        description:
+          "480 acres prime Texas land on Highway 69 with FTZ 171 designation, school district, and complete infrastructure",
+        offers: [
+          {
+            "@type": "Offer",
+            name: "Land Sale",
+            price: "250000",
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: "250000",
+              priceCurrency: "USD",
+              unitText: "per acre",
+              minPrice: "250000",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Land Rental",
+            price: "1000",
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: "1000",
+              priceCurrency: "USD",
+              unitText: "per acre per month",
+              minPrice: "1000",
+            },
+          },
+          {
+            "@type": "Offer",
+            name: "Custom Building",
+            description: "Custom building services available at market price",
+          },
+        ],
+        category: "Industrial Park Development",
+        brand: {
+          "@type": "Brand",
+          name: "InvesTexas",
+        },
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is the size of USMCA Park?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "USMCA Park is 480 acres total. 80 acres have been developed with a new school district and gas station, while 400 acres are available for future business and life development.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Where is USMCA Park located?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "USMCA Park is located on Cross USA Highway 69 in Texas. It has direct access to Interstate Hwy 69, which connects to the Pan-American Highway System spanning from Canada to Argentina. It's 20 miles from Houston International Airport and 40 miles from Houston Ocean Port.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is the land price at USMCA Park?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Land sale starts from $250,000 per acre. Land rental is available from $1,000 per acre per month. Custom building services are also available at market price.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What is US Foreign Trade Zone 171?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "USMCA Park has US FTZ 171 reservation, which provides significant customs and tax benefits for international trade operations. This designation allows businesses to defer, reduce, or eliminate customs duties on imported goods.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What transportation access does USMCA Park have?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "USMCA Park has tri-modal transportation access: 1) Interstate Highway 69 (Cross USA Highway and Pan-American Highway System), 2) 20 miles to Houston International Airport for global air connectivity, and 3) 40 miles to Houston Ocean Port for worldwide ocean shipping.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 // images
 import facility2_1 from "@/assets/images/facilities/facility2_1.png";

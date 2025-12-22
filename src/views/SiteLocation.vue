@@ -1,7 +1,183 @@
 <script setup>
 import { ref, onMounted, computed, reactive } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+// SEO Meta
+useSeoMeta({
+  title: "Strategic Location in Texas - Tri-Modal Transportation Hub | InvesTexas",
+  description:
+    "Prime Texas location with Highway 69 access, 15-20 miles to Houston IAH Airport (180+ destinations), 30-40 miles to Port of Houston (#1 US port). Complete tri-modal transportation connectivity.",
+  keywords:
+    "Texas strategic location, Interstate Highway 69, Houston IAH Airport, Port of Houston, tri-modal transportation, Pan-American Highway, USMCA Park location, Texas logistics hub, global transportation access",
+
+  // Open Graph
+  ogTitle: "Strategic Location in Texas - Highway, Airport & Seaport Access",
+  ogDescription:
+    "Tri-modal transportation access: On-site Highway 69, 15-20mi to Houston Airport (180+ destinations), 30-40mi to #1 US Port. Seamless global business operations.",
+  ogImage:
+    "https://images.unsplash.com/photo-1729879679733-8ca2ac28fcc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Strategic Texas Location - Complete Transportation Connectivity",
+  twitterDescription:
+    "Highway 69 on-site, Houston Airport 15-20mi, #1 US Port 30-40mi. Perfect location for global business.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1729879679733-8ca2ac28fcc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: "USMCA Park - InvesTexas",
+        description:
+          "Strategic location in Texas with tri-modal transportation access: Highway, Airport, and Seaport connectivity for seamless global business operations.",
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: "Texas",
+          addressCountry: "US",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          description: "Strategic location near Houston with excellent transportation access",
+        },
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Interstate Highway 69 Access",
+            value: "On-site",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Houston IAH International Airport",
+            value: "15-20 miles",
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Port of Houston",
+            value: "30-40 miles",
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Transportation Access Points",
+        description: "Tri-modal transportation connectivity for USMCA Park",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "Place",
+              name: "Interstate Highway 69",
+              description:
+                "Cross USA Transportation Backbone - Direct access to Interstate Highway 69, connecting Canada to Mexico via Pan-American Highway System",
+              amenityFeature: [
+                "Ocean to ocean connectivity",
+                "Pan-American Highway connection",
+                "Direct Canada-Mexico route",
+                "Efficient continental distribution",
+              ],
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "Airport",
+              name: "Houston IAH International Airport",
+              description:
+                "Global Air Transportation Hub - Only 15-20 miles away with connections to over 180 destinations worldwide",
+              amenityFeature: [
+                "180+ worldwide destinations",
+                "Major cargo handling facility",
+                "Express air freight services",
+                "24/7 international operations",
+              ],
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "Place",
+              name: "Houston Ocean Port",
+              description:
+                "America's Largest Container Port - Approximately 30-40 miles away, #1 port in the United States for foreign tonnage",
+              amenityFeature: [
+                "#1 US port for foreign tonnage",
+                "Global shipping connectivity",
+                "Container & bulk cargo services",
+                "Strategic Gulf Coast location",
+              ],
+            },
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How far is USMCA Park from Houston International Airport?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "USMCA Park is only 15-20 miles from George Bush Intercontinental Airport (IAH), one of the busiest airports in the United States with connections to over 180 destinations worldwide.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What highway access does the location have?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The property has direct on-site access to Interstate Highway 69, the critical north-south corridor connecting Canada to Mexico. It's part of the Pan-American Highway System, providing seamless continental distribution.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How close is the Port of Houston?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The Port of Houston is approximately 30-40 miles away. It's the #1 port in the United States for foreign tonnage, providing complete access to international maritime shipping lanes.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What amenities are nearby?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "The location has comprehensive amenities including on-site gas station and cafe, city park across the street, hospital (2 miles), Walmart Plaza (3 miles), and various shopping centers, parks, and entertainment venues within 10-30 miles.",
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 // images
 import siteLocation1_1 from "@/assets/images/siteLocation/siteLocation1_1.png";

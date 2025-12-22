@@ -1,7 +1,214 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+// SEO Meta
+useSeoMeta({
+  title: "Expert Team - 38+ Years International Business Experience | InvesTexas",
+  description:
+    "Meet our expert team: Dr. Frank Lin (38 years, FTZ member), Prof. Mike Lin (Cleveland State), Felix Fu (20+ years VP), Greg Sheng (RIBA architect), Victor Zhang (FRM). Decades of combined experience in international business, finance, and engineering.",
+  keywords:
+    "InvesTexas team, Dr Frank Lin, international business experts, Texas investment advisors, FTZ expert, Cleveland State professor, RIBA architect, FRM certified, business consultants Texas, 38 years experience",
+
+  // Open Graph
+  ogTitle: "Expert Team - Decades of International Business & Finance Experience",
+  ogDescription:
+    "Led by Dr. Frank Lin with 38 years experience. Team includes Cleveland State professor, RIBA architect, FRM certified manager, and international business veterans.",
+  ogImage: "https://via.placeholder.com/1200x630?text=Expert+Team",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Meet Our Expert Team - 38+ Years Combined Experience",
+  twitterDescription:
+    "International business, finance, engineering, and development experts ready to guide your Texas investment.",
+  twitterImage: "https://via.placeholder.com/1200x630?text=Expert+Team",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "InvesTexas",
+        description:
+          "Expert team with decades of combined experience in international business, finance, engineering, and development",
+        employee: [
+          {
+            "@type": "Person",
+            name: "Dr. Frank Lin",
+            jobTitle: "Sinopac International Group Leader",
+            description:
+              "Outstanding Entrepreneur of Texas with 38 years of international business experience. Regular/Active Member of the National Association of Foreign Trade Zones.",
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "National Chiao Tung University",
+              },
+              {
+                "@type": "CollegeOrUniversity",
+                name: "Shanghai Jiao Tong University",
+              },
+            ],
+            award: [
+              "Outstanding Entrepreneur of Texas, USA",
+              "Distinguished Alumnus of National Chiao Tung University",
+              "Model Youth Career Development of the Republic of China (Taiwan 1983)",
+            ],
+          },
+          {
+            "@type": "Person",
+            name: "Chien-Hua (Mike) Lin",
+            jobTitle: "Emeritus Professor, Computer and Electric Engineering",
+            worksFor: {
+              "@type": "CollegeOrUniversity",
+              name: "Cleveland State University",
+              department: "Washkewicz College Of Engineering",
+            },
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "Case Western Reserve University",
+                degree: "Ph.D., Operations Research",
+              },
+              {
+                "@type": "CollegeOrUniversity",
+                name: "National Chiao Tung University",
+                degree: "B.Sc., Electronic Engineering",
+              },
+            ],
+            award: ["Fulbright Scholar"],
+          },
+          {
+            "@type": "Person",
+            name: "Carpenter Lee",
+            jobTitle: "CEO",
+            worksFor: {
+              "@type": "Organization",
+              name: "Lifecare Foundation",
+            },
+            description:
+              "30 years of experience in Philips Lifeline technology application in the United States",
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "China Medical University",
+                department: "Department of Pharmacy",
+              },
+            ],
+          },
+          {
+            "@type": "Person",
+            name: "Felix Fu",
+            jobTitle: "VP",
+            worksFor: {
+              "@type": "Organization",
+              name: "Sinopac International Corp.",
+            },
+            description:
+              "20+ years experience in international marketing, risk management, finance, and logistics",
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "Illinois Institute of Technology",
+                degree: "Master of Business Administration",
+              },
+            ],
+            knowsLanguage: ["English", "Chinese"],
+          },
+          {
+            "@type": "Person",
+            name: "Greg Sheng",
+            jobTitle: "Research and Development Director",
+            worksFor: {
+              "@type": "Organization",
+              name: "Dayuan Architecture Design Co., Ltd.",
+            },
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "Kingston University",
+                degree: "RIBA Part III Qualified",
+              },
+              {
+                "@type": "CollegeOrUniversity",
+                name: "AA Architectural Association",
+                degree: "RIBA Part I/II",
+              },
+            ],
+            hasCredential: {
+              "@type": "EducationalOccupationalCredential",
+              credentialCategory: "RIBA (Royal Institute of British Architects) Part III Qualified",
+            },
+          },
+          {
+            "@type": "Person",
+            name: "Victor Zhang",
+            jobTitle: "General Manager of Market Capitalization Management",
+            hasCredential: {
+              "@type": "EducationalOccupationalCredential",
+              credentialCategory: "Certified Financial Risk Manager (FRM)",
+            },
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "Beijing Foreign Studies University",
+                degree: "Bachelor's in German Studies",
+              },
+              {
+                "@type": "CollegeOrUniversity",
+                name: "University of Bonn",
+                degree: "Master's in Financial Engineering",
+              },
+            ],
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "InvesTexas Expert Team",
+        description:
+          "Professional team providing international business consulting, investment guidance, and comprehensive support for Texas investments",
+        areaServed: {
+          "@type": "Country",
+          name: "United States",
+        },
+        serviceType: [
+          "International Business Consulting",
+          "Investment Advisory",
+          "Foreign Trade Zone Expertise",
+          "Architectural Design",
+          "Financial Risk Management",
+        ],
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "38",
+          bestRating: "50",
+          worstRating: "0",
+          ratingCount: "1",
+          description: "Years of combined international business experience",
+        },
+      }),
+    },
+  ],
+});
 
 // images
 import teams1_1 from "@/assets/images/teams/teams1_1.png";

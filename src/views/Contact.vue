@@ -1,7 +1,188 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+
+// SEO Meta
+useSeoMeta({
+  title: "Contact Us - Houston Office & Global Locations | InvesTexas",
+  description:
+    "Contact InvesTexas: Houston HQ (713-783-3122), Mexico facility (899-951-3028), Taiwan liaison office (2-8758-5888). Email: Contact@InvesTexas.com. Office hours: Mon-Fri 9AM-6PM CST.",
+  keywords:
+    "contact InvesTexas, Houston office, 7400 Harwin Drive, Texas investment contact, Sinopac headquarters, Mexico facility contact, Taiwan liaison office, Dr Frank Lin contact, business hours Houston",
+
+  // Open Graph
+  ogTitle: "Contact InvesTexas - Houston, Mexico & Taiwan Offices",
+  ogDescription:
+    "3 global offices ready to serve you: Houston TX (HQ), Reynosa Mexico, Taipei Taiwan. Call +1-713-783-3122 or email Contact@InvesTexas.com",
+  ogImage: "https://via.placeholder.com/1200x630?text=Contact+InvesTexas",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "Contact InvesTexas - 3 Global Office Locations",
+  twitterDescription:
+    "Houston HQ, Mexico facility, Taiwan liaison. Phone: +1-713-783-3122. Email: Contact@InvesTexas.com",
+  twitterImage: "https://via.placeholder.com/1200x630?text=Contact+InvesTexas",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "InvesTexas - Sinopac International Group",
+        description: "Investment opportunities in Texas with global office support",
+        email: "Contact@InvesTexas.com",
+        telephone: "+1-713-783-3122",
+        url: "http://www.Sinopac.us",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "7400 Harwin Drive",
+          addressLocality: "Houston",
+          addressRegion: "TX",
+          postalCode: "77036",
+          addressCountry: "US",
+        },
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "09:00",
+            closes: "18:00",
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: "Saturday",
+            opens: "10:00",
+            closes: "16:00",
+          },
+        ],
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            telephone: "+1-713-783-3122",
+            contactType: "customer service",
+            email: "Contact@InvesTexas.com",
+            areaServed: "US",
+            availableLanguage: ["English", "Chinese"],
+          },
+          {
+            "@type": "ContactPoint",
+            telephone: "+52-899-951-3028",
+            contactType: "customer service",
+            email: "Lintelmex@gmail.com",
+            areaServed: "MX",
+            availableLanguage: ["Spanish", "English"],
+          },
+          {
+            "@type": "ContactPoint",
+            telephone: "+886-2-8758-5888",
+            contactType: "customer service",
+            email: "info@usmcapark.com.tw",
+            areaServed: "TW",
+            availableLanguage: ["Chinese", "English"],
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "InvesTexas Office Locations",
+        description: "Three global office locations serving international investors",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "Place",
+              name: "Sinopac Headquarter Building",
+              description: "Main headquarters in Houston, Texas",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "7400 Harwin Drive",
+                addressLocality: "Houston",
+                addressRegion: "TX",
+                postalCode: "77036",
+                addressCountry: "US",
+              },
+              telephone: "+1-713-783-3122",
+              faxNumber: "+1-713-780-4626",
+              email: "Contact@InvesTexas.com",
+              contactPoint: {
+                "@type": "ContactPoint",
+                name: "Dr. Frank Lin",
+                contactType: "Director",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "Place",
+              name: "Lintel de Mexico",
+              description: "Manufacturing facility in Reynosa, Mexico",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Brecha 99, Parque Industrial Reynosa",
+                addressLocality: "CD Reynosa",
+                addressRegion: "Tamaulipas",
+                postalCode: "88790",
+                addressCountry: "MX",
+              },
+              telephone: "+52-899-951-3028",
+              email: "Lintelmex@gmail.com",
+              contactPoint: {
+                "@type": "ContactPoint",
+                name: "Mr. Luis G Rodrigue",
+                contactType: "General Manager",
+              },
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "Place",
+              name: "USMCA Park Asian Liaison Office",
+              description: "Asian liaison office in Taipei, Taiwan",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "15F, No. 552, Sec. 5, ZhongXiao E Rd, Xinyi Dist",
+                addressLocality: "Taipei City",
+                postalCode: "110",
+                addressCountry: "TW",
+              },
+              telephone: "+886-2-8758-5888",
+              email: "info@usmcapark.com.tw",
+              contactPoint: {
+                "@type": "ContactPoint",
+                name: "VP Johnson Lee",
+                contactType: "Vice President",
+              },
+            },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 // images
 import contact1_1 from "@/assets/images/contact/contact1_1.png";

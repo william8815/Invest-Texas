@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, toRaw } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import ImageSlider from "@/components/ImageSlider.vue";
 // config
@@ -7,6 +8,249 @@ import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
 // components
 import Icon from "@/components/base/Icon.vue";
+
+// SEO Meta
+useSeoMeta({
+  title: "Investment Process - From Showroom to IPO in 6 Steps | InvesTexas",
+  description:
+    "Complete investment journey: Product showroom, 60,000 sqft office space, pilot production support, custom factory building, brand marketing (38 years exp), and Nasdaq IPO support with NY finance partners.",
+  keywords:
+    "investment process Texas, showroom Houston, pilot production USA Mexico, Made in USA factory, brand marketing, IPO support, Nasdaq listing, Texas business setup, 60000 sqft facility, New York finance partners",
+
+  // Open Graph
+  ogTitle: "Investment Process - Complete Support from Showroom to IPO",
+  ogDescription:
+    "6 strategic steps to establish your business in Texas: Showroom → Office → Pilot Production → Factory → Brand Marketing → IPO. 38 years experience, NY finance partners.",
+  ogImage: "https://via.placeholder.com/1200x630?text=Investment+Process",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "6-Step Investment Process - Showroom to Nasdaq IPO",
+  twitterDescription:
+    "Complete business setup in Texas: 60,000 sqft facility, pilot production, custom factory, brand marketing, and IPO support.",
+  twitterImage: "https://via.placeholder.com/1200x630?text=Investment+Process",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: "Investment Process in Texas - From Showroom to IPO",
+        description:
+          "Six strategic steps to establish and grow your business in Texas, from initial showroom to going public on Nasdaq.",
+        totalTime: "P12M",
+        step: [
+          {
+            "@type": "HowToStep",
+            position: 1,
+            name: "Product Showroom with Market Survey",
+            text: "Start with Showroom in USMCA. We have Showroom with Multimedia Facility and offer Free Promotion to all Harwin International Wholesalers. Market Survey across USA supported by Sinopac VP Felix Fu.",
+            itemListElement: [
+              {
+                "@type": "HowToDirection",
+                text: "Showroom with Multimedia Facility",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Free Promotion to Harwin International Wholesalers",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Market Survey across USA",
+              },
+            ],
+          },
+          {
+            "@type": "HowToStep",
+            position: 2,
+            name: "Showroom Office - Start Product Sale & Setup Company",
+            text: "60,000 sq. ft. Building on 3.8 acres City Block at Center of Harwin Wholesale District. Office Space at reasonable price with Excellent Company Operation Consultancy by Dr. Lin.",
+            itemListElement: [
+              {
+                "@type": "HowToDirection",
+                text: "60,000 sq. ft. Building on 3.8 acres",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Center of Harwin Wholesale District",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Expert consultancy by Dr. Lin",
+              },
+            ],
+          },
+          {
+            "@type": "HowToStep",
+            position: 3,
+            name: "Pilot Run Operation Support - Test Production",
+            text: "50,000 sqft Manufacturing Floor Space + 120,000 sqft Outlet Show Space. Test production in USA or Mexico with only One Engineer needed.",
+            itemListElement: [
+              {
+                "@type": "HowToDirection",
+                text: "50,000 sqft Manufacturing Floor Space",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "120,000 sqft Outlet Show Space",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Full support for pilot production",
+              },
+            ],
+          },
+          {
+            "@type": "HowToStep",
+            position: 4,
+            name: "Finance to Build Factory - Start Made in USA",
+            text: "Strong Construction Team to build Custom Facility. Chief Architect GREG SHENG has strong engineering background for tailored facility design.",
+            itemListElement: [
+              {
+                "@type": "HowToDirection",
+                text: "Custom Building to fit your needs",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Strong Construction Team",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Chief Architect: GREG SHENG",
+              },
+            ],
+          },
+          {
+            "@type": "HowToStep",
+            position: 5,
+            name: "Pool Brand Marketing - Increase Company Profit",
+            text: "38 years International Marketing experience. Brand Name Sales development with After Sale Service. Operations in both USA & Mexico alongside Pan-American Highway System.",
+            itemListElement: [
+              {
+                "@type": "HowToDirection",
+                text: "38 years International Marketing experience",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Brand Name Sales development",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Operations in both USA & Mexico",
+              },
+            ],
+          },
+          {
+            "@type": "HowToStep",
+            position: 6,
+            name: "Finance & Go Public Support - Including Nasdaq",
+            text: "Working with Finance Companies in New York for Finance Loan & Go Public Support. Partners include American Wall Street Listed Group Inc, Cannondale Financial LLC, and Project Master LLC.",
+            itemListElement: [
+              {
+                "@type": "HowToDirection",
+                text: "New York Finance Company partnerships",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Property/Finance as Share Partner option",
+              },
+              {
+                "@type": "HowToDirection",
+                text: "Special Profit Guaranteed Program",
+              },
+            ],
+          },
+        ],
+      }),
+    },
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Complete Investment Process Support",
+        description:
+          "End-to-end support for establishing and growing your business in Texas, from initial showroom to IPO.",
+        provider: {
+          "@type": "Organization",
+          name: "InvesTexas",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "United States",
+        },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Investment Process Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Product Showroom & Market Survey",
+                description:
+                  "Multimedia facility with free promotion to Harwin International Wholesalers",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "60,000 sq.ft. Office Space",
+                description: "Center of Harwin Wholesale District with expert consultancy",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Pilot Production Support",
+                description: "50,000 sqft manufacturing space in USA or Mexico",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Custom Factory Construction",
+                description: "Made in USA facility with expert engineering team",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Brand Marketing Services",
+                description: "38 years international marketing experience",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "IPO & Finance Support",
+                description: "Nasdaq listing support with New York finance partners",
+              },
+            },
+          ],
+        },
+      }),
+    },
+  ],
+});
 // images
 import process1_1 from "@/assets/images/process/process1_1.png";
 import process2_1 from "@/assets/images/process/process2_1.jpg";

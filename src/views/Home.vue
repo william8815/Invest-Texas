@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useSeoMeta, useHead } from "@unhead/vue";
 
 // components
 import DefaultLayout from "@/layouts/default.vue";
@@ -7,6 +8,73 @@ import Icon from "@/components/base/Icon.vue";
 // config
 import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
+
+// SEO Meta
+useSeoMeta({
+  title: "InvesTexas - Best Property for Investing in Texas | Trump's Tariff Solution",
+  description:
+    "Invest in Texas to avoid heavy tariffs with free duty sales in USA. Strategic location with access to USMCA markets, 60,000 sqft Houston facility, 480 acres USMCA Park, and New York finance & IPO support.",
+  keywords:
+    "Texas investment, USMCA Park, Trump tariff solution, Texas business, Houston facility, foreign investment USA, Texas property investment, IPO support, Pan-American Highway, duty-free sales",
+
+  // Open Graph
+  ogTitle: "InvesTexas - Best Property for Investing in Texas",
+  ogDescription:
+    "Best destination for Trump's Tariffs Solution. Invest Texas with Finance & Go IPO support from New York. Complete infrastructure for your business success.",
+  ogImage:
+    "https://images.unsplash.com/photo-1695779539366-b221da6b9fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+  ogType: "website",
+  ogSiteName: "InvesTexas",
+  ogLocale: "en_US",
+
+  // Twitter Card
+  twitterCard: "summary_large_image",
+  twitterTitle: "InvesTexas - Best Property for Investing in Texas",
+  twitterDescription:
+    "Invest in Texas to avoid heavy tariffs. Strategic location with USMCA access, complete infrastructure, and New York finance support.",
+  twitterImage:
+    "https://images.unsplash.com/photo-1695779539366-b221da6b9fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1200",
+
+  // Additional SEO
+  robots: "index, follow",
+  author: "InvesTexas",
+});
+
+useHead({
+  htmlAttrs: {
+    lang: "en",
+  },
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "InvesTexas",
+        description:
+          "Best destination for investing in Texas with tariff advantages and complete infrastructure support.",
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          areaServed: "Worldwide",
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: "Texas",
+          addressCountry: "US",
+        },
+        offers: {
+          "@type": "Offer",
+          description: "60,000 sqft Houston Facility + 480 Acres USMCA Park",
+          areaServed: {
+            "@type": "Country",
+            name: "United States",
+          },
+        },
+      }),
+    },
+  ],
+});
 
 // images
 const heroImage =
