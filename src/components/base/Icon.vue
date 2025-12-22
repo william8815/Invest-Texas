@@ -40,6 +40,11 @@ import park from "@/assets/icons/park.svg";
 import cart from "@/assets/icons/cart.svg";
 import airplane from "@/assets/icons/airplane.svg";
 import ship from "@/assets/icons/ship.svg";
+import zoom_out from "@/assets/icons/zoom-out.svg";
+import zoom_in from "@/assets/icons/zoom-in.svg";
+import rotate_left from "@/assets/icons/rotate-left.svg";
+import rotate_right from "@/assets/icons/rotate-right.svg";
+import refresh from "@/assets/icons/refresh.svg";
 
 const icons = {
   mail,
@@ -81,6 +86,11 @@ const icons = {
   cart,
   airplane,
   ship,
+  zoom_out,
+  zoom_in,
+  rotate_left,
+  rotate_right,
+  refresh,
 };
 
 const props = defineProps({

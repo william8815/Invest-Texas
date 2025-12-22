@@ -561,6 +561,10 @@ const handleNext = () => {
     behavior: "smooth",
   });
 };
+
+// image viewer
+import ImageViewer from "@/components/ImageViewer.vue";
+const showImageViewer = ref(false);
 </script>
 
 <template>
@@ -742,31 +746,48 @@ const handleNext = () => {
               <!-- prev and next button -->
               <div
                 v-if="facility.images?.length > 1"
-                class="flex items-center justify-center gap-4 mt-4"
+                class="flex items-center justify-between gap-4 mt-4"
               >
-                <!-- 幫以下 button 添加 disabled & hover 的樣式 -->
-                <button
-                  class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
-                  :disabled="activeIndex === 0"
-                  @click="handlePrev()"
-                >
-                  <span
-                    class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                <div class="flex items-center gap-4">
+                  <button
+                    class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+                    :disabled="activeIndex === 0"
+                    @click="handlePrev()"
                   >
-                    <Icon name="arrow_down" size="24" class="rotate-90" />
-                  </span>
-                </button>
-                <button
-                  class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
-                  :disabled="activeIndex === facility.images?.length - 1"
-                  @click="handleNext()"
-                >
-                  <span
-                    class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                    <span
+                      class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                    >
+                      <Icon name="arrow_down" size="24" class="rotate-90" />
+                    </span>
+                  </button>
+                  <button
+                    class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+                    :disabled="activeIndex === facility.images?.length - 1"
+                    @click="handleNext()"
                   >
-                    <Icon name="arrow_down" size="24" class="rotate-[-90deg]" />
-                  </span>
+                    <span
+                      class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                    >
+                      <Icon name="arrow_down" size="24" class="rotate-[-90deg]" />
+                    </span>
+                  </button>
+                </div>
+                <button
+                  class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+                  @click="showImageViewer = true"
+                >
+                  <Icon name="eye" size="24" />
+                  <span>View Image</span>
                 </button>
+              </div>
+
+              <!-- image viewer -->
+              <div>
+                <ImageViewer
+                  :images="facility.images"
+                  v-model:visible="showImageViewer"
+                  :initial-index="activeIndex"
+                />
               </div>
             </div>
           </div>
