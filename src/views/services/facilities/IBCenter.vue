@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, toRaw } from "vue";
 import { useRouter } from "vue-router";
 import { useSeoMeta, useHead } from "@unhead/vue";
 const router = useRouter();
@@ -435,10 +435,10 @@ onMounted(() => {
 });
 
 // 圖片滾動容器的陰影狀態
+const imagesWrapperRef = ref(null);
 const imagesListRef = ref(null);
 const showLeftShadow = ref(false);
 const showRightShadow = ref(true);
-
 const handleImagesScroll = () => {
   if (!imagesListRef.value) return;
   const { scrollLeft, scrollWidth, clientWidth } = imagesListRef.value;
@@ -458,6 +458,44 @@ const initScrollShadow = () => {
 onUnmounted(() => {
   // 清理事件監聽（如果需要）
 });
+
+const activeIndex = ref(0);
+const handlePrev = () => {
+  if (activeIndex.value === 0) return;
+  facility.value.images[activeIndex.value].active = false;
+  facility.value.images[activeIndex.value - 1].active = true;
+  activeIndex.value--;
+  // 讓容器水平滾動至 active image 的索引位置
+  let imagesWrapper = toRaw(imagesWrapperRef.value);
+  let imageList = toRaw(imagesListRef.value);
+  let activeElement = imageList.querySelectorAll(".image__item")[activeIndex.value];
+  let wrapperRect = imagesWrapper.getBoundingClientRect();
+  let itemRect = activeElement.getBoundingClientRect();
+  console.log(activeElement);
+
+  // 讓容器水平滾動至 active image 的索引位置
+  imageList?.scrollBy({
+    left: itemRect.left - wrapperRect.left,
+    behavior: "smooth",
+  });
+};
+const handleNext = () => {
+  if (activeIndex.value === facility.value.images.length - 1) return;
+  facility.value.images[activeIndex.value].active = false;
+  facility.value.images[activeIndex.value + 1].active = true;
+  activeIndex.value++;
+  let imagesWrapper = toRaw(imagesWrapperRef.value);
+  let imageList = toRaw(imagesListRef.value);
+  let activeElement = imageList.querySelectorAll(".image__item")[activeIndex.value];
+  let wrapperRect = imagesWrapper.getBoundingClientRect();
+  let itemRect = activeElement.getBoundingClientRect();
+
+  // 讓容器水平滾動至 active image 的索引位置
+  imageList?.scrollBy({
+    left: itemRect.left - wrapperRect.left,
+    behavior: "smooth",
+  });
+};
 </script>
 
 <template>
@@ -582,7 +620,7 @@ onUnmounted(() => {
                 Reference Images
               </h3>
               <!-- 圖片滾動容器（含陰影提示） -->
-              <div class="images__wrapper relative">
+              <div ref="imagesWrapperRef" class="images__wrapper relative">
                 <!-- 左側陰影 -->
                 <div
                   class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
@@ -602,7 +640,7 @@ onUnmounted(() => {
                   <div
                     v-for="(image, index) in facility.images"
                     :key="index"
-                    class="h-[200px] lg:h-[300px] flex-shrink-0 px-2 relative"
+                    class="image__item h-[200px] lg:h-[300px] flex-shrink-0 px-2 relative"
                     :class="`w-[${getImageWidth(image.aspect, 200)}px] lg:w-[${getImageWidth(image.aspect, 300)}px]`"
                   >
                     <!-- Skeleton -->
@@ -630,6 +668,35 @@ onUnmounted(() => {
                     />
                   </div>
                 </div>
+              </div>
+              <!-- prev and next button -->
+              <div
+                v-if="facility.images?.length > 1"
+                class="flex items-center justify-center gap-4 mt-4"
+              >
+                <!-- 幫以下 button 添加 disabled & hover 的樣式 -->
+                <button
+                  class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+                  :disabled="activeIndex === 0"
+                  @click="handlePrev()"
+                >
+                  <span
+                    class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                  >
+                    <Icon name="arrow_down" size="24" class="rotate-90" />
+                  </span>
+                </button>
+                <button
+                  class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+                  :disabled="activeIndex === facility.images?.length - 1"
+                  @click="handleNext()"
+                >
+                  <span
+                    class="px-4 py-2 w-full h-full bg-white rounded-lg flex items-center justify-center"
+                  >
+                    <Icon name="arrow_down" size="24" class="rotate-[-90deg]" />
+                  </span>
+                </button>
               </div>
             </div>
           </div>

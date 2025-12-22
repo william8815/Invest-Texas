@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRaw, reactive } from "vue";
+import { ref, toRaw, reactive, computed } from "vue";
 import Icon from "@/components/base/Icon.vue";
 
 const images = defineModel("images", {
@@ -27,11 +27,12 @@ const handleImageLoad = (index) => {
   imageLoadedStates[index] = true;
 };
 
+const activeIndex = ref(0);
 const handlePrev = () => {
-  const activeIndex = images.value.findIndex((item) => item.active);
-  if (activeIndex === 0) return;
-  images.value[activeIndex].active = false;
-  images.value[activeIndex - 1].active = true;
+  if (activeIndex.value === 0) return;
+  images.value[activeIndex.value].active = false;
+  images.value[activeIndex.value - 1].active = true;
+  activeIndex.value--;
   // 讓容器水平滾動至 active image 的索引位置
   let element = toRaw(imageSliderRef.value);
   element?.scrollBy({
@@ -40,10 +41,10 @@ const handlePrev = () => {
   });
 };
 const handleNext = () => {
-  const activeIndex = images.value.findIndex((item) => item.active);
-  if (activeIndex === images.value.length - 1) return;
-  images.value[activeIndex].active = false;
-  images.value[activeIndex + 1].active = true;
+  if (activeIndex.value === images.value.length - 1) return;
+  images.value[activeIndex.value].active = false;
+  images.value[activeIndex.value + 1].active = true;
+  activeIndex.value++;
   // 讓容器水平滾動至 active image 的索引位置
   let element = toRaw(imageSliderRef.value);
   element?.scrollBy({
@@ -89,8 +90,10 @@ const handleNext = () => {
 
       <!-- prev and next button -->
       <div v-if="images?.length > 1" class="flex items-center justify-center gap-4 mt-4">
+        <!-- 幫以下 button 添加 disabled & hover 的樣式 -->
         <button
-          class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px]"
+          class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+          :disabled="activeIndex === 0"
           @click="handlePrev()"
         >
           <span
@@ -100,7 +103,8 @@ const handleNext = () => {
           </span>
         </button>
         <button
-          class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px]"
+          class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+          :disabled="activeIndex === images?.length - 1"
           @click="handleNext()"
         >
           <span
