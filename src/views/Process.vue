@@ -577,14 +577,14 @@ onMounted(() => {
   <DefaultLayout>
     <!-- Hero Section  -->
     <section
-      class="hero_section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-blue-900 text-white overflow-hidden"
+      class="hero_section relative py-20 bg-gradient-to-br from-sky-900 to-sky-900 text-white overflow-hidden"
     >
       <div
         class="hero__content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 translate-y-10 transition-all duration-500"
       >
         <div class="text-center">
           <h1 class="hero__title text-5xl md:text-6xl mb-6">Investment Process</h1>
-          <p class="hero__description text-xl text-blue-100 max-w-3xl mx-auto">
+          <p class="hero__description text-xl text-sky-100 max-w-3xl mx-auto">
             Six strategic steps to establish and grow your business in Texas
           </p>
         </div>
@@ -593,7 +593,7 @@ onMounted(() => {
 
     <section
       ref="progressRef"
-      class="process__section py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-x-hidden"
+      class="process__section py-20 bg-transparent relative overflow-x-hidden"
     >
       <!-- Vertical Timeline Progress Bar -->
       <div
@@ -689,7 +689,7 @@ onMounted(() => {
 
     <!-- Timeline Visual -->
     <section
-      class="timeline__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
+      class="timeline__section py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white overflow-x-hidden"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
@@ -699,7 +699,7 @@ onMounted(() => {
             Your Journey to Success
           </h2>
           <p
-            class="timeline__description text-xl text-blue-200 opacity-0 translate-x-[100px] transition-all duration-500"
+            class="timeline__description text-xl text-sky-200 opacity-0 translate-x-[100px] transition-all duration-500"
           >
             From showroom to IPO - we support you every step
           </p>
@@ -716,7 +716,7 @@ onMounted(() => {
               {{ step.number }}
             </div>
             <p
-              class="text-sm text-blue-200 group-hover:text-white transition-all duration-300 group-hover:scale-105"
+              class="text-sm text-sky-200 group-hover:text-white transition-all duration-300 group-hover:scale-105"
             >
               {{ step.title }}
             </p>

@@ -359,17 +359,17 @@ function animateCount(el, start, end, duration = 1500) {
           <div
             class="hero__description space-y-4 mb-4 md:mb-8 opacity-0 transition-all duration-1000 delay-[500ms]"
           >
-            <p class="text-lg md:text-2xl text-blue-100">
+            <p class="text-lg md:text-2xl text-sky-100">
               Best Destination for Trump's Tariffs Solution
             </p>
-            <p class="text-lg md:text-xl text-blue-100">
+            <p class="text-lg md:text-xl text-sky-100">
               Invest Texas with Finance & Go IPO support from New York
             </p>
-            <p class="text-base md:text-lg text-blue-200">
+            <p class="text-base md:text-lg text-sky-200">
               We could support both Local & Global Marketing + Future Low Cost Manufacturing in
               Mexico
             </p>
-            <p class="text-base md:text-lg text-blue-200">
+            <p class="text-base md:text-lg text-sky-200">
               Welcome to Invest Texas to enjoy Trump's Tariffs Policy for Free Duty Sales in USA +
               Low Duty Global Sales
             </p>

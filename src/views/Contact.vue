@@ -360,7 +360,7 @@ onMounted(() => {
                   name="name"
                   required
                   v-model="formData.name"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all"
                   placeholder="John Doe"
                 />
               </div>
@@ -376,7 +376,7 @@ onMounted(() => {
                     name="email"
                     required
                     v-model="formData.email"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all"
                     placeholder="john@company.com"
                   />
                 </div>
@@ -388,7 +388,7 @@ onMounted(() => {
                     id="phone"
                     name="phone"
                     v-model="formData.phone"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all"
                     placeholder="+1 (555) 123-4567"
                   />
                 </div>
@@ -401,7 +401,7 @@ onMounted(() => {
                   id="company"
                   name="company"
                   v-model="formData.company"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all"
                   placeholder="Your Company Ltd."
                 />
               </div>
@@ -414,14 +414,14 @@ onMounted(() => {
                   required
                   v-model="formData.message"
                   rows="6"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition-all resize-none"
                   placeholder="Tell us about your investment interests..."
                 />
               </div>
 
               <button
                 type="submit"
-                class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all flex items-center justify-center space-x-2"
+                class="w-full bg-gradient-to-r from-sky-600 to-cyan-600 text-white px-8 py-4 rounded-lg hover:from-sky-700 hover:to-cyan-700 transition-all flex items-center justify-center space-x-2"
               >
                 <span>Send Message</span>
                 <Icon name="send" size="20" class="w-5 h-5" />

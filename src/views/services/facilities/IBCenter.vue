@@ -526,7 +526,7 @@ const showImageViewer = ref(false);
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <a
             :href="`${pathUrl}/services-overview`"
-            class="inline-flex items-center text-white mb-6 hover:text-blue-200 transition-colors"
+            class="inline-flex items-center text-white mb-6 hover:text-sky-200 transition-colors"
             @click.prevent="router.go(-1)"
           >
             <Icon name="arrow_forward" size="16" class="mr-2 rotate-180" />
@@ -536,8 +536,8 @@ const showImageViewer = ref(false);
             <h1 class="text-5xl md:text-6xl text-white mb-4">
               {{ facility.title }}
             </h1>
-            <p class="text-xl text-blue-100 mb-4">{{ facility.tagline }}</p>
-            <div class="flex md:items-center flex-col md:flex-row text-blue-100">
+            <p class="text-xl text-sky-100 mb-4">{{ facility.tagline }}</p>
+            <div class="flex md:items-center flex-col md:flex-row text-sky-100">
               <span class="flex items-center">
                 <Icon name="map_pin" size="16" class="mr-2" />
                 {{ facility.location }}
@@ -623,12 +623,12 @@ const showImageViewer = ref(false);
               <div ref="imagesWrapperRef" class="images__wrapper relative">
                 <!-- 左側陰影 -->
                 <div
-                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-sky-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
                   :class="showLeftShadow ? 'opacity-100' : 'opacity-0'"
                 ></div>
                 <!-- 右側陰影 -->
                 <div
-                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-sky-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
                   :class="showRightShadow ? 'opacity-100' : 'opacity-0'"
                 ></div>
                 <!-- 圖片列表 -->

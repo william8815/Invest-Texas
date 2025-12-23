@@ -455,7 +455,7 @@ function eqal(timeFraction) {
             <Icon name="trending_down" size="20" class="w-20 h-20 mx-auto text-green-400" />
           </div>
           <h1 class="hero__title text-5xl md:text-6xl mb-6">Trump's Tariff Solution</h1>
-          <p class="hero__description text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto">
+          <p class="hero__description text-xl md:text-2xl text-sky-100 max-w-4xl mx-auto">
             Navigate the new tariff landscape with strategic manufacturing and assembly in the USMCA
             zone
           </p>
@@ -525,7 +525,7 @@ function eqal(timeFraction) {
 
           <!-- The Solution -->
           <div
-            class="problemSolution__solution bg-gradient-to-br from-green-50 to-blue-50 p-8 rounded-2xl border-2 border-green-200 opacity-0 translate-x-[100px] transition-all duration-500"
+            class="problemSolution__solution bg-gradient-to-br from-green-50 to-sky-50 p-8 rounded-2xl border-2 border-green-200 opacity-0 translate-x-[100px] transition-all duration-500"
           >
             <h2 class="text-3xl text-gray-900 mb-6">The Solution</h2>
             <div class="space-y-4">
@@ -592,7 +592,7 @@ function eqal(timeFraction) {
             Cost Comparison Analysis
           </h2>
           <p
-            class="tariffComparison__description text-xl text-blue-200 opacity-0 translate-x-[100px] transition-all duration-500"
+            class="tariffComparison__description text-xl text-sky-200 opacity-0 translate-x-[100px] transition-all duration-500"
           >
             See the dramatic savings with our USMCA solution
           </p>

@@ -528,7 +528,7 @@ onMounted(() => {
       >
         <div class="text-center">
           <h1 class="hero__title text-5xl md:text-6xl mb-6">Master Plan & Facilities</h1>
-          <p class="hero__description text-xl text-blue-100 max-w-3xl mx-auto">
+          <p class="hero__description text-xl text-sky-100 max-w-3xl mx-auto">
             Comprehensive infrastructure and investment opportunities across Texas and Mexico
           </p>
         </div>
@@ -688,7 +688,7 @@ onMounted(() => {
 
     <!-- Infrastructure Highlights -->
     <section
-      class="infrastructure__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
+      class="infrastructure__section py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white overflow-x-hidden"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -698,7 +698,7 @@ onMounted(() => {
             Complete Infrastructure Support
           </h2>
           <p
-            class="infrastructure__description text-xl text-blue-100 opacity-0 translate-x-[100px] transition-all duration-500"
+            class="infrastructure__description text-xl text-sky-100 opacity-0 translate-x-[100px] transition-all duration-500"
           >
             Everything you need for successful business operations
           </p>
@@ -716,7 +716,7 @@ onMounted(() => {
               <Icon :name="item.icon" size="24" />
             </div>
             <div class="text-2xl mb-1">{{ item.label }}</div>
-            <div class="text-blue-200">{{ item.description }}</div>
+            <div class="text-sky-200">{{ item.description }}</div>
           </div>
         </div>
       </div>

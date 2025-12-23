@@ -760,7 +760,7 @@ onMounted(() => {
           <div class="port__content p-12 duration-500 opacity-0 translate-x-[100%] transition-all">
             <div class="max-w-lg">
               <div
-                class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full text-blue-700 mb-6"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-sky-100 rounded-full text-sky-700 mb-6"
               >
                 <Icon name="ship" size="24" class="w-5 h-5" />
                 <span class="text-sm uppercase tracking-wide">Maritime</span>
@@ -778,7 +778,7 @@ onMounted(() => {
                   class="flex items-center gap-3"
                 >
                   <div
-                    class="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs"
+                    class="w-5 h-5 bg-sky-600 rounded-full flex items-center justify-center text-white text-xs"
                   >
                     ✓
                   </div>
