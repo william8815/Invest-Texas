@@ -555,20 +555,22 @@ onMounted(() => {
           <a
             v-for="project in investmentProjects"
             :key="project.title"
-            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-sky-50 p-6 rounded-xl border border-sky-100 group hover:shadow-lg"
+            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-sky-50 p-6 rounded-xl border border-sky-100 group hover:shadow-lg flex flex-col justify-between"
             :href="project.url"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <div class="flex flex-flex-row items-center gap-4">
-              <div
-                class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-700 rounded-lg flex items-center justify-center text-white mb-4 shadow-md"
-              >
-                <Icon :name="project.icon" size="24" />
+            <div>
+              <div class="flex flex-flex-row items-center gap-4">
+                <div
+                  class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-700 rounded-lg flex items-center justify-center text-white mb-4 shadow-md"
+                >
+                  <Icon :name="project.icon" size="24" />
+                </div>
+                <h3 class="text-xl text-gray-900 mb-2">{{ project.title }}</h3>
               </div>
-              <h3 class="text-xl text-gray-900 mb-2">{{ project.title }}</h3>
+              <p class="text-gray-600">{{ project.description }}</p>
             </div>
-            <p class="text-gray-600">{{ project.description }}</p>
             <div class="flex flex-row items-center justify-end gap-2">
               <Icon name="link_external" size="24" class="text-sky-600" />
             </div>
