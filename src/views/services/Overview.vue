@@ -231,37 +231,43 @@ const investmentProjects = [
     icon: "cpu",
     title: "X * AI PC",
     description: "We will use AI PC Products in our RV Product",
-    href: "projects_X-AI-PC",
+    // href: "projects_X-AI-PC",
+    url: "http://www.xaipc.us/",
   },
   {
     icon: "wind",
     title: "IonOxy Air System",
     description: "We will use Patented Ion-Oxygen Products in our RV Product",
-    href: "projects_Ionoxy-Air",
+    // href: "projects_Ionoxy-Air",
+    url: "https://unitedpage.hypermart.net/ionoxy/index.html",
   },
   {
     icon: "home",
     title: "Modular HomeLift",
     description: "We could use Patented Home Lift Products in our 2 Floor RV Product",
-    href: "projects_Home-Lift",
+    // href: "projects_Home-Lift",
+    url: "https://unitedpage.hypermart.net/modularhomelift/index.html",
   },
   {
     icon: "buildings",
     title: "Leisure RV Villas",
     description: "We could use our RV in our Leisure (RV) Villas",
-    href: "projects_RV-Villas",
+    // href: "projects_RV-Villas",
+    url: "https://unitedpage.hypermart.net/leisurevillas/index.html",
   },
   {
     icon: "villa",
     title: "School Front Villas",
     description: "We are developing Villas Condo in front of New School District",
-    href: "projects_School-Villas",
+    // href: "projects_School-Villas",
+    url: "https://unitedpage.hypermart.net/schoolvillas/index.html",
   },
   {
     icon: "dollar",
     title: "Finance / Go Public",
     description: "We could Finance Investor for their operation or even go public",
-    href: "projects_Finance-Ipo",
+    // href: "projects_Finance-Ipo",
+    url: "https://unitedpage.hypermart.net/invest-texas/P-Finance.html",
   },
 ];
 
@@ -550,15 +556,22 @@ onMounted(() => {
             v-for="project in investmentProjects"
             :key="project.title"
             class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-sky-50 p-6 rounded-xl border border-sky-100 group hover:shadow-lg"
-            :href="`${pathUrl}${project.href}`"
+            :href="project.url"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <div
-              class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-700 rounded-lg flex items-center justify-center text-white mb-4 shadow-md"
-            >
-              <Icon :name="project.icon" size="24" />
+            <div class="flex flex-flex-row items-center gap-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-700 rounded-lg flex items-center justify-center text-white mb-4 shadow-md"
+              >
+                <Icon :name="project.icon" size="24" />
+              </div>
+              <h3 class="text-xl text-gray-900 mb-2">{{ project.title }}</h3>
             </div>
-            <h3 class="text-xl text-gray-900 mb-2">{{ project.title }}</h3>
             <p class="text-gray-600">{{ project.description }}</p>
+            <div class="flex flex-row items-center justify-end gap-2">
+              <Icon name="link_external" size="24" class="text-sky-600" />
+            </div>
           </a>
         </div>
       </div>
