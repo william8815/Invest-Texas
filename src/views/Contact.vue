@@ -333,12 +333,12 @@ onMounted(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <h1 class="text-5xl md:text-6xl mb-6">Get In Touch</h1>
-          <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p class="text-xl text-sky-100 max-w-3xl mx-auto">
             Contact us to discuss your investment opportunities in Texas
           </p>
         </div>
@@ -445,20 +445,17 @@ onMounted(() => {
               >
                 <div class="flex items-start space-x-4">
                   <div
-                    class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center flex-shrink-0"
                   >
-                    <Icon name="mail" size="20" class="w-6 h-6 text-blue-600" />
+                    <Icon name="mail" size="20" class="w-6 h-6 text-sky-600" />
                   </div>
                   <div>
                     <h3 class="text-lg text-gray-900 mb-1">Email</h3>
-                    <a
-                      href="mailto:Contact@InvesTexas.com"
-                      class="text-blue-600 hover:text-blue-700"
-                    >
+                    <a href="mailto:Contact@InvesTexas.com" class="text-sky-600 hover:text-sky-700">
                       Contact@InvesTexas.com
                     </a>
                     <span>, </span>
-                    <a href="mailto:USA@Sinopac.us" class="text-blue-600 hover:text-blue-700">
+                    <a href="mailto:USA@Sinopac.us" class="text-sky-600 hover:text-sky-700">
                       USA@Sinopac.us
                     </a>
                   </div>
@@ -466,13 +463,13 @@ onMounted(() => {
 
                 <div class="flex items-start space-x-4">
                   <div
-                    class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center flex-shrink-0"
                   >
-                    <Icon name="phone" size="20" class="w-6 h-6 text-green-600" />
+                    <Icon name="phone" size="20" class="w-6 h-6 text-sky-600" />
                   </div>
                   <div>
                     <h3 class="text-lg text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+17137833122" class="text-gray-700 hover:text-blue-600">
+                    <a href="tel:+17137833122" class="text-gray-700 hover:text-sky-600">
                       +1-713-783-3122
                     </a>
                   </div>
@@ -480,9 +477,9 @@ onMounted(() => {
 
                 <div class="flex items-start space-x-4">
                   <div
-                    class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center flex-shrink-0"
                   >
-                    <Icon name="map_pin" size="20" class="w-6 h-6 text-purple-600" />
+                    <Icon name="map_pin" size="20" class="w-6 h-6 text-sky-600" />
                   </div>
                   <div>
                     <h3 class="text-lg text-gray-900 mb-1">Address</h3>
@@ -492,9 +489,9 @@ onMounted(() => {
 
                 <div class="flex items-start space-x-4">
                   <div
-                    class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="w-12 h-12 bg-sky-100 rounded-lg flex items-center justify-center flex-shrink-0"
                   >
-                    <Icon name="earth" size="20" class="w-6 h-6 text-orange-600" />
+                    <Icon name="earth" size="20" class="w-6 h-6 text-sky-600" />
                   </div>
                   <div>
                     <h3 class="text-lg text-gray-900 mb-1">Website</h3>
@@ -502,7 +499,7 @@ onMounted(() => {
                       href="http://www.sinopac.us"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="text-blue-600 hover:text-blue-700"
+                      class="text-sky-600 hover:text-sky-700"
                     >
                       www.Sinopac.us
                     </a>
@@ -511,7 +508,7 @@ onMounted(() => {
               </div>
 
               <div
-                class="contact__infoRight bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border border-blue-100 opacity-0 translate-x-[100px] transition-all duration-500"
+                class="contact__infoRight bg-gradient-to-r from-sky-50 to-sky-100 p-6 rounded-xl border border-sky-200 opacity-0 translate-x-[100px] transition-all duration-500"
               >
                 <h3 class="text-lg text-gray-900 mb-3">Office Hours</h3>
                 <div class="space-y-2 text-gray-700">
@@ -579,7 +576,7 @@ onMounted(() => {
             </div>
             <div
               v-else
-              class="h-48 bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white"
+              class="h-48 bg-gradient-to-r from-sky-700 to-sky-500 flex items-center justify-center text-white"
             >
               <div class="text-center p-6">
                 <Icon name="map_pin" size="20" class="w-12 h-12 mx-auto mb-2" />
@@ -600,7 +597,7 @@ onMounted(() => {
                   <Icon name="mail" size="20" class="w-4 h-4 mt-0.5 flex-shrink-0" />
                   <div>
                     <div v-for="(email, idx) in office.email" :key="idx">
-                      <a :href="`mailto:${email}`" class="text-blue-600 hover:text-blue-700">
+                      <a :href="`mailto:${email}`" class="text-sky-600 hover:text-sky-700">
                         {{ email }}
                       </a>
                     </div>
@@ -609,7 +606,7 @@ onMounted(() => {
 
                 <div v-if="office.phone" class="flex items-center space-x-2 text-gray-700">
                   <Icon name="phone" size="20" class="w-4 h-4 flex-shrink-0" />
-                  <a :href="`tel:${office.phone}`" class="text-gray-700 hover:text-blue-600">
+                  <a :href="`tel:${office.phone}`" class="text-gray-700 hover:text-sky-600">
                     {{ office.phone }}
                   </a>
                 </div>
@@ -623,7 +620,7 @@ onMounted(() => {
                     :href="`http://${office.website}`"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-blue-600 hover:text-blue-700 text-sm flex items-center space-x-1"
+                    class="text-sky-600 hover:text-sky-700 text-sm flex items-center space-x-1"
                   >
                     <Icon name="earth" size="20" class="w-4 h-4" />
                     <span>{{ office.website }}</span>

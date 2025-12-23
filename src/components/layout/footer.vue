@@ -3,17 +3,12 @@ import Icon from "@/components/base/Icon.vue";
 </script>
 
 <template>
-  <footer class="bg-gradient-to-b from-gray-900 to-gray-950 text-white pt-16 pb-8">
+  <footer class="bg-gradient-to-br from-sky-900 to-sky-800 text-white pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <!-- Company Info -->
         <div>
           <div class="flex items-center space-x-2 mb-4">
-            <div
-              class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center"
-            >
-              <span class="text-white">IT</span>
-            </div>
             <div class="text-lg">InvesTexas</div>
           </div>
           <p class="text-gray-400 text-sm mb-4">A division of Sinopac International Corp.</p>
@@ -88,7 +83,7 @@ import Icon from "@/components/base/Icon.vue";
         </div>
       </div>
 
-      <div class="border-t border-gray-800 pt-8">
+      <div class="border-t border-gray-400 pt-8">
         <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p class="text-gray-400 text-sm">
             © 2025 InvesTexas - Sinopac International Corp. All rights reserved.

@@ -287,7 +287,7 @@ function animateCount(el, start, end, duration = 1500) {
           @load="heroImageLoaded = true"
         />
         <div
-          class="absolute inset-0 bg-gradient-to-r from-sky-900/90 via-cyan-800/80 to-transparent"
+          class="absolute inset-0 bg-gradient-to-r from-sky-900/90 via-sky-800/80 to-transparent"
         ></div>
       </div>
       <!-- content -->
@@ -380,7 +380,7 @@ function animateCount(el, start, end, duration = 1500) {
           >
             <a
               :href="`${pathUrl}process`"
-              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-600/20 group"
             >
               View Investment Process
               <Icon
@@ -421,7 +421,7 @@ function animateCount(el, start, end, duration = 1500) {
             :data-index="index"
           >
             <div
-              class="w-16 h-16 bg-gradient-to-br from-sky-500 to-amber-400 rounded-xl flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform duration-300"
+              class="w-16 h-16 bg-gradient-to-br from-sky-700 to-sky-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-md group-hover:scale-110 transition-transform duration-300"
             >
               <Icon :name="feature.icon" size="24" />
             </div>
@@ -433,7 +433,7 @@ function animateCount(el, start, end, duration = 1500) {
     </section>
 
     <!-- Quick Stats - 數字計數動畫 -->
-    <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section class="py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div
@@ -441,21 +441,21 @@ function animateCount(el, start, end, duration = 1500) {
             :key="index"
             class="text-center stat-item opacity-0 translate-y-10 transition-all duration-300"
           >
-            <div class="flex justify-center mb-4 text-amber-400">
+            <div class="flex justify-center mb-4 text-sky-200">
               <Icon :name="stat.icon" size="24" />
             </div>
-            <div class="text-5xl mb-2 text-amber-300">
+            <div class="text-5xl mb-2 text-sky-200">
               <span class="stat-number" :data-end="stat.number">0</span>
               <span>{{ stat.suffix }}</span>
             </div>
-            <div class="text-blue-200">{{ stat.label }}</div>
+            <div class="text-sky-200">{{ stat.label }}</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- CTA Section - 滾動淡入 -->
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-sky-50">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="cta-section text-center duration-1000">
           <h2 class="text-4xl text-gray-900 mb-6">Ready to Start Your Investment Journey?</h2>
@@ -466,7 +466,7 @@ function animateCount(el, start, end, duration = 1500) {
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               :href="`${pathUrl}contact`"
-              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-600/20 group"
             >
               Schedule a Visit
               <Icon

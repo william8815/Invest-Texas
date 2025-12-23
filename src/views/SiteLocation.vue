@@ -3,6 +3,8 @@ import { ref, onMounted, computed, reactive } from "vue";
 import { useSeoMeta, useHead } from "@unhead/vue";
 import DefaultLayout from "@/layouts/default.vue";
 import Icon from "@/components/base/Icon.vue";
+import { appConfig } from "@/config/env";
+const pathUrl = appConfig.pathUrl;
 
 // SEO Meta
 useSeoMeta({
@@ -524,13 +526,13 @@ onMounted(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <Icon name="map_pin" size="24" class="w-16 h-16 mx-auto mb-6 text-amber-400" />
           <h1 class="text-5xl md:text-6xl mb-6">Strategic Location in Texas</h1>
-          <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p class="text-xl text-sky-100 max-w-3xl mx-auto">
             Tri-modal transportation access: Highway, Airport, and Seaport connectivity for seamless
             global business operations
           </p>
@@ -554,7 +556,7 @@ onMounted(() => {
                 <span class="text-sm uppercase tracking-wide">Transportation</span>
               </div>
               <h2 class="text-5xl text-gray-900 mb-4">{{ sections[0].title }}</h2>
-              <p class="text-xl text-amber-600 mb-6">{{ sections[0].subtitle }}</p>
+              <p class="text-xl text-sky-600 mb-6">{{ sections[0].subtitle }}</p>
               <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                 {{ sections[0].description }}
               </p>
@@ -764,7 +766,7 @@ onMounted(() => {
                 <span class="text-sm uppercase tracking-wide">Maritime</span>
               </div>
               <h2 class="text-5xl text-gray-900 mb-4">{{ sections[2].title }}</h2>
-              <p class="text-xl text-amber-600 mb-6">{{ sections[2].subtitle }}</p>
+              <p class="text-xl text-sky-600 mb-6">{{ sections[2].subtitle }}</p>
               <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                 {{ sections[2].description }}
               </p>
@@ -818,7 +820,7 @@ onMounted(() => {
                 <span class="text-sm uppercase tracking-wide">Aviation</span>
               </div>
               <h2 class="text-5xl text-gray-900 mb-4">{{ sections[1].title }}</h2>
-              <p class="text-xl text-amber-600 mb-6">{{ sections[1].subtitle }}</p>
+              <p class="text-xl text-sky-600 mb-6">{{ sections[1].subtitle }}</p>
               <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                 {{ sections[1].description }}
               </p>
@@ -1089,16 +1091,16 @@ onMounted(() => {
     </div>
 
     <!-- Mobile Version: Simple Card Layout -->
-    <div class="lg:hidden bg-white overflow-x-hidden">
+    <div class="lg:hidden overflow-x-hidden">
       <!-- Transportation Sections -->
-      <section v-for="section in sections" :key="section.id" class="py-16 px-4">
+      <section v-for="section in sections" :key="section.id" class="py-16 px-4 bg-white">
         <div
           class="max-w-2xl mx-auto siteLocationMobile__item opacity-0 translate-y-10 transition-all duration-500"
         >
           <div>
             <div class="mb-8">
               <h2 class="text-4xl text-gray-900 mb-4">{{ section.title }}</h2>
-              <p class="text-xl text-amber-600 mb-4">{{ section.subtitle }}</p>
+              <p class="text-xl text-sky-600 mb-4">{{ section.subtitle }}</p>
               <p class="text-lg text-gray-600 mb-6">{{ section.description }}</p>
 
               <div
@@ -1146,7 +1148,7 @@ onMounted(() => {
       </section>
 
       <!-- Surrounding Area -->
-      <section class="surroundingArea__section py-16 px-4 bg-gradient-to-br from-sky-50 to-cyan-50">
+      <section class="surroundingArea__section py-16 px-4 bg-transparent">
         <div class="max-w-2xl mx-auto">
           <div
             class="surroundingArea__content text-center mb-12 opacity-0 translate-y-10 transition-all duration-500"
@@ -1163,7 +1165,7 @@ onMounted(() => {
             >
               <div class="flex items-center gap-4">
                 <div
-                  class="w-10 h-10 bg-gradient-to-br from-sky-500 to-cyan-500 rounded-full flex items-center justify-center text-white"
+                  class="w-10 h-10 bg-gradient-to-br from-sky-500 to-sky-700 rounded-full flex items-center justify-center text-white"
                 >
                   <Icon :name="amenity.icon" size="24" class="w-4 h-4" />
                 </div>
@@ -1179,25 +1181,28 @@ onMounted(() => {
     </div>
 
     <!-- CTA -->
-    <section
-      class="cta__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
-    >
+    <section class="cta__section py-20 bg-white overflow-x-hidden">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="cta__content opacity-0 translate-y-10 transition-all duration-500">
           <h2 class="text-4xl mb-6">Experience Our Strategic Advantage</h2>
-          <p class="text-xl text-blue-100 mb-8">
+          <p class="text-xl text-sky-600 mb-8">
             See how our location connects you to continental and global markets
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/contact"
-              class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-900 rounded-lg hover:bg-blue-50 transition-colors shadow-xl"
+              :href="`${pathUrl}contact`"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20 group"
             >
               Schedule a Tour
+              <Icon
+                name="arrow_forward"
+                size="20"
+                class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform"
+              />
             </a>
             <a
-              href="/process"
-              class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors"
+              :href="`${pathUrl}process`"
+              class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-sky-600 text-sky-600 rounded-lg hover:bg-sky-50 transition-colors"
             >
               View Entry Process
             </a>

@@ -515,7 +515,7 @@ onMounted(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white overflow-x-hidden"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white overflow-x-hidden"
     >
       <div
         class="hero__content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 opacity-0 translate-y-10 transition-all duration-500"
@@ -549,11 +549,11 @@ onMounted(() => {
           <a
             v-for="project in investmentProjects"
             :key="project.title"
-            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-gradient-to-br from-blue-50 to-emerald-50 p-6 rounded-xl border border-blue-100 group hover:shadow-lg"
+            class="projects__item opacity-0 translate-x-10 transition-all duration-500 block bg-sky-50 p-6 rounded-xl border border-sky-100 group hover:shadow-lg"
             :href="`${pathUrl}${project.href}`"
           >
             <div
-              class="w-12 h-12 bg-gradient-to-br from-sky-500 to-amber-400 rounded-lg flex items-center justify-center text-white mb-4 shadow-md"
+              class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-700 rounded-lg flex items-center justify-center text-white mb-4 shadow-md"
             >
               <Icon :name="project.icon" size="24" />
             </div>
@@ -614,7 +614,7 @@ onMounted(() => {
             <div class="p-8">
               <div class="flex items-start justify-between mb-4">
                 <div>
-                  <h3 class="text-2xl text-gray-900 mb-2">{{ facility.title }}</h3>
+                  <h3 class="text-2xl text-gray-900 mb-2 text-sky-600">{{ facility.title }}</h3>
                   <div class="flex items-center gap-4 text-sm text-gray-600">
                     <span class="flex items-center gap-1">
                       <Icon name="buildings" size="16" />
@@ -638,7 +638,7 @@ onMounted(() => {
                     :key="feature"
                     class="flex items-start space-x-2 text-sm text-gray-700"
                   >
-                    <div class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 flex-shrink-0" />
+                    <div class="w-1.5 h-1.5 bg-sky-600 rounded-full mt-1.5 flex-shrink-0" />
                     <span>{{ feature }}</span>
                   </li>
                 </ul>
@@ -649,13 +649,13 @@ onMounted(() => {
                   :href="`http://${facility.website}`"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-blue-600 hover:text-blue-700 text-sm"
+                  class="text-sky-600 hover:text-sky-700 text-sm"
                 >
                   {{ facility.website }}
                 </a>
                 <a
                   :href="`${pathUrl}${facility.link_name}`"
-                  class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all group"
+                  class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all group"
                 >
                   Learn More
                   <Icon
@@ -718,7 +718,7 @@ onMounted(() => {
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               :href="`${pathUrl}contact`"
-              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20 group"
             >
               Schedule a Visit
               <Icon

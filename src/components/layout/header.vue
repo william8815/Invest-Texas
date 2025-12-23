@@ -9,18 +9,20 @@ import { appConfig } from "@/config/env";
 const pathUrl = appConfig.pathUrl;
 
 // Navigation items
-const navItems = [
+const navItems = ref([
   {
     label: "Why Texas",
     children: [
       {
         label: "Tariff Solution",
         path: "tariff-advantage",
+        name: "tariff-advantage",
         description: "Navigate Trump's tariff policies",
       },
       {
         label: "Strategic Location",
         path: "site-location",
+        name: "site-location",
         description: "Tri-modal transportation access",
       },
     ],
@@ -28,10 +30,12 @@ const navItems = [
   {
     label: "Process",
     path: "process",
+    name: "process",
   },
   {
     label: "Services",
     path: "services-overview",
+    name: "services-overview",
     // megaMenuSections: [
     //   {
     //     title: "FACILITIES",
@@ -98,12 +102,14 @@ const navItems = [
   {
     label: "Pricing",
     path: "pricing",
+    name: "pricing",
   },
   {
     label: "Team",
     path: "team",
+    name: "team",
   },
-];
+]);
 
 // State
 const isOpen = ref(false);
@@ -122,18 +128,20 @@ const showMegaMenu = computed(() => {
 });
 
 const activeItem = computed(() => {
-  return navItems.find((item) => item.label === activeDropdown.value);
+  return navItems.value.find((item) => item.label === activeDropdown.value);
 });
 
 // Methods
 const isPathActive = (item) => {
-  if (item.path && route.path === item.path) return true;
-  if (item.children) {
-    return item.children.some((child) => route.path === child.path);
+  console.log(item);
+  console.log(route);
+  if (item.name && route.name === item.name) return true;
+  if (item.children?.length > 0) {
+    return item.children.some((child) => route.name === child.name);
   }
-  if (item.megaMenuSections) {
+  if (item.megaMenuSections?.length > 0) {
     return item.megaMenuSections.some((section) =>
-      section.items.some((child) => route.path === child.path)
+      section.items.some((child) => route.name === child.name)
     );
   }
   return false;
@@ -203,14 +211,9 @@ onUnmounted(() => {
         <!-- Left: Logo -->
         <div class="justify-self-start">
           <a :href="`${pathUrl}home`" class="flex items-center space-x-3 group">
-            <div
-              class="w-12 h-12 bg-gradient-to-br from-sky-600 to-cyan-600 rounded-lg flex items-center justify-center text-white shadow-lg group-hover:shadow-xl transition-shadow"
-            >
-              <span class="text-xl">IT</span>
-            </div>
             <div class="hidden sm:block">
-              <div class="text-xl text-gray-900">InvesTexas</div>
-              <div class="text-xs text-gray-500">Invest in Texas</div>
+              <div class="text-xl text-sky-900">InvesTexas</div>
+              <div class="text-xs text-gray-900">Invest in Texas</div>
             </div>
           </a>
         </div>
@@ -228,7 +231,7 @@ onUnmounted(() => {
               :href="`${pathUrl}${item.path}`"
               :class="[
                 'px-3 h-[100%] rounded-lg transition-colors text-[15px] whitespace-nowrap',
-                isPathActive(item) ? 'text-sky-600' : 'text-gray-700 hover:text-sky-600',
+                isPathActive(item) ? 'text-sky-800' : 'text-gray-700 hover:text-sky-600',
               ]"
             >
               {{ item.label }}
@@ -237,7 +240,7 @@ onUnmounted(() => {
               v-else
               :class="[
                 'px-3 rounded-lg transition-colors flex items-center space-x-1 text-[15px] whitespace-nowrap',
-                isPathActive(item) ? 'text-sky-600' : 'text-gray-700 hover:text-sky-600',
+                isPathActive(item) ? 'text-sky-800' : 'text-gray-700 hover:text-sky-600',
               ]"
             >
               <span>{{ item.label }}</span>
@@ -250,7 +253,7 @@ onUnmounted(() => {
         <div class="justify-self-end flex items-center gap-3">
           <a
             :href="`${pathUrl}contact`"
-            class="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 shadow-lg shadow-amber-500/20 hover:shadow-xl hover:shadow-amber-500/30 transition-all text-sm sm:text-base group"
+            class="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 shadow-md shadow-sky-600/20 hover:shadow-lg hover:shadow-sky-500/30 transition-all text-sm sm:text-base group"
           >
             <span class="hidden sm:inline">Contact Us</span>
             <span class="sm:hidden">Contact</span>
@@ -300,7 +303,7 @@ onUnmounted(() => {
                     v-for="child in activeItem.children"
                     :key="child.path"
                     :href="`${pathUrl}${child.path}`"
-                    class="block px-6 py-4 hover:bg-gradient-to-r hover:from-sky-50 hover:to-cyan-50 rounded-lg transition-colors group/item"
+                    class="block px-6 py-4 hover:bg-sky-100 hover:text-sky-600 rounded-lg transition-colors group/item"
                   >
                     <div class="text-gray-900 group-hover/item:text-sky-600 transition-colors mb-1">
                       {{ child.label }}
@@ -329,7 +332,7 @@ onUnmounted(() => {
                       :class="[
                         'w-full text-left px-4 py-3 rounded-lg transition-all',
                         activeMegaSection === section.title
-                          ? 'bg-gradient-to-r from-sky-600 to-cyan-600 text-white shadow-md'
+                          ? 'bg-sky-600 text-white shadow-md'
                           : 'text-gray-700 hover:bg-gray-100',
                       ]"
                     >
@@ -361,7 +364,7 @@ onUnmounted(() => {
                             v-for="menuItem in section.items"
                             :key="menuItem.path"
                             :href="`${pathUrl}${menuItem.path}`"
-                            class="block px-6 py-4 rounded-lg hover:bg-gradient-to-r hover:from-sky-50 hover:to-cyan-50 transition-colors group/item"
+                            class="block px-6 py-4 rounded-lg hover:bg-gradient-to-r hover:bg-sky-600 transition-colors group/item"
                           >
                             <div
                               class="text-gray-900 group-hover/item:text-sky-600 transition-colors mb-1"
@@ -383,7 +386,7 @@ onUnmounted(() => {
         </div>
 
         <!-- Decorative Bottom Bar -->
-        <div class="h-1 bg-gradient-to-r from-sky-600 via-cyan-500 to-amber-500" />
+        <div class="h-1 bg-gradient-to-r from-sky-600 via-sky-800 to-sky-600" />
       </div>
     </Transition>
 
@@ -421,12 +424,7 @@ onUnmounted(() => {
           class="sticky top-0 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between z-10 h-[70px]"
         >
           <div class="flex items-center space-x-2">
-            <div
-              class="w-8 h-8 bg-gradient-to-br from-sky-600 to-cyan-600 rounded-lg flex items-center justify-center text-white"
-            >
-              <span class="text-sm">IT</span>
-            </div>
-            <span class="text-gray-900">Menu</span>
+            <span class="text-sky-900">Menu</span>
           </div>
           <button
             @click="isOpen = false"
@@ -447,15 +445,15 @@ onUnmounted(() => {
               :class="[
                 'block px-4 py-3 rounded-lg transition-colors',
                 isPathActive(item)
-                  ? 'bg-gradient-to-r from-sky-600 to-cyan-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100',
+                  ? 'bg-sky-600 text-white'
+                  : 'text-gray-700 hover:bg-sky-100 hover:text-sky-600',
               ]"
             >
               {{ item.label }}
             </a>
 
             <!-- Regular dropdown (Why Texas) -->
-            <div v-else-if="item.children">
+            <div v-else-if="item.children?.length > 0">
               <button
                 @click="toggleMobileMenu(item.label)"
                 :class="[
@@ -496,7 +494,7 @@ onUnmounted(() => {
             </div>
 
             <!-- Three-level nested accordion (Services) -->
-            <div v-else-if="item.megaMenuSections">
+            <div v-else-if="item.megaMenuSections?.length > 0">
               <button
                 @click="toggleMobileMenu(item.label)"
                 :class="[
@@ -526,7 +524,7 @@ onUnmounted(() => {
                       <!-- Second level: Section headers -->
                       <button
                         @click="toggleMobileSubMenu(section.title)"
-                        class="w-full flex items-center justify-between px-4 py-2 text-sm bg-sky-50 text-sky-700 rounded-lg hover:bg-sky-100 transition-colors"
+                        class="w-full flex items-center justify-between px-4 py-2 text-sm bg-sky-50 text-sky-600 rounded-lg hover:bg-sky-500 transition-colors"
                       >
                         <span class="uppercase tracking-wide">{{ section.title }}</span>
                         <Icon

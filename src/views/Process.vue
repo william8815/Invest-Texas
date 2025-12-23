@@ -597,7 +597,7 @@ onMounted(() => {
     >
       <!-- Vertical Timeline Progress Bar -->
       <div
-        class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-sky-600 to-amber-500 origin-top hidden lg:block transition-all duration-100"
+        class="absolute left-1/2 top-0 w-1 bg-gradient-to-b from-sky-500 to-sky-700 origin-top hidden lg:block transition-all duration-100"
         :style="{
           transform: `scaleY(${scrollProgress})`,
           height: '100%',
@@ -620,7 +620,7 @@ onMounted(() => {
               class="process__dot absolute left-1/2 -translate-x-1/2 hidden lg:block z-10 opacity-0 scale-[0.5] transition-all duration-500"
             >
               <div
-                class="w-20 h-20 bg-gradient-to-br from-sky-600 to-amber-500 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300 cursor-pointer"
+                class="w-20 h-20 bg-gradient-to-br from-sky-700 to-sky-500 rounded-full flex items-center justify-center text-white text-3xl shadow-2xl border-4 border-white hover:scale-110 transition-transform duration-300 cursor-pointer"
               >
                 {{ step.number }}
               </div>
@@ -634,14 +634,14 @@ onMounted(() => {
               <div class="flex items-center gap-4 mb-6">
                 <!-- Mobile Number Badge -->
                 <div
-                  class="w-16 h-16 bg-gradient-to-br from-sky-600 to-amber-500 rounded-2xl flex items-center justify-center text-white text-2xl flex-shrink-0 lg:hidden"
+                  class="w-16 h-16 bg-gradient-to-br from-sky-500 to-sky-700 rounded-2xl flex items-center justify-center text-white text-2xl flex-shrink-0 lg:hidden"
                 >
                   {{ step.number }}
                 </div>
                 <div
-                  class="w-12 h-12 bg-gradient-to-br from-sky-500 to-amber-400 rounded-xl flex items-center justify-center text-white"
+                  class="w-12 h-12 bg-sky-100 rounded-xl flex items-center justify-center text-white"
                 >
-                  <Icon :name="step.icon" size="24" />
+                  <Icon :name="step.icon" size="24" class="text-sky-600" />
                 </div>
               </div>
 
@@ -650,9 +650,7 @@ onMounted(() => {
                 <p class="text-xl text-sky-600 mb-4">{{ step.subtitle }}</p>
                 <p class="text-gray-700 leading-relaxed mb-6">{{ step.description }}</p>
 
-                <div
-                  class="bg-gradient-to-br from-sky-50 to-amber-50 p-6 rounded-xl border border-sky-100"
-                >
+                <div class="bg-sky-50 p-6 rounded-xl border border-sky-100">
                   <h4 class="text-lg text-gray-900 mb-4">Key Features:</h4>
                   <ul class="space-y-3">
                     <li
@@ -713,7 +711,7 @@ onMounted(() => {
             class="timeline__item text-center group cursor-pointer opacity-0 translate-y-10 transition-all duration-500"
           >
             <div
-              class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-2xl mx-auto mb-3 border-2 border-white/30 group-hover:bg-amber-500 group-hover:border-amber-400 transition-all duration-300 group-hover:scale-105"
+              class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-2xl mx-auto mb-3 border-2 border-white/30 group-hover:bg-sky-500 group-hover:border-sky-400 transition-all duration-300 group-hover:scale-105"
             >
               {{ step.number }}
             </div>
@@ -737,7 +735,7 @@ onMounted(() => {
           </p>
           <a
             :href="`${pathUrl}contact`"
-            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20"
+            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20"
           >
             Schedule a Consultation
             <Icon name="arrow_forward" size="20" class="ml-2 w-5 h-5" />

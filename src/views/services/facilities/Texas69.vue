@@ -517,14 +517,14 @@ const showImageViewer = ref(false);
         :class="heroImageLoaded ? 'opacity-100' : 'opacity-0'"
         @load="heroImageLoaded = true"
       />
-      <div class="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-800/70" />
+      <div class="absolute inset-0 bg-gradient-to-r from-sky-900/90 to-sky-800/70" />
 
       <div class="absolute inset-0 flex items-center">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <a
             :href="`${pathUrl}/services-overview`"
             @click.prevent="router.go(-1)"
-            class="inline-flex items-center text-white mb-6 hover:text-blue-200 transition-colors"
+            class="inline-flex items-center text-white mb-6 hover:text-sky-200 transition-colors"
           >
             <Icon name="arrow_forward" size="16" class="mr-2 rotate-180" />
             Back to Overview
@@ -533,8 +533,8 @@ const showImageViewer = ref(false);
             <h1 class="text-5xl md:text-6xl text-white mb-4">
               {{ facility.title }}
             </h1>
-            <p class="text-xl text-blue-100 mb-4">{{ facility.tagline }}</p>
-            <div class="flex items-center space-x-4 text-blue-100">
+            <p class="text-xl text-sky-100 mb-4">{{ facility.tagline }}</p>
+            <div class="flex items-center space-x-4 text-sky-100">
               <span class="flex items-center">
                 <Icon name="map_pin" size="16" class="mr-2" />
                 {{ facility.location }}
@@ -608,9 +608,9 @@ const showImageViewer = ref(false);
                 <div
                   v-for="(feature, index) in facility.features"
                   :key="index"
-                  class="features__item flex items-center space-x-2 p-3 bg-blue-50 rounded-lg opacity-0 translate-y-10 transition-all duration-500"
+                  class="features__item flex items-center space-x-2 p-3 bg-sky-100 rounded-lg opacity-0 translate-y-10 transition-all duration-500"
                 >
-                  <div class="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0" />
+                  <div class="w-2 h-2 bg-sky-600 rounded-full flex-shrink-0" />
                   <span class="text-gray-700">{{ feature }}</span>
                 </div>
               </div>
@@ -626,12 +626,12 @@ const showImageViewer = ref(false);
               <div ref="imagesWrapperRef" class="images__wrapper relative">
                 <!-- 左側陰影 -->
                 <div
-                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  class="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-sky-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
                   :class="showLeftShadow ? 'opacity-100' : 'opacity-0'"
                 ></div>
                 <!-- 右側陰影 -->
                 <div
-                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-blue-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
+                  class="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-sky-50 to-transparent pointer-events-none z-10 transition-opacity duration-300"
                   :class="showRightShadow ? 'opacity-100' : 'opacity-0'"
                 ></div>
                 <!-- 圖片列表 -->
@@ -680,7 +680,7 @@ const showImageViewer = ref(false);
               >
                 <div class="flex items-center gap-4">
                   <button
-                    class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+                    class="bg-gradient-to-r from-sky-700 to-sky-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
                     :disabled="activeIndex === 0"
                     @click="handlePrev()"
                   >
@@ -691,7 +691,7 @@ const showImageViewer = ref(false);
                     </span>
                   </button>
                   <button
-                    class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+                    class="bg-gradient-to-r from-sky-700 to-sky-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
                     :disabled="activeIndex === facility.images?.length - 1"
                     @click="handleNext()"
                   >
@@ -703,7 +703,7 @@ const showImageViewer = ref(false);
                   </button>
                 </div>
                 <button
-                  class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+                  class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20 group"
                   @click="showImageViewer = true"
                 >
                   <Icon name="eye" size="24" />
@@ -725,10 +725,10 @@ const showImageViewer = ref(false);
           <div class="lg:col-span-1">
             <div class="sticky top-[100px]">
               <div
-                class="pricing__card bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200 opacity-0 translate-x-[50px] transition-all duration-500"
+                class="pricing__card bg-gradient-to-br from-sky-50 to-sky-100 p-8 rounded-2xl border border-sky-200 opacity-0 translate-x-[50px] transition-all duration-500"
               >
                 <h3 class="text-2xl text-gray-900 mb-6 flex items-center">
-                  <Icon name="dollar" size="16" class="w-6 h-6 mr-2 text-blue-600" />
+                  <Icon name="dollar" size="16" class="w-6 h-6 mr-2 text-sky-600" />
                   Pricing
                 </h3>
                 <div class="space-y-4 mb-8">
@@ -738,13 +738,13 @@ const showImageViewer = ref(false);
                     class="bg-white p-4 rounded-lg"
                   >
                     <div class="text-sm text-gray-600 mb-1">{{ price.item }}</div>
-                    <div class="text-xl text-blue-600">{{ price.price }}</div>
+                    <div class="text-xl text-sky-600">{{ price.price }}</div>
                   </div>
                 </div>
 
                 <a
                   href="/contact"
-                  class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20"
+                  class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20"
                 >
                   Schedule a Tour
                   <Icon name="arrow_forward" size="16" class="ml-2 w-5 h-5" />
@@ -761,11 +761,11 @@ const showImageViewer = ref(false);
                 <div class="space-y-2 text-sm">
                   <a
                     href="mailto:Contact@InvesTexas.com"
-                    class="text-blue-600 hover:text-blue-700 block"
+                    class="text-sky-600 hover:text-sky-700 block"
                   >
                     Contact@InvesTexas.com
                   </a>
-                  <a href="tel:+17137833122" class="text-blue-600 hover:text-blue-700 block">
+                  <a href="tel:+17137833122" class="text-sky-600 hover:text-sky-700 block">
                     +1-713-783-3122
                   </a>
                 </div>
@@ -777,21 +777,21 @@ const showImageViewer = ref(false);
     </section>
 
     <!-- CTA -->
-    <section class="cta__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section class="cta__section py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="cta__content opacity-0 translate-y-10 transition-all duration-500">
           <h2 class="text-4xl mb-6">Ready to Get Started?</h2>
-          <p class="text-xl text-blue-100 mb-8">Schedule a visit to see this facility in person</p>
+          <p class="text-xl text-sky-600 mb-8">Schedule a visit to see this facility in person</p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/contact"
-              class="inline-flex items-center justify-center px-8 py-4 bg-white text-blue-900 rounded-lg hover:bg-blue-50 transition-colors"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20 group"
             >
               Schedule a Visit
             </a>
             <a
               href="/pricing"
-              class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white/10 transition-colors"
+              class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-sky-600 text-sky-600 rounded-lg hover:bg-sky-50 transition-colors"
             >
               View All Pricing
             </a>

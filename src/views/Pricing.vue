@@ -526,12 +526,12 @@ onMounted(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <h1 class="text-5xl md:text-6xl mb-6">Pricing & Services</h1>
-          <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p class="text-xl text-sky-100 max-w-3xl mx-auto">
             Transparent pricing for all our facilities and services
           </p>
         </div>
@@ -547,9 +547,11 @@ onMounted(() => {
             :key="tier.category"
             class="pricing__card bg-white rounded-2xl shadow-xl overflow-hidden opacity-0 translate-y-10 transition-all duration-500"
           >
-            <div class="bg-gradient-to-r from-sky-600 to-amber-500 p-6">
+            <div class="bg-gradient-to-r from-sky-700 to-sky-500 p-6">
               <div class="flex items-center space-x-3 text-white">
-                <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                <div
+                  class="w-12 h-12 bg-sky-100 text-sky-600 rounded-lg flex items-center justify-center"
+                >
                   <Icon :name="tier.icon" size="24" />
                 </div>
                 <h2 class="text-2xl">{{ tier.category }}</h2>
@@ -561,14 +563,14 @@ onMounted(() => {
                 <div
                   v-for="item in tier.items"
                   :key="item.service"
-                  class="pricing__item flex flex-col md:flex-row md:items-center md:justify-between p-4 bg-gray-50 rounded-lg hover:bg-blue-50 opacity-0 translate-x-10 transition-all duration-500"
+                  class="pricing__item flex flex-col md:flex-row md:items-center md:justify-between p-4 bg-gray-50 rounded-lg hover:bg-sky-50 opacity-0 translate-x-10 transition-all duration-500"
                 >
                   <div class="flex-1 mb-2 md:mb-0">
                     <h3 class="text-lg text-gray-900 mb-1">{{ item.service }}</h3>
                     <p v-if="item.note" class="text-sm text-gray-600">{{ item.note }}</p>
                   </div>
                   <div class="flex items-center">
-                    <span class="text-xl text-amber-600 font-semibold whitespace-nowrap">
+                    <span class="text-xl text-sky-600 font-semibold whitespace-nowrap">
                       {{ item.price }}
                     </span>
                   </div>
@@ -581,26 +583,24 @@ onMounted(() => {
     </section>
 
     <!-- Value Added Services -->
-    <section
-      class="services__section py-20 bg-gradient-to-br from-blue-900 to-emerald-900 text-white"
-    >
+    <section class="services__section py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           class="services__content text-center mb-12 opacity-0 translate-y-10 transition-all duration-500"
         >
           <h2 class="text-4xl mb-4">Value-Added Services Included</h2>
-          <p class="text-xl text-blue-100">Additional benefits that come with our partnership</p>
+          <p class="text-xl text-sky-100">Additional benefits that come with our partnership</p>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+        <div class="bg-sky-100 backdrop-blur-sm rounded-2xl p-8 border border-sky-200">
           <div class="services__list grid grid-cols-1 md:grid-cols-2 gap-4">
             <div
               v-for="service in valueAddedServices"
               :key="service"
               class="services__item flex items-start space-x-3 opacity-0 translate-y-10 transition-all duration-500"
             >
-              <Icon name="check" size="24" class="text-green-400 flex-shrink-0 mt-0.5" />
-              <span class="text-blue-100">{{ service }}</span>
+              <Icon name="check" size="24" class="text-sky-600 flex-shrink-0 mt-0.5" />
+              <span class="text-sky-600">{{ service }}</span>
             </div>
           </div>
         </div>
@@ -621,7 +621,7 @@ onMounted(() => {
           <div
             v-for="option in specialOffers"
             :key="option.title"
-            class="offers__item bg-gradient-to-br from-blue-50 to-emerald-50 p-8 rounded-xl border border-blue-100 opacity-0 translate-y-10 transition-all duration-500"
+            class="offers__item bg-gradient-to-br from-sky-50 to-sky-100 p-8 rounded-xl border border-sky-200 opacity-0 translate-y-10 transition-all duration-500"
           >
             <h3 class="text-xl text-gray-900 mb-3">{{ option.title }}</h3>
             <p class="text-gray-700">{{ option.description }}</p>
@@ -631,7 +631,7 @@ onMounted(() => {
     </section>
 
     <!-- Notable Pricing -->
-    <section class="notable__section py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section class="notable__section py-20 bg-transparent">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           class="notable__content text-center mb-12 opacity-0 translate-y-10 transition-all duration-500"
@@ -644,10 +644,10 @@ onMounted(() => {
           <div
             v-for="item in notablePricing"
             :key="item.label"
-            class="notable__item bg-white p-6 rounded-xl shadow-lg text-center border-2 border-blue-100 hover:border-blue-300 opacity-0 translate-y-10 transition-all duration-500"
+            class="notable__item bg-white p-6 rounded-xl shadow-lg text-center border-2 border-sky-200 hover:border-sky-300 opacity-0 translate-y-10 transition-all duration-500"
           >
             <div class="text-sm text-gray-600 mb-2">{{ item.label }}</div>
-            <div class="text-3xl text-amber-600 font-bold mb-1">{{ item.price }}</div>
+            <div class="text-3xl text-sky-600 font-bold mb-1">{{ item.price }}</div>
             <div class="text-sm text-gray-500">{{ item.period }}</div>
           </div>
         </div>
@@ -655,16 +655,16 @@ onMounted(() => {
     </section>
 
     <!-- CTA -->
-    <section class="cta__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section class="cta__section py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="cta__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <h2 class="text-4xl mb-6">Ready to Discuss Your Needs?</h2>
-          <p class="text-xl text-blue-100 mb-8">
+          <p class="text-xl text-sky-600 mb-8">
             Contact us for a customized quote tailored to your business requirements
           </p>
           <a
             :href="`${pathUrl}contact`"
-            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20 group"
           >
             Get a Custom Quote
             <Icon

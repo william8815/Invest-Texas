@@ -438,7 +438,7 @@ function eqal(timeFraction) {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative py-20 bg-gradient-to-br from-green-900 via-blue-900 to-blue-800 text-white overflow-hidden"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white overflow-hidden"
     >
       <!-- Decorative Elements -->
       <div class="hero__decorative-elements absolute inset-0 opacity-10">
@@ -583,9 +583,7 @@ function eqal(timeFraction) {
     </section>
 
     <!-- Tariff Comparison Table -->
-    <section
-      class="tariffComparison__section py-20 bg-gradient-to-br from-gray-900 via-sky-900 to-cyan-900 text-white overflow-x-hidden"
-    >
+    <section class="tariffComparison__section py-20 bg-sky-900 text-white overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2
@@ -607,7 +605,7 @@ function eqal(timeFraction) {
             class="w-full border-collapse bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden"
           >
             <thead>
-              <tr class="bg-white/10 border-b border-white/20">
+              <tr class="bg-sky-500 border-b border-white/20">
                 <th class="p-6 text-left text-lg">Scenario</th>
                 <th class="p-6 text-center text-lg">Tariff Rate</th>
                 <th class="p-6 text-center text-lg">Cost Impact</th>
@@ -636,10 +634,10 @@ function eqal(timeFraction) {
                 <td class="p-6 text-center text-red-200">45-60 days</td>
               </tr>
 
-              <tr class="border-b border-white/10 bg-amber-500/20">
+              <tr class="border-b border-white/10 bg-amber-600/20">
                 <td class="p-6">
                   <div class="text-lg">Direct Manufacturing in USA</div>
-                  <div class="text-sm text-amber-200">High labor costs</div>
+                  <div class="text-sm text-amber-400">High labor costs</div>
                 </td>
                 <td class="p-6 text-center">
                   <div class="text-3xl text-amber-300">
@@ -686,9 +684,7 @@ function eqal(timeFraction) {
         <div
           class="tariffComparison__savings mt-12 text-center opacity-0 translate-y-10 transition-all duration-500"
         >
-          <div
-            class="inline-block bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl p-8 shadow-2xl"
-          >
+          <div class="inline-block bg-sky-500 rounded-2xl p-8 shadow-2xl">
             <div class="text-lg text-white mb-2">Average Savings with InvesTexas</div>
             <div class="text-6xl text-white mb-2">
               <span :data-end="40" class="table__number"></span>
@@ -717,7 +713,7 @@ function eqal(timeFraction) {
             class="keyAdvantages__item bg-white p-8 rounded-xl shadow-lg hover:shadow-xl border border-gray-100"
           >
             <div
-              class="w-16 h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-xl flex items-center justify-center text-white mb-6"
+              class="w-16 h-16 bg-gradient-to-br from-sky-500 to-sky-700 rounded-xl flex items-center justify-center text-white mb-6"
             >
               <Icon :name="advantage.icon" size="30" />
             </div>
@@ -740,7 +736,7 @@ function eqal(timeFraction) {
           </p>
         </div>
 
-        <div class="bg-gradient-to-br from-blue-50 to-green-50 p-8 rounded-2xl">
+        <div class="bg-gradient-to-br from-sky-500 to-sky-700 p-8 rounded-2xl">
           <div class="benefits__list space-y-4">
             <div
               v-for="(benefit, index) in benefits"
@@ -751,7 +747,7 @@ function eqal(timeFraction) {
                 <Icon
                   name="check_outline"
                   size="20"
-                  class="w-6 h-6 text-green-600 flex-shrink-0 mt-1"
+                  class="w-6 h-6 text-sky-600 flex-shrink-0 mt-1"
                 />
                 <p class="text-gray-700">{{ benefit }}</p>
               </div>
@@ -762,92 +758,90 @@ function eqal(timeFraction) {
     </section>
 
     <!-- USMCA & FTZ Section -->
-    <section
-      class="usmcaFtz__section py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white overflow-x-hidden"
-    >
+    <section class="usmcaFtz__section py-20 bg-transparent text-sky-800 overflow-x-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div class="usmcaFtz__content">
             <h2 class="text-4xl mb-6">USMCA & Foreign Trade Zone Benefits</h2>
-            <p class="text-lg text-blue-100 mb-6">
+            <p class="text-lg mb-6">
               Sinopac has been serving in International Business for 38 years as a Regular/Active
               member of US Foreign Trade Zone.
             </p>
             <div class="space-y-4">
               <div class="flex items-start space-x-3">
                 <div
-                  class="w-6 h-6 bg-green-400 rounded-full flex items-center justify-center text-green-900 text-xs flex-shrink-0 mt-1"
+                  class="w-6 h-6 bg-sky-600 rounded-full flex items-center justify-center text-sky-100 text-xs flex-shrink-0 mt-1"
                 >
                   ✓
                 </div>
-                <p class="text-blue-100">Access to US FTZ 171 designation at USMCA Park</p>
+                <p class="text-sky-600">Access to US FTZ 171 designation at USMCA Park</p>
               </div>
               <div class="flex items-start space-x-3">
                 <div
-                  class="w-6 h-6 bg-green-400 rounded-full flex items-center justify-center text-green-900 text-xs flex-shrink-0 mt-1"
+                  class="w-6 h-6 bg-sky-600 rounded-full flex items-center justify-center text-sky-100 text-xs flex-shrink-0 mt-1"
                 >
                   ✓
                 </div>
-                <p class="text-blue-100">Defer, reduce, or eliminate customs duties</p>
+                <p class="text-sky-600">Defer, reduce, or eliminate customs duties</p>
               </div>
               <div class="flex items-start space-x-3">
                 <div
-                  class="w-6 h-6 bg-green-400 rounded-full flex items-center justify-center text-green-900 text-xs flex-shrink-0 mt-1"
+                  class="w-6 h-6 bg-sky-600 rounded-full flex items-center justify-center text-sky-100 text-xs flex-shrink-0 mt-1"
                 >
                   ✓
                 </div>
-                <p class="text-blue-100">Streamlined customs procedures and compliance</p>
+                <p class="text-sky-600">Streamlined customs procedures and compliance</p>
               </div>
               <div class="flex items-start space-x-3">
                 <div
-                  class="w-6 h-6 bg-green-400 rounded-full flex items-center justify-center text-green-900 text-xs flex-shrink-0 mt-1"
+                  class="w-6 h-6 bg-sky-600 rounded-full flex items-center justify-center text-sky-100 text-xs flex-shrink-0 mt-1"
                 >
                   ✓
                 </div>
-                <p class="text-blue-100">Expert guidance through 38 years of experience</p>
+                <p class="text-sky-600">Expert guidance through 38 years of experience</p>
               </div>
             </div>
           </div>
 
           <div
-            class="usmcaFtz__howItWorks bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20"
+            class="usmcaFtz__howItWorks bg-sky-800/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20"
           >
             <h3 class="text-2xl mb-6">How It Works</h3>
             <div class="space-y-6">
               <div>
                 <div class="flex items-center space-x-3 mb-2">
                   <div
-                    class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center text-white shadow-md"
+                    class="w-8 h-8 bg-gradient-to-br from-sky-500 to-sky-700 rounded-full flex items-center justify-center text-white shadow-md"
                   >
                     1
                   </div>
                   <h4 class="text-lg">Import Materials</h4>
                 </div>
-                <p class="text-sm text-blue-100 ml-11">Tariff-deferred entry into FTZ</p>
+                <p class="text-sm text-sky-600 ml-11">Tariff-deferred entry into FTZ</p>
               </div>
-              <Icon name="arrow_forward" size="20" class="text-amber-400" />
+              <Icon name="arrow_forward" size="20" class="text-sky-800 rotate-[90deg]" />
               <div>
                 <div class="flex items-center space-x-3 mb-2">
                   <div
-                    class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center text-white shadow-md"
+                    class="w-8 h-8 bg-gradient-to-br from-sky-500 to-sky-700 rounded-full flex items-center justify-center text-white shadow-md"
                   >
                     2
                   </div>
                   <h4 class="text-lg">Manufacture/Assemble</h4>
                 </div>
-                <p class="text-sm text-blue-100 ml-11">Value-added operations</p>
+                <p class="text-sm text-sky-600 ml-11">Value-added operations</p>
               </div>
-              <Icon name="arrow_forward" size="20" class="text-amber-400" />
+              <Icon name="arrow_forward" size="20" class="text-sky-600 rotate-[90deg]" />
               <div>
                 <div class="flex items-center space-x-3 mb-2">
                   <div
-                    class="w-8 h-8 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center text-white shadow-md"
+                    class="w-8 h-8 bg-gradient-to-br from-sky-500 to-sky-700 rounded-full flex items-center justify-center text-white shadow-md"
                   >
                     3
                   </div>
                   <h4 class="text-lg">Distribute</h4>
                 </div>
-                <p class="text-sm text-blue-100 ml-11">
+                <p class="text-sm text-sky-600 ml-11">
                   Export or domestic sale with optimized duty
                 </p>
               </div>
@@ -868,7 +862,7 @@ function eqal(timeFraction) {
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               :href="`${pathUrl}contact`"
-              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20 group"
+              class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20 group"
             >
               Get Started
               <Icon

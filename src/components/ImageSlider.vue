@@ -92,7 +92,7 @@ const handleNext = () => {
       <div v-if="images?.length > 1" class="flex items-center justify-center gap-4 mt-4">
         <!-- 幫以下 button 添加 disabled & hover 的樣式 -->
         <button
-          class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+          class="bg-gradient-to-r from-sky-700 to-sky-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
           :disabled="activeIndex === 0"
           @click="handlePrev()"
         >
@@ -103,7 +103,7 @@ const handleNext = () => {
           </span>
         </button>
         <button
-          class="bg-gradient-to-r from-sky-600 to-amber-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
+          class="bg-gradient-to-r from-sky-700 to-sky-500 rounded-lg flex items-center justify-center p-[2px] disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80 transition-opacity duration-300"
           :disabled="activeIndex === images?.length - 1"
           @click="handleNext()"
         >

@@ -407,12 +407,12 @@ onMounted(() => {
   <DefaultLayout>
     <!-- Hero Section -->
     <section
-      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 via-cyan-800 to-sky-900 text-white"
+      class="hero__section relative py-20 bg-gradient-to-br from-sky-900 to-sky-800 text-white"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="hero__content text-center opacity-0 translate-y-10 transition-all duration-500">
           <h1 class="text-5xl md:text-6xl mb-6">Our Expert Team</h1>
-          <p class="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p class="text-xl text-sky-100 max-w-3xl mx-auto">
             Decades of combined experience in international business, finance, engineering, and
             development
           </p>
@@ -435,7 +435,7 @@ onMounted(() => {
             >
               <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div
-                  class="lg:col-span-1 bg-gradient-to-br from-sky-600 to-cyan-600 p-8 text-white flex lg:flex-col items-center lg:justify-center gap-4"
+                  class="lg:col-span-1 bg-gradient-to-r from-sky-700 to-sky-500 p-8 text-white flex lg:flex-col items-center lg:justify-center gap-4"
                 >
                   <!-- avatar -->
                   <div class="w-48 h-48 rounded-full overflow-hidden relative">
@@ -462,8 +462,8 @@ onMounted(() => {
                   </div>
                   <div class="flex flex-col lg:items-center">
                     <h3 class="text-2xl mb-2">{{ member.name }}</h3>
-                    <p class="text-blue-100 mb-2">{{ member.title }}</p>
-                    <p v-if="member.subtitle" class="text-sm text-blue-200">
+                    <p class="text-sky-100 mb-2">{{ member.title }}</p>
+                    <p v-if="member.subtitle" class="text-sm text-sky-200">
                       {{ member.subtitle }}
                     </p>
                   </div>
@@ -486,7 +486,7 @@ onMounted(() => {
                           :key="idx"
                           class="flex items-start space-x-3"
                         >
-                          <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                          <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                           <span class="text-gray-700">{{ exp }}</span>
                         </li>
                       </ul>
@@ -501,7 +501,7 @@ onMounted(() => {
                           :key="idx"
                           class="flex items-start space-x-3"
                         >
-                          <div class="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                          <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                           <span class="text-gray-700">{{ cert }}</span>
                         </li>
                       </ul>
@@ -514,7 +514,7 @@ onMounted(() => {
                         <span
                           v-for="(skill, idx) in member.skills"
                           :key="idx"
-                          class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                          class="px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-sm"
                         >
                           {{ skill }}
                         </span>
@@ -530,7 +530,7 @@ onMounted(() => {
                           :key="idx"
                           class="flex items-start space-x-3"
                         >
-                          <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                          <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                           <span class="text-gray-700">{{ exp }}</span>
                         </li>
                       </ul>
@@ -545,7 +545,7 @@ onMounted(() => {
                           :key="idx"
                           class="flex items-start space-x-3"
                         >
-                          <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                          <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                           <span class="text-gray-700">{{ exp }}</span>
                         </li>
                       </ul>
@@ -560,7 +560,7 @@ onMounted(() => {
                           :key="idx"
                           class="flex items-start space-x-3"
                         >
-                          <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
+                          <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                           <span class="text-gray-700">{{ edu }}</span>
                         </li>
                       </ul>
@@ -591,16 +591,16 @@ onMounted(() => {
     </section>
 
     <!-- CTA -->
-    <section class="py-20 bg-gradient-to-br from-sky-900 to-cyan-900 text-white">
+    <section class="py-20 bg-white">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div>
           <h2 class="text-4xl mb-6">Work With Our Expert Team</h2>
-          <p class="text-xl text-blue-100 mb-8">
+          <p class="text-xl text-sky-600 mb-8">
             Let our experienced professionals guide your investment journey in Texas
           </p>
           <a
             href="/contact"
-            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-600 to-amber-500 text-white rounded-lg hover:from-sky-700 hover:to-amber-600 transition-all shadow-lg shadow-amber-500/20"
+            class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-700 to-sky-500 text-white rounded-lg hover:from-sky-800 hover:to-sky-600 transition-all shadow-lg shadow-sky-500/20"
           >
             Contact Our Team
             <Icon name="arrow_forward" size="20" class="ml-2 w-5 h-5" />
@@ -626,7 +626,7 @@ onMounted(() => {
           >
             <!-- Modal Header -->
             <div
-              class="h-[140px] bg-gradient-to-br from-sky-600 to-cyan-600 p-6 text-white flex items-center gap-4"
+              class="h-[140px] bg-gradient-to-r from-sky-700 to-sky-500 p-6 text-white flex items-center gap-4"
             >
               <div class="w-24 h-24 rounded-lg overflow-hidden relative">
                 <!-- Skeleton -->
@@ -654,8 +654,8 @@ onMounted(() => {
               </div>
               <div class="flex-1">
                 <h3 class="text-2xl font-semibold mb-1">{{ selectedMember.name }}</h3>
-                <p class="text-blue-100">{{ selectedMember.title }}</p>
-                <p v-if="selectedMember.subtitle" class="text-sm text-blue-200 mt-1">
+                <p class="text-sky-100">{{ selectedMember.title }}</p>
+                <p v-if="selectedMember.subtitle" class="text-sm text-sky-200 mt-1">
                   {{ selectedMember.subtitle }}
                 </p>
               </div>
@@ -681,7 +681,7 @@ onMounted(() => {
               <!-- Experience -->
               <div v-if="selectedMember.experience" class="mb-6">
                 <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-indigo-600 rounded-full" />
+                  <div class="w-1 h-6 bg-sky-600 rounded-full" />
                   Experience
                 </h4>
                 <ul class="space-y-2 pl-3">
@@ -690,7 +690,7 @@ onMounted(() => {
                     :key="idx"
                     class="flex items-start space-x-3"
                   >
-                    <div class="w-2 h-2 bg-indigo-600 rounded-full mt-2 flex-shrink-0" />
+                    <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                     <span class="text-gray-700">{{ exp }}</span>
                   </li>
                 </ul>
@@ -699,7 +699,7 @@ onMounted(() => {
               <!-- Certifications & Training -->
               <div v-if="selectedMember.certifications" class="mb-6">
                 <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-green-600 rounded-full" />
+                  <div class="w-1 h-6 bg-sky-600 rounded-full" />
                   Certifications & Training
                 </h4>
                 <ul class="space-y-2 pl-3">
@@ -708,7 +708,7 @@ onMounted(() => {
                     :key="idx"
                     class="flex items-start space-x-3"
                   >
-                    <div class="w-2 h-2 bg-green-600 rounded-full mt-2 flex-shrink-0" />
+                    <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                     <span class="text-gray-700">{{ cert }}</span>
                   </li>
                 </ul>
@@ -717,14 +717,14 @@ onMounted(() => {
               <!-- Skills & Expertise -->
               <div v-if="selectedMember.skills" class="mb-6">
                 <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-blue-600 rounded-full" />
+                  <div class="w-1 h-6 bg-sky-600 rounded-full" />
                   Skills & Expertise
                 </h4>
                 <div class="flex flex-wrap gap-2 pl-3">
                   <span
                     v-for="(skill, idx) in selectedMember.skills"
                     :key="idx"
-                    class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm"
+                    class="px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-sm"
                   >
                     {{ skill }}
                   </span>
@@ -734,7 +734,7 @@ onMounted(() => {
               <!-- China Work Experience -->
               <div v-if="selectedMember.chinaExperience" class="mb-6">
                 <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-red-600 rounded-full" />
+                  <div class="w-1 h-6 bg-sky-600 rounded-full" />
                   China Work Experience
                 </h4>
                 <ul class="space-y-2 pl-3">
@@ -743,7 +743,7 @@ onMounted(() => {
                     :key="idx"
                     class="flex items-start space-x-3"
                   >
-                    <div class="w-2 h-2 bg-red-600 rounded-full mt-2 flex-shrink-0" />
+                    <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                     <span class="text-gray-700">{{ exp }}</span>
                   </li>
                 </ul>
@@ -752,7 +752,7 @@ onMounted(() => {
               <!-- UK Work Experience -->
               <div v-if="selectedMember.ukExperience" class="mb-6">
                 <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-purple-600 rounded-full" />
+                  <div class="w-1 h-6 bg-sky-600 rounded-full" />
                   UK Work Experience
                 </h4>
                 <ul class="space-y-2 pl-3">
@@ -761,7 +761,7 @@ onMounted(() => {
                     :key="idx"
                     class="flex items-start space-x-3"
                   >
-                    <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 flex-shrink-0" />
+                    <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                     <span class="text-gray-700">{{ exp }}</span>
                   </li>
                 </ul>
@@ -770,7 +770,7 @@ onMounted(() => {
               <!-- Education -->
               <div v-if="selectedMember.education" class="mb-6">
                 <h4 class="text-xl font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <div class="w-1 h-6 bg-amber-500 rounded-full" />
+                  <div class="w-1 h-6 bg-sky-600 rounded-full" />
                   Education
                 </h4>
                 <ul class="space-y-2 pl-3">
@@ -779,7 +779,7 @@ onMounted(() => {
                     :key="idx"
                     class="flex items-start space-x-3"
                   >
-                    <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0" />
+                    <div class="w-2 h-2 bg-sky-600 rounded-full mt-2 flex-shrink-0" />
                     <span class="text-gray-700">{{ edu }}</span>
                   </li>
                 </ul>
@@ -792,7 +792,7 @@ onMounted(() => {
             >
               <button
                 @click="closeModal"
-                class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors font-medium"
+                class="px-6 py-2 bg-sky-100 hover:bg-sky-200 text-sky-700 rounded-lg transition-colors font-medium"
               >
                 Close
               </button>
